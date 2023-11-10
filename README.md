@@ -11,8 +11,11 @@ Bienvenidos al Ahorcado! En nuestro proyecto intentamos recrear el clásico jueg
 ## Como correr el juego
 
 1. Para conseguir el codigo del juego se puede:
-  a. Clonar el repositorio localmente usando: git clone https://github.com/tu-nombre-de-usuario/hangman.git
-  b. Descargar el zip directamente desde el repo
+
+       a. Clonar el repositorio localmente usando: git clone https://github.com/tu-nombre-de-usuario/hangman.git
+
+       b. Descargar el zip directamente desde el repo
+
 2. Como el juego está hecho con Python va a ser necesario que tengas Python descargado, se puede descargar desde acá: https://www.python.org/downloads/
 3. Se va a tener que agregar Python a la variable de entorno PATH, en este link se explica como hacerlo: https://realpython.com/add-python-to-path/
 4. Finalmente, para correr el juego, abrir la terminal y ejecutar: `python path-a-hangman/hangman.py`
