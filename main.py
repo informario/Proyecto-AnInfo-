@@ -1,5 +1,4 @@
-import pygame
+def hola():
+    print("¡Hola mundo!")
 
-from game import Game
-
-pygame.init()
+hola()
