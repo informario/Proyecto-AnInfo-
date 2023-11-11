@@ -8,7 +8,7 @@ Bienvenidos al Ahorcado! En nuestro proyecto intentamos recrear el clásico jueg
 - Al iniciar el juego se elige una palabra aleatoria que está oculta, tu objetivo es intentar adivinarla antes de que se complete el ahorcado!
 - Cuando se elige una letra que no está en la palabra se le agrega una parte al ahorcado, y cuando el ahorcado esté completo perdés el juego!
   
-## Como correr el juego
+## Ejecucion del juego
 
 1. Para conseguir el codigo del juego se puede:
 
@@ -18,7 +18,7 @@ Bienvenidos al Ahorcado! En nuestro proyecto intentamos recrear el clásico jueg
 
 2. Como el juego está hecho con Python va a ser necesario que tengas Python descargado, se puede descargar desde acá: https://www.python.org/downloads/
 3. Se va a tener que agregar Python a la variable de entorno PATH, en este link se explica como hacerlo: https://realpython.com/add-python-to-path/
-4. Finalmente, para correr el juego, abrir la terminal y ejecutar: `python path-a-hangman/hangman.py`
+4. Finalmente, para ejecutar el juego, abrir la terminal y ejecutar: `python path-a-main/main.py`
 
 ## Miembros del grupo
 - Alan Valdevenito
