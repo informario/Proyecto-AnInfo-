@@ -1,0 +1,5 @@
+{
+    "facil": ["auto", "moto", "fanta", "todo", "god", "pan", "birra", "bote", "ganar", "suma", "sol", "luna", "barra", "perro", "gato", "banana"],
+    "normal": ["vereda", "manu camejo", "manual", "resaltador", "sprite", "resumen", "nico riedel", "pedido", "telepatia", "travel rock", "fahrenheit", "lampara", "radiografia", "guitarra", "sacapuntas", "postre", "scrum master", "estrella", "capricornio"],
+    "dificil": ["supercalifragilisticoespialidoso", "detras del humo no se ve", "manuel cangrejo", "gonzalo matrinez sastre", "calculadora casio", "termodinamica", "auriculares inalambricos", "campeones del mundo", "fiesta de disfraces", "electrodomestico", "extraordinario", "desarrollo de software", "biocombustible", "energias renovables", "en donde te sentaste"]
+}
