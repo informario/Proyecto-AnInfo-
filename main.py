@@ -93,8 +93,9 @@ class JuegoAhorcado:
         self.mostrar_palabra()
         print("\n\n")
         print("Letras adivinadas: ", self.letras_adivinadas)
-        print("Letras erroneas: ", self.letras_erroneas)
+        print("Letras erradas: ", self.letras_erroneas)
         print("Intentos restantes: ", self.intentos_restantes)
+        print("Pistas restantes: ", self.pistas)
         print("\n")
         self.estado.print()
         print("=========================================")
@@ -126,10 +127,10 @@ class JuegoAhorcado:
     def iniciar(self):
         self.mostrar_estado()
         while self.en_curso():
-            print("Ingrese 0 para volver al menú principal")
-            print("Ingrese 1 para pedir una pista")
+            print("0. Abandonar partida")
+            print("1. Pedir pista")
             print("Ingrese una letra para continuar jugando\n")
-            char = input("-")
+            char = input("Intento: ")
             if char == "0":
                 self.abandonar()
                 return
