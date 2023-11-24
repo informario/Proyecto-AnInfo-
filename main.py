@@ -21,7 +21,7 @@ class EstadoJuego(Enum):
 
 class Dificultad(Enum):
     FACIL = 1,
-    MEDIA = 2,
+    NORMAL = 2,
     DIFICIL = 3,
 
     # Esta funcion va a leer del .json y devolver alguna palabra de acuerdo a la dificultad
@@ -29,7 +29,7 @@ class Dificultad(Enum):
         match self:
             case Dificultad.FACIL:
                 return "casa"
-            case Dificultad.MEDIA:
+            case Dificultad.NORMAL:
                 return "perro"
             case Dificultad.DIFICIL:
                 return "murcielago"
@@ -37,27 +37,27 @@ class Dificultad(Enum):
     def obtener_intentos_maximos(self):
         match self:
             case Dificultad.FACIL:
-                return 3
-            case Dificultad.MEDIA:
-                return 4
+                return 0
+            case Dificultad.NORMAL:
+                return 0
             case Dificultad.DIFICIL:
-                return 5
+                return 0
             #actualizar esto
 
     def obtener_pistas(self):
         match self:
             case Dificultad.FACIL:
-                return 1
-            case Dificultad.MEDIA:
-                return 2
+                return 0
+            case Dificultad.NORMAL:
+                return 0
             case Dificultad.DIFICIL:
-                return 3
+                return 0
 
     def to_string(self):
         match self:
             case Dificultad.FACIL:
                 return "FACIL"
-            case Dificultad.MEDIA:
+            case Dificultad.NORMAL:
                 return "MEDIA"
             case Dificultad.DIFICIL:
                 return "DIFICIl"
@@ -89,14 +89,13 @@ class JuegoAhorcado:
     
     def mostrar_estado(self):
         print("=========================================")
+        print("Intentos restantes: x")
+        print("Letras adivinadas: x")
+        print("Letras erradas: x")
+        print("Pistas restantes: x")
+
         self.dificultad.print()
         self.mostrar_palabra()
-        print("\n\n")
-        print("Letras adivinadas: ", self.letras_adivinadas)
-        print("Letras erradas: ", self.letras_erroneas)
-        print("Intentos restantes: ", self.intentos_restantes)
-        print("Pistas restantes: ", self.pistas)
-        print("\n")
         self.estado.print()
         print("=========================================")
 
@@ -116,7 +115,6 @@ class JuegoAhorcado:
 
     def obtener_pista(self):
         if self.pistas == 0:
-            print("No te quedan pistas")
             return
         # Logica para obtener una pista
 
@@ -137,7 +135,7 @@ class JuegoAhorcado:
             if char == "1":
                 self.obtener_pista()
                 continue
-            self.intentar_adivinar_letra(char)
+            #self.intentar_adivinar_letra(char)
             self.mostrar_estado()
         
         return self.estado
