@@ -1,16 +1,17 @@
-from dificultad import Dificultad
 
-def main():
+def hola():
+    print("¡Hola mundo!")
+    print_status(False, 5, 3, ["a", "e", "i", "o", "u"])
 
-    dificultad = Dificultad(["a", "b", "c"], 7, 3)
 
-    print(f"Palabras: {dificultad.get_palabras()}")
-    print(f"Intentos: {dificultad.get_intentos()}")
-    print(f"Pistas: {dificultad.get_pistas()}")
+def print_status(adivino: True, intentos: int, pistas: int, letras_adivinadas: list):
+    if adivino:
+        print("BIEN!")
+    else:
+        print("MAL AHI")
+    print(f"Intentos restantes: {intentos}")
+    print(f"Pistas restantes: {pistas}")
+    print(f"Letras adivinadas: {letras_adivinadas}")
+    print("Printeo el ahorcado") #4
 
-    print(f"Quedan intentos: {dificultad.quedan_intentos()}")
-    print(f"Quedan pistas: {dificultad.quedan_pistas()}")
-
-    return 0
-
-main()
+hola()

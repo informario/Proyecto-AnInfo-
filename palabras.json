@@ -1,0 +1,5 @@
+{
+    "facil": ["auto", "moto", "fanta", "todo", "cascada", "pan", "birra", "bote", "ganar", "suma", "sol", "luna", "barra", "perro", "gato", "banana","issue","humo"],
+    "normal": ["vereda", "manu camejo", "manual", "codigo", "sprite", "resumen", "github", "pedido", "telepatia", "scrum", "prototipo", "lampara", "radiografia", "guitarra", "sacapuntas", "postre", "backlog", "estrella", "capricornio"],
+    "dificil": ["daily stand up", "nico riedel", "manuel cangrejo", "gonzalo matrinez sastre", "calculadora casio", "termodinamica", "auriculares inalambricos", "campeones del mundo", "electrodomestico", "extraordinario", "desarrollo de software", "biocombustible", "energias renovables", "historia de usuario","metodologias agiles","scrum master","requerimientos"]
+}
