@@ -62,7 +62,7 @@ class Dificultad(Enum):
     def obtener_intentos_maximos(self):
         match self:
             case Dificultad.FACIL:
-                return 0
+                return 30 #hardcodeado para testing
             case Dificultad.NORMAL:
                 return 0
             case Dificultad.DIFICIL:
@@ -99,7 +99,7 @@ class JuegoAhorcado:
         self.pistas = dificultad.obtener_pistas()
         self.letras_por_adivinar = list(set(self.palabra))
         self.letras_adivinadas = []
-        self.letras_erroneas = []
+        self.letras_dichas = []
         self.estado = EstadoJuego.EN_CURSO
     
     def en_curso(self):
@@ -130,8 +130,10 @@ class JuegoAhorcado:
             self.letras_adivinadas.append(letra)
             
         else:
-            self.letras_erroneas.append(letra)
             self.intentos_restantes -= 1
+
+        if letra not in self.letras_dichas:
+            self.letras_dichas.append(letra)
 
         if len(self.letras_por_adivinar) == 0:
             self.estado = EstadoJuego.GANADO
@@ -150,6 +152,7 @@ class JuegoAhorcado:
     def iniciar(self):
         self.mostrar_estado()
         while self.en_curso():
+            print(f"Letras dichas: {self.letras_dichas}")
             print("0. Abandonar partida")
             print("1. Pedir pista")
             print("Ingrese una letra para continuar jugando\n")
@@ -160,7 +163,7 @@ class JuegoAhorcado:
             if char == "1":
                 self.obtener_pista()
                 continue
-            #self.intentar_adivinar_letra(char)
+            self.intentar_adivinar_letra(char)
             self.mostrar_estado()
         
         return self.estado
