@@ -1,4 +1,11 @@
-class Dificultad:
+from enum import Enum
+import random
+import json
+
+class Dificultad(Enum):
+    FACIL = 0,
+    NORMAL = 1,
+    DIFICIL = 2,
 
     def __init__(self, palabras, cantidad_intentos, cantidad_pistas):
         self.palabras = palabras
@@ -25,5 +32,18 @@ class Dificultad:
     def get_pistas(self):
         return self.cantidad_pistas
     
-    def get_palabras(self):
+    def get_palabra(self, path):
+        
+        with open(path, 'r') as j:
+            data = json.load(j)
+
+        match self:
+            case Dificultad.FACIL:
+                return random.choice(data.get('facil'))
+            
+            case Dificultad.NORMAL:
+                return random.choice(data.get('normal'))
+            
+            case Dificultad.DIFICIL:
+                return random.choice(data.get('dificil'))
         return self.palabras

@@ -1,7 +1,12 @@
+import json
+import random
+
 
 def hola():
     print("¡Hola mundo!")
     print_status(False, 5, 3, ["a", "e", "i", "o", "u"])
+
+            
 
 
 def print_status(adivino: True, intentos: int, pistas: int, letras_adivinadas: list):
@@ -40,14 +45,19 @@ class Dificultad(Enum):
     DIFICIL = 3,
 
     # Esta funcion va a leer del .json y devolver alguna palabra de acuerdo a la dificultad
-    def obtener_palabra(self):
+    def obtener_palabra(self, path):
+        with open(path, 'r') as j:
+            data = json.load(j)
+
         match self:
             case Dificultad.FACIL:
-                return "casa"
+                return random.choice(data.get('facil'))
+            
             case Dificultad.NORMAL:
-                return "perro"
+                return random.choice(data.get('normal'))
+            
             case Dificultad.DIFICIL:
-                return "murcielago"
+                return random.choice(data.get('dificil'))
 
     def obtener_intentos_maximos(self):
         match self:
@@ -84,7 +94,7 @@ class Dificultad(Enum):
 class JuegoAhorcado:
     def __init__(self, dificultad):
         self.dificultad = dificultad
-        self.palabra = dificultad.obtener_palabra()
+        self.palabra = dificultad.obtener_palabra('palabras.json')
         self.intentos_restantes = dificultad.obtener_intentos_maximos()
         self.pistas = dificultad.obtener_pistas()
         self.letras_por_adivinar = list(set(self.palabra))
