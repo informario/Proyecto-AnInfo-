@@ -17,6 +17,7 @@ class JuegoAhorcado:
         return self.estado == EstadoJuego.EN_CURSO
     
     def mostrar_palabra(self):
+        print("    ")
         for letra in self.palabra:
             if letra in self.letras_adivinadas:
                 print(letra, end=" ")
@@ -31,6 +32,7 @@ class JuegoAhorcado:
         print("Pistas restantes: ", self.pistas_restantes)
 
         self.mostrar_palabra()
+        print("\n")
         self.estado.print()
         print("=========================================")
 
