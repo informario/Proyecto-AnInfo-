@@ -2,16 +2,28 @@ from enum import Enum
 import random
 import json
 
+PATH = "palabras.json"
+
 class Dificultad(Enum):
     FACIL = 0,
     NORMAL = 1,
     DIFICIL = 2,
 
-    def __init__(self, palabras, cantidad_intentos, cantidad_pistas):
-        self.palabras = palabras
-        self.cantidad_intentos = cantidad_intentos
-        self.cantidad_pistas = cantidad_pistas
+    def __init__(self):
 
+        if (self == self.FACIL):
+            self.cantidad_intentos = 7
+            self.cantidad_pistas = 5
+            self.palabras = self.get_palabra()
+        elif (self == self.NORMAL):
+            self.cantidad_intentos = 5
+            self.cantidad_pistas = 3
+            self.palabras = self.get_palabra()
+        else:
+            self.cantidad_intentos = 3
+            self.cantidad_pistas = 1
+            self.palabras = self.get_palabra()
+        
     def decrementar_intentos(self):
         if (self.cantidad_intentos > 0):
             self.cantidad_intentos -= 1
@@ -32,9 +44,9 @@ class Dificultad(Enum):
     def get_pistas(self):
         return self.cantidad_pistas
     
-    def get_palabra(self, path):
+    def get_palabra(self):
         
-        with open(path, 'r') as j:
+        with open(PATH, 'r') as j:
             data = json.load(j)
 
         match self:
@@ -46,4 +58,5 @@ class Dificultad(Enum):
             
             case Dificultad.DIFICIL:
                 return random.choice(data.get('dificil'))
+            
         return self.palabras
