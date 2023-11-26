@@ -1,3 +1,7 @@
+from juego_ahorcado import JuegoAhorcado
+from estado_juego import EstadoJuego
+from dificultad import Dificultad
+
 def main_menu():
     """
     Muestra el menu principal del juego del Ahorcado y maneja las opciones seleccionadas por el usuario.
@@ -10,25 +14,29 @@ def main_menu():
     Salida:
     - Mensajes de la opcion elegida.
     """
+
     while True:
-        print_main_menu()
+        mostrar_opciones()
         opcion = input("Elige una opcion: ")
         if opcion == "1":
             print("Empezamos!")
+            juego = JuegoAhorcado(Dificultad.FACIL)
+            estado = juego.iniciar()
+            if estado == EstadoJuego.ABANDONADO:
+                continue
         elif opcion == "2":
             print("Dificultad")
         elif opcion == "3":
             print("Reglas")
         elif opcion == "4":
-            print("Adios!")
+            print("Salir")
             break
         else:
             print("Opcion incorrecta")
 
-
-def print_main_menu():
+def mostrar_opciones():
     """
-    Imprime el menú principal del juego del Ahorcado.
+    Imprime las opciones del menú principal del juego del Ahorcado.
 
     Opciones:
         1 - Empezar!!!!!!
@@ -36,6 +44,7 @@ def print_main_menu():
         3 - Reglas
         4 - Salir :(
     """
+
     print("Opciones:")
     print("\t1 - Empezar!!!!!!")
     print("\t2 - Dificultad")
