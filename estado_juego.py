@@ -1,3 +1,5 @@
+from enum import Enum
+
 class EstadoJuego(Enum):
     EN_CURSO = 1,
     GANADO = 2,

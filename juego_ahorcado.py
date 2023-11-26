@@ -1,20 +1,23 @@
 from dificultad import Dificultad
+from estado_juego import EstadoJuego
 
 class JuegoAhorcado:
 
     def __init__(self, dificultad):
-        self.dificultad = dificultad
-
+        self.intentos_restantes = dificultad.obtener_intentos_maximos()
+        self.pistas_restantes = dificultad.obtener_pistas()
+        self.palabra = dificultad.obtener_palabra()
         self.letras_por_adivinar = list(set(self.palabra))
         self.letras_adivinadas = []
-        self.letras_dichas = []
+        self.letras_erradas = []
+        
         self.estado = EstadoJuego.EN_CURSO
     
     def en_curso(self):
         return self.estado == EstadoJuego.EN_CURSO
     
     def mostrar_palabra(self):
-        for letra in self.dificultad.palabra:
+        for letra in self.palabra:
             if letra in self.letras_adivinadas:
                 print(letra, end=" ")
             else:
@@ -22,12 +25,11 @@ class JuegoAhorcado:
     
     def mostrar_estado(self):
         print("=========================================")
-        print("Intentos restantes: x")
-        print("Letras adivinadas: x")
-        print("Letras erradas: x")
-        print("Pistas restantes: x")
+        print("Intentos restantes: ", self.intentos_restantes)
+        print("Letras adivinadas: ", self.letras_adivinadas)
+        print("Letras erradas: ", self.letras_erradas)
+        print("Pistas restantes: ", self.pistas_restantes)
 
-        self.dificultad.print()
         self.mostrar_palabra()
         self.estado.print()
         print("=========================================")
@@ -39,10 +41,8 @@ class JuegoAhorcado:
             
         else:
             self.intentos_restantes -= 1
-
-        if letra not in self.letras_dichas:
-            self.letras_dichas.append(letra)
-
+            self.letras_erradas.append(letra)
+            
         if len(self.letras_por_adivinar) == 0:
             self.estado = EstadoJuego.GANADO
         if self.intentos_restantes == 0:
@@ -60,7 +60,7 @@ class JuegoAhorcado:
     def iniciar(self):
         self.mostrar_estado()
         while self.en_curso():
-            print(f"Letras dichas: {self.letras_dichas}")
+            print(f"Letras erradas: {self.letras_erradas}")
             print("0. Abandonar partida")
             print("1. Pedir pista")
             print("Ingrese una letra para continuar jugando\n")

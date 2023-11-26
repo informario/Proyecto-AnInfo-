@@ -5,47 +5,12 @@ import json
 PATH = "palabras.json"
 
 class Dificultad(Enum):
-    FACIL = 0,
-    NORMAL = 1,
-    DIFICIL = 2,
+    FACIL = 1,
+    NORMAL = 2,
+    DIFICIL = 3,
 
-    def __init__(self):
-
-        if (self == self.FACIL):
-            self.cantidad_intentos = 7
-            self.cantidad_pistas = 5
-            self.palabras = self.get_palabra()
-        elif (self == self.NORMAL):
-            self.cantidad_intentos = 5
-            self.cantidad_pistas = 3
-            self.palabras = self.get_palabra()
-        else:
-            self.cantidad_intentos = 3
-            self.cantidad_pistas = 1
-            self.palabras = self.get_palabra()
-        
-    def decrementar_intentos(self):
-        if (self.cantidad_intentos > 0):
-            self.cantidad_intentos -= 1
-
-    def decrementar_pistas(self):
-        if (self.cantidad_pistas > 0):
-            self.cantidad_pistas -= 1
-
-    def quedan_intentos(self):
-        return (self.cantidad_intentos > 0)
-    
-    def quedan_pistas(self):
-        return (self.cantidad_pistas > 0)
-
-    def get_intentos(self):
-        return self.cantidad_intentos
-    
-    def get_pistas(self):
-        return self.cantidad_pistas
-    
-    def get_palabra(self):
-        
+    # Esta funcion va a leer del .json y devolver alguna palabra de acuerdo a la dificultad
+    def obtener_palabra(self):
         with open(PATH, 'r') as j:
             data = json.load(j)
 
@@ -58,5 +23,30 @@ class Dificultad(Enum):
             
             case Dificultad.DIFICIL:
                 return random.choice(data.get('dificil'))
-            
-        return self.palabras
+
+    def obtener_intentos_maximos(self):
+        match self:
+            case Dificultad.FACIL:
+                return 7 
+            case Dificultad.NORMAL:
+                return 5
+            case Dificultad.DIFICIL:
+                return 3
+
+    def obtener_pistas(self):
+        match self:
+            case Dificultad.FACIL:
+                return 5
+            case Dificultad.NORMAL:
+                return 3
+            case Dificultad.DIFICIL:
+                return 1
+
+    def to_string(self):
+        match self:
+            case Dificultad.FACIL:
+                return "FACIL"
+            case Dificultad.NORMAL:
+                return "MEDIA"
+            case Dificultad.DIFICIL:
+                return "DIFICIL"
