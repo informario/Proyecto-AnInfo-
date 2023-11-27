@@ -1,5 +1,6 @@
 from dificultad import Dificultad
 from estado_juego import EstadoJuego
+from manejador_de_pistas import ManejadorDePistas
 
 class JuegoAhorcado:
 
@@ -51,9 +52,7 @@ class JuegoAhorcado:
             self.estado = EstadoJuego.PERDIDO
 
     def obtener_pista(self):
-        if self.pistas == 0:
-            return
-        # Logica para obtener una pista
+        ManejadorDePistas(self)
 
     def abandonar(self):
         self.estado = EstadoJuego.ABANDONADO
@@ -72,6 +71,7 @@ class JuegoAhorcado:
                 return
             if char == "1":
                 self.obtener_pista()
+                self.mostrar_estado()
                 continue
             self.intentar_adivinar_letra(char)
             self.mostrar_estado()
