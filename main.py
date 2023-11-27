@@ -1,7 +1,6 @@
 from main_menu import *
 
 def main():
-
-    main_menu()
+    MenuJuego().ejecutar_opciones()
 
 main()
