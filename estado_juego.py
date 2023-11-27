@@ -1,10 +1,9 @@
 from enum import Enum
 
 class EstadoJuego(Enum):
-    EN_CURSO = 1,
-    GANADO = 2,
-    PERDIDO = 3,
-    ABANDONADO = 4,
+    EN_CURSO = 1
+    GANADO = 2
+    PERDIDO = 3
     
     def print(self):
         match self:
@@ -14,5 +13,3 @@ class EstadoJuego(Enum):
                 print("Felicitaciones, ganaste")
             case EstadoJuego.PERDIDO:
                 print("Perdiste")
-            case EstadoJuego.ABANDONADO:
-                print("Abandonaste el juego")
