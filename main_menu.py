@@ -5,7 +5,6 @@ from enum import Enum
 
 OPCION_VOLVER_MENU_PRINCIPAL = 0
 DIFICULTAD_INICIAL = Dificultad.NORMAL
-OPCIONES_SELECCIONAR_DIFICULTAD = ["1", "2", "3", "0"]
 
 class OpcionMenu(Enum):
     EMPEZAR_JUEGO = 1
@@ -13,8 +12,8 @@ class OpcionMenu(Enum):
     REGLAS = 3
     SALIR = 4
     
-    def from_input(input):
-        match input:
+    def from_input(inp):
+        match inp.strip():
             case "1":
                 return OpcionMenu.EMPEZAR_JUEGO
             case "2":
@@ -64,7 +63,7 @@ class MenuJuego:
         """    
         while True:
             MenuJuego.mostrar_opciones()
-            opcion = input("Elige una opcion: ")
+            opcion = input("Elige una opcion: ").strip()
             opcion = OpcionMenu.from_input(opcion)
             if opcion == None:
                 print("Opcion incorrecta")
@@ -82,21 +81,17 @@ class MenuJuego:
         print("0. Volver al menu principal")
         print("Dificultad actual: ", self.dificultad.to_string())
         print("\n")
-        opcion = input("-")
-        while opcion not in OPCIONES_SELECCIONAR_DIFICULTAD:
+        opcion = input("-").strip()
+        dificultad = Dificultad.from_input(opcion)
+        while dificultad == None:
+            if opcion == OPCION_VOLVER_MENU_PRINCIPAL:
+                return
             print("Opcion incorrecta, vuelve a intentarlo")
-            opcion = input("-")
-            #Esto se puede abstraer a otra función porque lo vamos a usar en varios lugares
-        
-        if int(opcion) == OPCION_VOLVER_MENU_PRINCIPAL:
-            return
-        dificultad = Dificultad.from_index(int(opcion))
-        if dificultad == None:
-            # Esto no deberia pasar nunca
-            return
+            opcion = input("-").strip()
+            dificultad = Dificultad.from_input(opcion)
+
         self.dificultad = dificultad
         print("Dificultad seleccionada: ", self.dificultad.to_string())
-        return
         
     def empezar_a_jugar(self):
         juego = JuegoAhorcado(self.dificultad)

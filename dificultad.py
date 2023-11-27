@@ -52,13 +52,14 @@ class Dificultad(Enum):
                 return "DIFICIL"
                 
 
-    def from_index(index):
-        match index:
-            case Dificultad.FACIL.value:
+    def from_input(inp):
+        match inp:
+            case "1":
                 return Dificultad.FACIL
-            case Dificultad.NORMAL.value:
+            case "2":
                 return Dificultad.NORMAL
-            case Dificultad.DIFICIL.value:
+            case "3":
                 return Dificultad.DIFICIL
             case _:
                 return None
+
