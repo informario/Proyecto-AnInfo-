@@ -54,11 +54,9 @@ class JuegoAhorcado:
     def obtener_pista(self):
         ManejadorDePistas(self)
 
-    def abandonar(self):
-        self.estado = EstadoJuego.ABANDONADO
-
     # Devuelve el estado final del juego
     def iniciar(self):
+        print("Bienvenido al juego del Ahorcado!")
         self.mostrar_estado()
         while self.en_curso():
             print(f"Letras erradas: {self.letras_erradas}")
@@ -67,8 +65,14 @@ class JuegoAhorcado:
             print("Ingrese una letra para continuar jugando\n")
             char = input("Intento: ")
             if char == "0":
-                self.abandonar()
-                return
+                print("¿Estas seguro de que deseas abandonar la partida?")
+                print("0. Si")
+                print("1. No")
+                char = input("-")
+                if char == "0":
+                    return
+                else:
+                    continue
             if char == "1":
                 self.obtener_pista()
                 self.mostrar_estado()

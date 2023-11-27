@@ -5,9 +5,9 @@ import json
 PATH = "palabras.json"
 
 class Dificultad(Enum):
-    FACIL = 1,
-    NORMAL = 2,
-    DIFICIL = 3,
+    FACIL = 1
+    NORMAL = 2
+    DIFICIL = 3
 
     # Esta funcion va a leer del .json y devolver alguna palabra de acuerdo a la dificultad
     def obtener_palabra(self):
@@ -47,6 +47,19 @@ class Dificultad(Enum):
             case Dificultad.FACIL:
                 return "FACIL"
             case Dificultad.NORMAL:
-                return "MEDIA"
+                return "NORMAL"
             case Dificultad.DIFICIL:
                 return "DIFICIL"
+                
+
+    def from_input(inp):
+        match inp:
+            case "1":
+                return Dificultad.FACIL
+            case "2":
+                return Dificultad.NORMAL
+            case "3":
+                return Dificultad.DIFICIL
+            case _:
+                return None
+
