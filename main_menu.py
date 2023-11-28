@@ -3,7 +3,7 @@ from estado_juego import EstadoJuego
 from dificultad import Dificultad
 from enum import Enum
 
-OPCION_VOLVER_MENU_PRINCIPAL = 0
+OPCION_VOLVER_MENU_PRINCIPAL = "0"
 DIFICULTAD_INICIAL = Dificultad.NORMAL
 
 class OpcionMenu(Enum):
@@ -32,7 +32,7 @@ class OpcionMenu(Enum):
             case OpcionMenu.SELECCIONAR_DIFICULTAD:
                 menu_juego.seleccionar_dificultad()
             case OpcionMenu.REGLAS:
-                print("Reglas")
+                menu_juego.mostrar_reglas()
             case OpcionMenu.SALIR:
                 print("¡Gracias por jugar!")
             case _:
@@ -71,7 +71,27 @@ class MenuJuego:
             opcion.ejecutar(self)
             if opcion == OpcionMenu.SALIR:
                 break
-
+    
+    def mostrar_reglas(self):
+        print("Reglas:")
+        print("1. El juego consiste en adivinar una palabra o frase oculta")
+        print("2. El jugador puede ingresar una letra o una palabra para intentar adivinar")
+        print("3. Si la letra ingresada se encuentra en la palabra oculta, esta se revelará y pasará a ser conocida")
+        print("4. Si la letra ingresada no se encuentra en la palabra oculta, el jugador pierde un intento")
+        print("5. El juego termina cuando el jugador adivina la palabra oculta o se queda sin intentos")
+        print("6. El jugador puede pedir pistas para obtener información sobre la palabra oculta")
+        print("7. Existen dos tipos de pistas: se puede revelar una letra de la palabra (que gasta una pista), o se puede pedir una definición de la palabra oculta (que gasta dos pistas)")
+        print("8. El juego tiene tres niveles de dificultad: FACIL, NORMAL y DIFICIL, al elegir estos cambian las dificultades de las palabras, y cada uno tiene una cantidad de intentos y pistas diferente")
+        print("9. El jugador puede cambiar la dificultad del juego en cualquier momento")
+        print("10. El jugador puede abandonar la partida en cualquier momento")
+        print("\n")
+        print("Envie 0 para volver al menu principal")
+        opcion = input("-").strip()
+        while True:
+            if opcion == OPCION_VOLVER_MENU_PRINCIPAL:
+                return
+            print("Opcion incorrecta, vuelve a intentarlo")
+            opcion = input("-").strip()
 
     def seleccionar_dificultad(self):
         print("Selecciona una dificultad:")
