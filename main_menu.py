@@ -77,7 +77,7 @@ class MenuJuego:
         print("Selecciona una dificultad:")
         print("1. FACIL: 7 intentos, 5 pistas y palabras cortas")
         print("2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
-        print("3. DIFICIL: 3 intentos, una pista y palabras o frases largas")
+        print("3. DIFICIL: 3 intentos, 2 pistas y palabras o frases largas")
         print("0. Volver al menu principal")
         print("Dificultad actual: ", self.dificultad.to_string())
         print("\n")
