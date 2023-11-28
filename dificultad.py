@@ -9,20 +9,20 @@ class Dificultad(Enum):
     NORMAL = 2
     DIFICIL = 3
 
-    # Esta funcion va a leer del .json y devolver alguna palabra de acuerdo a la dificultad
+    # Esta funcion va a leer del .json y devolver un diccionario con la palabra y su pista de acuerdo a la dificultad
     def obtener_palabra(self):
         with open(PATH, 'r') as j:
             data = json.load(j)
 
         match self:
             case Dificultad.FACIL:
-                return random.choice(data.get('facil'))
+                return list(random.choice(data.get('facil')).items())[0]
             
             case Dificultad.NORMAL:
-                return random.choice(data.get('normal'))
+                return list(random.choice(data.get('normal')).items())[0]
             
             case Dificultad.DIFICIL:
-                return random.choice(data.get('dificil'))
+                return list(random.choice(data.get('dificil')).items())[0]
 
     def obtener_intentos_maximos(self):
         match self:
@@ -40,7 +40,7 @@ class Dificultad(Enum):
             case Dificultad.NORMAL:
                 return 3
             case Dificultad.DIFICIL:
-                return 1
+                return 2
 
     def to_string(self):
         match self:

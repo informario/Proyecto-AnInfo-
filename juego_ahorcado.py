@@ -1,13 +1,14 @@
 from dificultad import Dificultad
 from estado_juego import EstadoJuego
-from manejador_de_pistas import ManejadorDePistas
+import random
 
 class JuegoAhorcado:
 
     def __init__(self, dificultad):
         self.intentos_restantes = dificultad.obtener_intentos_maximos()
         self.pistas_restantes = dificultad.obtener_pistas()
-        self.palabra = dificultad.obtener_palabra()
+        self.palabra, self.pista = dificultad.obtener_palabra()
+        self.mostrar_pista = False
         self.letras_por_adivinar = list(set(self.palabra))
         self.letras_adivinadas = []
         self.letras_erradas = []
@@ -31,6 +32,8 @@ class JuegoAhorcado:
         print("Letras adivinadas: ", self.letras_adivinadas)
         print("Letras erradas: ", self.letras_erradas)
         print("Pistas restantes: ", self.pistas_restantes)
+        if self.mostrar_pista:
+            print("AYUDA: ", self.pista)
 
         self.mostrar_palabra()
         print("\n")
@@ -51,8 +54,32 @@ class JuegoAhorcado:
         if self.intentos_restantes == 0:
             self.estado = EstadoJuego.PERDIDO
 
-    def obtener_pista(self):
-        ManejadorDePistas(self)
+    def revelar_letra(self):
+        if self.pistas_restantes == 0:
+            print("\nNo te quedan pistas!\n")
+            return
+        
+        if len(self.letras_por_adivinar) <= 1:
+            print("\nTe queda solo una letra, no podes usar la pista!\n")
+            return
+
+        pista = random.choice(self.letras_por_adivinar)
+        self.letras_por_adivinar.remove(pista)
+        self.letras_adivinadas.append(pista)
+
+        self.pistas_restantes -= 1
+
+    def dar_pista(self):
+        if self.pistas_restantes < 2:
+            print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
+            return
+
+        if self.mostrar_pista:
+            print("\nYa te dimos una pista!\n")
+            return
+
+        self.mostrar_pista = True
+        self.pistas_restantes -= 2
 
     # Devuelve el estado final del juego
     def iniciar(self):
@@ -61,7 +88,8 @@ class JuegoAhorcado:
         while self.en_curso():
             print(f"Letras erradas: {self.letras_erradas}")
             print("0. Abandonar partida")
-            print("1. Pedir pista")
+            print("1. Revelar una letra")
+            print("2. Pedir una pista")
             print("Ingrese una letra para continuar jugando\n")
             char = input("Intento: ")
             if char == "0":
@@ -74,7 +102,11 @@ class JuegoAhorcado:
                 else:
                     continue
             if char == "1":
-                self.obtener_pista()
+                self.revelar_letra()
+                self.mostrar_estado()
+                continue
+            if char == "2":
+                self.dar_pista()
                 self.mostrar_estado()
                 continue
             self.intentar_adivinar_letra(char)
