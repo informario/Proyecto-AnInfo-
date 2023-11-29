@@ -53,6 +53,17 @@ class JuegoAhorcado:
             self.estado = EstadoJuego.GANADO
         if self.intentos_restantes == 0:
             self.estado = EstadoJuego.PERDIDO
+    
+    def intentar_adivinar_palabra(self, str):
+        
+        if str == self.palabra:
+            self.estado = EstadoJuego.GANADO
+        else:
+            self.intentos_restantes -= 1
+
+        if self.intentos_restantes == 0:
+            self.estado = EstadoJuego.PERDIDO
+
 
     def revelar_letra(self):
         if self.pistas_restantes == 0:
@@ -109,7 +120,10 @@ class JuegoAhorcado:
                 self.dar_pista()
                 self.mostrar_estado()
                 continue
-            self.intentar_adivinar_letra(char)
+            if len(char) > 1:
+                self.intentar_adivinar_palabra(char)
+            else:
+                self.intentar_adivinar_letra(char)
             self.mostrar_estado()
         
         return self.estado
