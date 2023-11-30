@@ -64,6 +64,7 @@ class JuegoAhorcado:
             self.letras_adivinadas.append(letra)
             
         else:
+            print("Letra incorrecta, vuelve a intentarlo")
             self.intentos_restantes -= 1
             self.letras_erradas.append(letra)
             
@@ -112,6 +113,20 @@ class JuegoAhorcado:
         self.mostrar_pista = True
         self.pistas_restantes -= 2
 
+    def manejar_pista(self, pista):
+        pista()
+        self.mostrar_estado()
+
+    def abandonar_partida(self):
+        print("¿Estas seguro de que deseas abandonar la partida?")
+        print("0. Si")
+        print("1. No")
+        char = input("-")
+        if char == "0":
+            return True
+        else:
+            return False
+
     # Devuelve el estado final del juego
     def iniciar(self):
         os.system('clear')
@@ -129,34 +144,23 @@ class JuegoAhorcado:
             # lo va a dejar vacío
             os.system('clear')
 
-            
-            if char == "0":
-                print("¿Estas seguro de que deseas abandonar la partida?")
-                print("0. Si")
-                print("1. No")
-                char = input("-")
-                if char == "0":
-                    return
-                else:
+            match char:
+                case "0":
+                    if self.abandonar_partida():
+                        return
+                case "1":
+                    self.manejar_pista(self.revelar_letra)
                     continue
-            if char == "1":
-                self.revelar_letra()
-                self.mostrar_estado()
-                continue
-            if char == "2":
-                self.dar_pista()
-                
-                self.mostrar_estado()
-                continue
-
+                case "2":
+                    self.manejar_pista(self.dar_pista)
+                    continue
+            
             if len(char) > 1:
                 self.intentar_adivinar_palabra(char)
             else:
                 self.intentar_adivinar_letra(char)
             self.mostrar_estado()
         
-        inp = input("Presione ENTER para continuar\n")
-        while inp != "":
-            inp = input("")
-            continue
         return self.estado
+
+
