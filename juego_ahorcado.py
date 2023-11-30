@@ -10,7 +10,7 @@ class JuegoAhorcado:
         self.pistas_restantes = dificultad.obtener_pistas()
         self.palabra, self.pista = dificultad.obtener_palabra()
         self.mostrar_pista = False
-        self.letras_por_adivinar = list(set(self.palabra))
+        self.letras_por_adivinar = list(set(filter(lambda x: x != " ", self.palabra)))
         self.letras_adivinadas = []
         self.letras_erradas = []
         
@@ -24,6 +24,8 @@ class JuegoAhorcado:
         for letra in self.palabra:
             if letra in self.letras_adivinadas or self.estado == EstadoJuego.PERDIDO:
                 print(letra, end=" ")
+            elif letra == " ":
+                print(" ", end=" ")
             else:
                 print("_", end=" ")
         
@@ -44,6 +46,10 @@ class JuegoAhorcado:
         print("=========================================")
 
     def intentar_adivinar_letra(self, letra):
+
+        if letra.isspace():
+            return
+
         if letra in self.letras_por_adivinar:
             self.letras_por_adivinar.remove(letra)
             self.letras_adivinadas.append(letra)
@@ -57,9 +63,12 @@ class JuegoAhorcado:
         if self.intentos_restantes == 0:
             self.estado = EstadoJuego.PERDIDO
     
-    def intentar_adivinar_palabra(self, str):
+    def intentar_adivinar_palabra(self, palabra):
+
+        if palabra.isspace():
+            return
         
-        if str == self.palabra:
+        if palabra == self.palabra:
             self.estado = EstadoJuego.GANADO
             self.letras_adivinadas += self.letras_por_adivinar
         else:
