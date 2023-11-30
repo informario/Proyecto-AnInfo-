@@ -5,7 +5,7 @@ from dificultad import Dificultad
 from enum import Enum
 
 OPCION_VOLVER_MENU_PRINCIPAL = "0"
-DIFICULTAD_INICIAL = Dificultad.DIFICIL
+DIFICULTAD_INICIAL = Dificultad.NORMAL
 
 class OpcionMenu(Enum):
     EMPEZAR_JUEGO = 1
