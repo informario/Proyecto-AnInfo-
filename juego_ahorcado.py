@@ -2,6 +2,7 @@ from dificultad import Dificultad
 from estado_juego import EstadoJuego
 import random
 import os
+import getpass
 
 class JuegoAhorcado:
 
@@ -21,14 +22,19 @@ class JuegoAhorcado:
     
     def mostrar_palabra(self):
         print("    ")
-        for letra in self.palabra:
-            if letra in self.letras_adivinadas or self.estado == EstadoJuego.PERDIDO:
-                print(letra, end=" ")
-            elif letra == " ":
-                print(" ", end=" ")
-            else:
-                print("_", end=" ")
         
+        if self.en_curso():
+            for letra in self.palabra:
+                if letra in self.letras_adivinadas:
+                    print(letra, end=" ")
+                elif letra == " ":
+                    print(" ", end=" ")
+                else:
+                    print("_", end=" ")
+
+        else:
+            for letra in self.palabra:
+                print(letra, end=" ")
     
     def mostrar_estado(self):
         os.system('clear')
@@ -44,6 +50,10 @@ class JuegoAhorcado:
         print("\n")
         self.estado.print()
         print("=========================================")
+
+        if not self.en_curso():
+            print("Presione ENTER para volver al menu principal")
+            getpass.getpass(prompt="")
 
     def intentar_adivinar_letra(self, letra):
 
