@@ -14,7 +14,6 @@ class JuegoAhorcado:
         self.letras_por_adivinar = list(set(filter(lambda x: x != " ", self.palabra)))
         self.letras_adivinadas = []
         self.letras_erradas = []
-        
         self.estado = EstadoJuego.EN_CURSO
     
     def en_curso(self):
@@ -37,7 +36,7 @@ class JuegoAhorcado:
                 print(letra, end=" ")
     
     def mostrar_estado(self):
-        os.system('clear')
+        
         print("=========================================")
         print("Intentos restantes: ", self.intentos_restantes)
         print("Letras adivinadas: ", self.letras_adivinadas)
@@ -56,8 +55,8 @@ class JuegoAhorcado:
             getpass.getpass(prompt="")
 
     def intentar_adivinar_letra(self, letra):
-
-        if letra.isspace():
+        if len(letra) == 0:
+            print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
             return
 
         if letra in self.letras_por_adivinar:
@@ -74,14 +73,12 @@ class JuegoAhorcado:
             self.estado = EstadoJuego.PERDIDO
     
     def intentar_adivinar_palabra(self, palabra):
-
-        if palabra.isspace():
-            return
         
         if palabra == self.palabra:
             self.estado = EstadoJuego.GANADO
             self.letras_adivinadas += self.letras_por_adivinar
         else:
+            print("\nPalabra incorrecta\n")
             self.intentos_restantes -= 1
 
         if self.intentos_restantes == 0:
@@ -121,12 +118,18 @@ class JuegoAhorcado:
         print("Bienvenido al juego del Ahorcado!")
         self.mostrar_estado()
         while self.en_curso():
-            print(f"Letras erradas: {self.letras_erradas}")
             print("0. Abandonar partida")
             print("1. Revelar una letra")
             print("2. Pedir una pista")
             print("Ingrese una letra para continuar jugando\n")
-            char = input("Intento: ")
+
+            char = input("Intento: ").lower().strip()   
+            # Esto convierte el input a minusculas y elimina los espacios en blanco
+            # del principio y del final. Si le pasamos un string con unicamente un espacio en blanco,
+            # lo va a dejar vacío
+            os.system('clear')
+
+            
             if char == "0":
                 print("¿Estas seguro de que deseas abandonar la partida?")
                 print("0. Si")
@@ -142,12 +145,18 @@ class JuegoAhorcado:
                 continue
             if char == "2":
                 self.dar_pista()
+                
                 self.mostrar_estado()
                 continue
+
             if len(char) > 1:
                 self.intentar_adivinar_palabra(char)
             else:
                 self.intentar_adivinar_letra(char)
             self.mostrar_estado()
         
+        inp = input("Presione ENTER para continuar\n")
+        while inp != "":
+            inp = input("")
+            continue
         return self.estado
