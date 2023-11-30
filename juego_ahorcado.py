@@ -21,10 +21,11 @@ class JuegoAhorcado:
     def mostrar_palabra(self):
         print("    ")
         for letra in self.palabra:
-            if letra in self.letras_adivinadas:
+            if letra in self.letras_adivinadas or self.estado == EstadoJuego.PERDIDO:
                 print(letra, end=" ")
             else:
                 print("_", end=" ")
+        
     
     def mostrar_estado(self):
         print("=========================================")
@@ -58,6 +59,7 @@ class JuegoAhorcado:
         
         if str == self.palabra:
             self.estado = EstadoJuego.GANADO
+            self.letras_adivinadas += self.letras_por_adivinar
         else:
             self.intentos_restantes -= 1
 

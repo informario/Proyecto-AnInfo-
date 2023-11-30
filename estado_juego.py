@@ -12,4 +12,4 @@ class EstadoJuego(Enum):
             case EstadoJuego.GANADO:
                 print("Felicitaciones, ganaste")
             case EstadoJuego.PERDIDO:
-                print("Perdiste")
+                print("Perdiste, no te quedan intentos")
