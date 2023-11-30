@@ -185,7 +185,7 @@ def agregar_partes_modo_dificil(intentos_fallidos: int, ahorcado: Ahorcado):
         ahorcado.agregar_piernas()
 
 
-def dibujar_ahorcardo(intentos_fallidos, dificultad: Dificultad):
+def dibujar_ahorcado(intentos_fallidos, dificultad: Dificultad):
     """
     Dibuja el ahorcado del ahorcado de acuerdo a los intentos fallidos y la dificultad.
 
@@ -213,4 +213,4 @@ def dibujar_ahorcardo(intentos_fallidos, dificultad: Dificultad):
     ahorcado.print()
 
 # Ejemplo de uso
-dibujar_ahorcardo(5, Dificultad.NORMAL)
+dibujar_ahorcado(1, Dificultad.FACIL)
