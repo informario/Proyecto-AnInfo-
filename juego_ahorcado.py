@@ -1,6 +1,7 @@
 from dificultad import Dificultad
 from estado_juego import EstadoJuego
 import random
+import os
 
 class JuegoAhorcado:
 
@@ -27,6 +28,7 @@ class JuegoAhorcado:
                 print("_", end=" ")
     
     def mostrar_estado(self):
+        os.system('clear')
         print("=========================================")
         print("Intentos restantes: ", self.intentos_restantes)
         print("Letras adivinadas: ", self.letras_adivinadas)
@@ -94,6 +96,7 @@ class JuegoAhorcado:
 
     # Devuelve el estado final del juego
     def iniciar(self):
+        os.system('clear')
         print("Bienvenido al juego del Ahorcado!")
         self.mostrar_estado()
         while self.en_curso():
