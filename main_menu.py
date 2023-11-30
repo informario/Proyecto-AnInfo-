@@ -1,3 +1,4 @@
+import os
 from juego_ahorcado import JuegoAhorcado
 from estado_juego import EstadoJuego
 from dificultad import Dificultad
@@ -43,6 +44,7 @@ class MenuJuego:
         self.dificultad = DIFICULTAD_INICIAL
     
     def mostrar_opciones():
+        os.system('clear')
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
@@ -73,6 +75,7 @@ class MenuJuego:
                 break
     
     def mostrar_reglas(self):
+        os.system('clear')
         print("Reglas:")
         print("1. El juego consiste en adivinar una palabra o frase oculta")
         print("2. El jugador puede ingresar una letra o una palabra para intentar adivinar")
@@ -94,6 +97,7 @@ class MenuJuego:
             opcion = input("-").strip()
 
     def seleccionar_dificultad(self):
+        os.system('clear')
         print("Selecciona una dificultad:")
         print("1. FACIL: 7 intentos, 5 pistas y palabras cortas")
         print("2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
