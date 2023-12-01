@@ -1,5 +1,6 @@
 from dificultad import Dificultad
 from estado_juego import EstadoJuego
+from options.game_options import OpcionJuego
 import random
 import os
 import getpass
@@ -10,7 +11,7 @@ class JuegoAhorcado:
         self.intentos_restantes = dificultad.obtener_intentos_maximos()
         self.pistas_restantes = dificultad.obtener_pistas()
         self.palabra, self.pista = dificultad.obtener_palabra()
-        self.mostrar_pista = False
+        self.pista_utilizada = False
         self.letras_por_adivinar = list(set(filter(lambda x: x != " ", self.palabra)))
         self.letras_adivinadas = []
         self.letras_erradas = []
@@ -20,8 +21,6 @@ class JuegoAhorcado:
         return self.estado == EstadoJuego.EN_CURSO
     
     def mostrar_palabra(self):
-        print("    ")
-        
         if self.en_curso():
             for letra in self.palabra:
                 if letra in self.letras_adivinadas:
@@ -31,9 +30,10 @@ class JuegoAhorcado:
                 else:
                     print("_", end=" ")
 
-        else:
-            for letra in self.palabra:
-                print(letra, end=" ")
+            return
+        
+        for letra in self.palabra:
+            print(letra, end=" ")
     
     def mostrar_estado(self):
         
@@ -42,7 +42,7 @@ class JuegoAhorcado:
         print("Letras adivinadas: ", self.letras_adivinadas)
         print("Letras erradas: ", self.letras_erradas)
         print("Pistas restantes: ", self.pistas_restantes)
-        if self.mostrar_pista:
+        if self.pista_utilizada:
             print("AYUDA: ", self.pista)
 
         self.mostrar_palabra()
@@ -50,24 +50,22 @@ class JuegoAhorcado:
         self.estado.print()
         print("=========================================")
 
-        if not self.en_curso():
-            print("Presione ENTER para volver al menu principal")
-            getpass.getpass(prompt="")
 
     def intentar_adivinar_letra(self, letra):
-        if len(letra) == 0:
-            print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
+        if letra in self.letras_adivinadas:
+            print("\nYa adivinaste esta letra, vuelve a intentarlo\n")
             return
-
+        
         if letra in self.letras_por_adivinar:
+            print("\nAdivinaste una letra!\n")   
             self.letras_por_adivinar.remove(letra)
             self.letras_adivinadas.append(letra)
             
         else:
-            print("Letra incorrecta, vuelve a intentarlo")
+            print("\nLetra incorrecta, vuelve a intentarlo\n")
             self.intentos_restantes -= 1
             self.letras_erradas.append(letra)
-            
+
         if len(self.letras_por_adivinar) == 0:
             self.estado = EstadoJuego.GANADO
         if self.intentos_restantes == 0:
@@ -76,6 +74,7 @@ class JuegoAhorcado:
     def intentar_adivinar_palabra(self, palabra):
         
         if palabra == self.palabra:
+            print("\nAdivinaste la palabra!\n")
             self.estado = EstadoJuego.GANADO
             self.letras_adivinadas += self.letras_por_adivinar
         else:
@@ -86,7 +85,7 @@ class JuegoAhorcado:
             self.estado = EstadoJuego.PERDIDO
 
 
-    def revelar_letra(self):
+    def dar_pista(self):
         if self.pistas_restantes == 0:
             print("\nNo te quedan pistas!\n")
             return
@@ -94,73 +93,91 @@ class JuegoAhorcado:
         if len(self.letras_por_adivinar) <= 1:
             print("\nTe queda solo una letra, no podes usar la pista!\n")
             return
-
+    
+        print("\nPista obtenida\n") 
         pista = random.choice(self.letras_por_adivinar)
         self.letras_por_adivinar.remove(pista)
         self.letras_adivinadas.append(pista)
 
         self.pistas_restantes -= 1
 
-    def dar_pista(self):
+    def dar_ayuda(self):
         if self.pistas_restantes < 2:
             print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
             return
 
-        if self.mostrar_pista:
+        if self.pista_utilizada:
             print("\nYa te dimos una pista!\n")
             return
 
-        self.mostrar_pista = True
+        print("\nAyuda obtenida\n")
+        self.pista_utilizada = True
         self.pistas_restantes -= 2
 
-    def manejar_pista(self, pista):
-        pista()
-        self.mostrar_estado()
-
-    def abandonar_partida(self):
+    def partida_abandonada():
         print("¿Estas seguro de que deseas abandonar la partida?")
         print("0. Si")
-        print("1. No")
-        char = input("-")
-        if char == "0":
-            return True
-        else:
+        print("1. No\n")
+        inp = input("- ")
+        if inp == "1":
             return False
+        
+        return True
+        
+    def mostrar_opciones():
+        print("0. Abandonar partida")
+        print("1. Revelar una letra")
+        print("2. Pedir una pista")
+        print("Ingrese una letra para continuar jugando\n")
+
+    def terminar_partida():
+        print("\nPresione ENTER para volver al menu principal\n")
+        getpass.getpass(prompt="")
+
+
+    def intentar_adivinar(self, inp):
+        if len(inp) > 1:
+            self.intentar_adivinar_palabra(inp)
+            return
+        self.intentar_adivinar_letra(inp) 
+
+    def input_invalido(inp):
+        return len(inp) == 0    
+        # Más adelante seguramente hagamos otras validaciones, por eso la funcion
+        # como por ejemplo que no se pueda ingresar un numero distinto de 0, 1 o 2 
+
+
+    def jugar_partida(self):
+        while self.en_curso():
+            JuegoAhorcado.mostrar_opciones()
+            inp = input("Intento: ").lower().strip()
+            os.system('clear')
+            if JuegoAhorcado.input_invalido(inp):
+                print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
+                continue
+
+            opcion = OpcionJuego.from_input(inp)
+            if opcion == None:
+                self.intentar_adivinar(inp) 
+                self.mostrar_estado()
+                continue
+
+            if opcion == OpcionJuego.ABANDONAR_PARTIDA:
+                if JuegoAhorcado.partida_abandonada():
+                    return
+                
+            opcion.ejecutar(self)            
+            self.mostrar_estado()
+        
+        JuegoAhorcado.terminar_partida()
 
     # Devuelve el estado final del juego
     def iniciar(self):
         os.system('clear')
-        print("Bienvenido al juego del Ahorcado!")
+        print("\nBienvenido al juego del Ahorcado!\n")                                                                        
         self.mostrar_estado()
-        while self.en_curso():
-            print("0. Abandonar partida")
-            print("1. Revelar una letra")
-            print("2. Pedir una pista")
-            print("Ingrese una letra para continuar jugando\n")
-
-            char = input("Intento: ").lower().strip()   
-            # Esto convierte el input a minusculas y elimina los espacios en blanco
-            # del principio y del final. Si le pasamos un string con unicamente un espacio en blanco,
-            # lo va a dejar vacío
-            os.system('clear')
-
-            match char:
-                case "0":
-                    if self.abandonar_partida():
-                        return
-                case "1":
-                    self.manejar_pista(self.revelar_letra)
-                    continue
-                case "2":
-                    self.manejar_pista(self.dar_pista)
-                    continue
-            
-            if len(char) > 1:
-                self.intentar_adivinar_palabra(char)
-            else:
-                self.intentar_adivinar_letra(char)
-            self.mostrar_estado()
+        self.jugar_partida()
         
-        return self.estado
+        
 
 

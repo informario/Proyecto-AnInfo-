@@ -3,6 +3,9 @@ import random
 import json
 
 PATH = "palabras.json"
+OPCION_FACIL = "1"
+OPCION_NORMAL = "2"
+OPCION_DIFICIL = "3"
 
 class Dificultad(Enum):
     FACIL = 1
@@ -52,14 +55,15 @@ class Dificultad(Enum):
                 return "DIFICIL"
                 
 
+    
     def from_input(inp):
-        match inp:
-            case "1":
-                return Dificultad.FACIL
-            case "2":
-                return Dificultad.NORMAL
-            case "3":
-                return Dificultad.DIFICIL
-            case _:
-                return None
+        if inp == OPCION_FACIL:
+            return Dificultad.FACIL
+        elif inp == OPCION_NORMAL:
+            return Dificultad.NORMAL
+        elif inp == OPCION_DIFICIL:
+            return Dificultad.DIFICIL
+        else:
+            return None
+    
 
