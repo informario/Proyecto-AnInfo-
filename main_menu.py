@@ -4,40 +4,11 @@ from estado_juego import EstadoJuego
 from dificultad import Dificultad
 from enum import Enum
 
+from options.menu_options import OpcionMenu
+
 OPCION_VOLVER_MENU_PRINCIPAL = "0"
 DIFICULTAD_INICIAL = Dificultad.NORMAL
 
-class OpcionMenu(Enum):
-    EMPEZAR_JUEGO = 1
-    SELECCIONAR_DIFICULTAD = 2
-    REGLAS = 3
-    SALIR = 4
-    
-    def from_input(inp):
-        match inp.strip():
-            case "1":
-                return OpcionMenu.EMPEZAR_JUEGO
-            case "2":
-                return OpcionMenu.SELECCIONAR_DIFICULTAD
-            case "3":
-                return OpcionMenu.REGLAS
-            case "4":
-                return OpcionMenu.SALIR
-            case _:
-                return None
-
-    def ejecutar(self, menu_juego):
-        match self:
-            case OpcionMenu.EMPEZAR_JUEGO:
-                menu_juego.empezar_a_jugar()
-            case OpcionMenu.SELECCIONAR_DIFICULTAD:
-                menu_juego.seleccionar_dificultad()
-            case OpcionMenu.REGLAS:
-                menu_juego.mostrar_reglas()
-            case OpcionMenu.SALIR:
-                print("¡Gracias por jugar!")
-            case _:
-                print("Opcion incorrecta")
 
 class MenuJuego:
     def __init__(self):
