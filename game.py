@@ -1,6 +1,6 @@
-from dificultad import Difficulty
-from estado_juego import GameState
-from options.game_options import GameOpt
+from difficulty import Difficulty
+from game_state import GameState
+from options.game import GameOpt
 import random
 import os
 import getpass
