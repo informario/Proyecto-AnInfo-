@@ -1,31 +1,31 @@
 from enum import Enum
 
-OPCION_ABANDONAR_PARTIDA = "0"
-OPCION_PEDIR_PISTA = "1"
-OPCION_PEDIR_AYUDA = "2"
+ABANDON_GAME_OPT = "0"
+ASK_CLUE_OPT = "1"
+ASK_HELP_OPT = "2"
 
-class OpcionJuego(Enum):
-    ABANDONAR_PARTIDA = 1
-    PEDIR_PISTA = 2
-    PEDIR_AYUDA = 3
+class GameOpt(Enum):
+    ABANDON_GAME_OPT = 1
+    ASK_CLUE = 2
+    ASK_HELP = 3
 
     @classmethod
     def from_input(cls, inp):
-        if inp == OPCION_ABANDONAR_PARTIDA:
-            return OpcionJuego.ABANDONAR_PARTIDA
-        elif inp == OPCION_PEDIR_PISTA:
-            return OpcionJuego.PEDIR_PISTA
-        elif inp == OPCION_PEDIR_AYUDA:
-            return OpcionJuego.PEDIR_AYUDA
+        if inp == ABANDON_GAME_OPT:
+            return GameOpt.ABANDON_GAME_OPT
+        elif inp == ASK_CLUE_OPT:
+            return GameOpt.ASK_CLUE
+        elif inp == ASK_HELP_OPT:
+            return GameOpt.ASK_HELP
         else:
             return None
             
-    def ejecutar(self, juego):
+    def execute(self, juego):
         match self:
-            case OpcionJuego.ABANDONAR_PARTIDA:
-                juego.abandonar_partida()   # No se utiliza
-            case OpcionJuego.PEDIR_PISTA:
-                juego.dar_pista()
-            case OpcionJuego.PEDIR_AYUDA:
-                juego.dar_ayuda()
+            case GameOpt.ABANDON_GAME_OPT:
+                juego.game_abandoned()   # No se utiliza
+            case GameOpt.ASK_CLUE:
+                juego.give_clue()
+            case GameOpt.ASK_HELP:
+                juego.give_help()
 

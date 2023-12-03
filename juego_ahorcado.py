@@ -1,120 +1,120 @@
-from dificultad import Dificultad
-from estado_juego import EstadoJuego
-from options.game_options import OpcionJuego
+from dificultad import Difficulty
+from estado_juego import GameState
+from options.game_options import GameOpt
 import random
 import os
 import getpass
 
-class JuegoAhorcado:
+class HangmanGame:
 
-    def __init__(self, dificultad):
-        self.intentos_restantes = dificultad.obtener_intentos_maximos()
-        self.pistas_restantes = dificultad.obtener_pistas()
-        self.palabra, self.pista = dificultad.obtener_palabra()
-        self.pista_utilizada = False
-        self.letras_por_adivinar = list(set(filter(lambda x: x != " ", self.palabra)))
-        self.letras_adivinadas = []
-        self.letras_erradas = []
-        self.estado = EstadoJuego.EN_CURSO
+    def __init__(self, difficulty):
+        self.attempts_remaining = difficulty.get_max_attempts()
+        self.remaining_clues = difficulty.get_clues()
+        self.word, self.clue = difficulty.get_word()
+        self.clue_used = False
+        self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
+        self.letters_guessed = []
+        self.letters_missed = []
+        self.state = GameState.RUNNING
     
-    def en_curso(self):
-        return self.estado == EstadoJuego.EN_CURSO
+    def running(self):
+        return self.state == GameState.RUNNING
     
-    def mostrar_palabra(self):
-        if self.en_curso():
-            for letra in self.palabra:
-                if letra in self.letras_adivinadas:
-                    print(letra, end=" ")
-                elif letra == " ":
+    def print_word(self):
+        if self.running():
+            for letter in self.word:
+                if letter in self.letters_guessed:
+                    print(letter, end=" ")
+                elif letter == " ":
                     print(" ", end=" ")
                 else:
                     print("_", end=" ")
 
             return
         
-        for letra in self.palabra:
-            print(letra, end=" ")
+        for letter in self.word:
+            print(letter, end=" ")
     
-    def mostrar_estado(self):
+    def print_state(self):
         
         print("=========================================")
-        print("Intentos restantes: ", self.intentos_restantes)
-        print("Letras adivinadas: ", self.letras_adivinadas)
-        print("Letras erradas: ", self.letras_erradas)
-        print("Pistas restantes: ", self.pistas_restantes)
-        if self.pista_utilizada:
-            print("AYUDA: ", self.pista)
+        print("Intentos restantes: ", self.attempts_remaining)
+        print("Letras adivinadas: ", self.letters_guessed)
+        print("Letras erradas: ", self.letters_missed)
+        print("Pistas restantes: ", self.remaining_clues)
+        if self.clue_used:
+            print("AYUDA: ", self.clue)
 
-        self.mostrar_palabra()
+        self.print_word()
         print("\n")
-        self.estado.print()
+        self.state.print()
         print("=========================================")
 
 
-    def intentar_adivinar_letra(self, letra):
-        if letra in self.letras_adivinadas:
+    def try_to_guess_letter(self,letter):
+        if letter in self.letters_guessed:
             print("\nYa adivinaste esta letra, vuelve a intentarlo\n")
             return
         
-        if letra in self.letras_por_adivinar:
+        if letter in self.letters_to_guess:
             print("\nAdivinaste una letra!\n")   
-            self.letras_por_adivinar.remove(letra)
-            self.letras_adivinadas.append(letra)
+            self.letters_to_guess.remove(letter)
+            self.letters_guessed.append(letter)
             
         else:
             print("\nLetra incorrecta, vuelve a intentarlo\n")
-            self.intentos_restantes -= 1
-            self.letras_erradas.append(letra)
+            self.attempts_remaining -= 1
+            self.letters_missed.append(letter)
 
-        if len(self.letras_por_adivinar) == 0:
-            self.estado = EstadoJuego.GANADO
-        if self.intentos_restantes == 0:
-            self.estado = EstadoJuego.PERDIDO
+        if len(self.letters_to_guess) == 0:
+            self.state = GameState.WON
+        if self.attempts_remaining == 0:
+            self.state = GameState.LOST
     
-    def intentar_adivinar_palabra(self, palabra):
+    def try_to_guess_word(self, word):
         
-        if palabra == self.palabra:
+        if word == self.word:
             print("\nAdivinaste la palabra!\n")
-            self.estado = EstadoJuego.GANADO
-            self.letras_adivinadas += self.letras_por_adivinar
+            self.state = GameState.WON
+            self.letters_guessed += self.letters_to_guess
         else:
             print("\nPalabra incorrecta\n")
-            self.intentos_restantes -= 1
+            self.attempts_remaining -= 1
 
-        if self.intentos_restantes == 0:
-            self.estado = EstadoJuego.PERDIDO
+        if self.attempts_remaining == 0:
+            self.state = GameState.LOST
 
 
-    def dar_pista(self):
-        if self.pistas_restantes == 0:
+    def give_clue(self):
+        if self.remaining_clues == 0:
             print("\nNo te quedan pistas!\n")
             return
         
-        if len(self.letras_por_adivinar) <= 1:
+        if len(self.letters_to_guess) <= 1:
             print("\nTe queda solo una letra, no podes usar la pista!\n")
             return
     
         print("\nPista obtenida\n") 
-        pista = random.choice(self.letras_por_adivinar)
-        self.letras_por_adivinar.remove(pista)
-        self.letras_adivinadas.append(pista)
+        clue = random.choice(self.letters_to_guess)
+        self.letters_to_guess.remove(clue)
+        self.letters_guessed.append(clue)
 
-        self.pistas_restantes -= 1
+        self.remaining_clues -= 1
 
-    def dar_ayuda(self):
-        if self.pistas_restantes < 2:
+    def give_help(self):
+        if self.remaining_clues < 2:
             print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
             return
 
-        if self.pista_utilizada:
+        if self.clue_used:
             print("\nYa te dimos una pista!\n")
             return
 
         print("\nAyuda obtenida\n")
-        self.pista_utilizada = True
-        self.pistas_restantes -= 2
+        self.clue_used = True
+        self.remaining_clues -= 2
 
-    def partida_abandonada():
+    def is_abandoned():
         print("¿Estas seguro de que deseas abandonar la partida?")
         print("0. Si")
         print("1. No\n")
@@ -124,59 +124,59 @@ class JuegoAhorcado:
         
         return True
         
-    def mostrar_opciones():
+    def show_options():
         print("0. Abandonar partida")
         print("1. Revelar una letra")
         print("2. Pedir una pista")
         print("Ingrese una letra para continuar jugando\n")
 
-    def terminar_partida():
+    def end():
         print("\nPresione ENTER para volver al menu principal\n")
         getpass.getpass(prompt="")
 
 
-    def intentar_adivinar(self, inp):
+    def try_to_guess(self, inp):
         if len(inp) > 1:
-            self.intentar_adivinar_palabra(inp)
+            self.try_to_guess_word(inp)
             return
-        self.intentar_adivinar_letra(inp) 
+        self.try_to_guess_letter(inp) 
 
-    def input_invalido(inp):
+    def invalid_input(inp):
         return len(inp) == 0    
         # Más adelante seguramente hagamos otras validaciones, por eso la funcion
         # como por ejemplo que no se pueda ingresar un numero distinto de 0, 1 o 2 
 
 
-    def jugar_partida(self):
-        while self.en_curso():
-            JuegoAhorcado.mostrar_opciones()
+    def play(self):
+        while self.running():
+            HangmanGame.show_options()
             inp = input("Intento: ").lower().strip()
             os.system('clear')
-            if JuegoAhorcado.input_invalido(inp):
+            if HangmanGame.invalid_input(inp):
                 print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
                 continue
 
-            opcion = OpcionJuego.from_input(inp)
+            opcion = GameOpt.from_input(inp)
             if opcion == None:
-                self.intentar_adivinar(inp) 
-                self.mostrar_estado()
+                self.try_to_guess(inp) 
+                self.print_state()
                 continue
 
-            if opcion == OpcionJuego.ABANDONAR_PARTIDA:
-                if JuegoAhorcado.partida_abandonada():
+            if opcion == GameOpt.ABANDON_GAME_OPT:
+                if HangmanGame.is_abandoned():
                     return
                 
-            opcion.ejecutar(self)            
-            self.mostrar_estado()
+            opcion.execute(self)            
+            self.print_state()
         
-        JuegoAhorcado.terminar_partida()
+        HangmanGame.end()
 
     # Devuelve el estado final del juego
-    def iniciar(self):
+    def run(self):
         os.system('clear')
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        
-        self.mostrar_estado()
-        self.jugar_partida()
+        self.print_state()
+        self.play()
         
         
 

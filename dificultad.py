@@ -3,66 +3,67 @@ import random
 import json
 
 PATH = "palabras.json"
-OPCION_FACIL = "1"
-OPCION_NORMAL = "2"
-OPCION_DIFICIL = "3"
+EASY_OPTION = "1"
+MEDIUM_OPTION = "2"
+HARD_OPTION = "3"
 
-class Dificultad(Enum):
-    FACIL = 1
-    NORMAL = 2
-    DIFICIL = 3
+class Difficulty(Enum):
+    EASY = 1
+    MEDIUM = 2
+    HARD = 3
 
-    # Esta funcion va a leer del .json y devolver un diccionario con la palabra y su pista de acuerdo a la dificultad
-    def obtener_palabra(self):
+    def get_word(self):
+        """Reads a .json file and returns a word according to the chosen difficulty"""
+
         with open(PATH, 'r') as j:
             data = json.load(j)
 
         match self:
-            case Dificultad.FACIL:
+            case Difficulty.EASY:
                 return list(random.choice(data.get('facil')).items())[0]
             
-            case Dificultad.NORMAL:
+            case Difficulty.MEDIUM:
                 return list(random.choice(data.get('normal')).items())[0]
             
-            case Dificultad.DIFICIL:
+            case Difficulty.HARD:
                 return list(random.choice(data.get('dificil')).items())[0]
 
-    def obtener_intentos_maximos(self):
+    def get_max_attempts(self):
         match self:
-            case Dificultad.FACIL:
+            case Difficulty.EASY:
                 return 7 
-            case Dificultad.NORMAL:
+            case Difficulty.MEDIUM:
                 return 5
-            case Dificultad.DIFICIL:
+            case Difficulty.HARD:
                 return 3
 
-    def obtener_pistas(self):
+    def get_clues(self):
         match self:
-            case Dificultad.FACIL:
+            case Difficulty.EASY:
                 return 5
-            case Dificultad.NORMAL:
+            case Difficulty.MEDIUM:
                 return 3
-            case Dificultad.DIFICIL:
+            case Difficulty.HARD:
                 return 2
 
     def to_string(self):
         match self:
-            case Dificultad.FACIL:
+            case Difficulty.EASY:
                 return "FACIL"
-            case Dificultad.NORMAL:
+            case Difficulty.MEDIUM:
                 return "NORMAL"
-            case Dificultad.DIFICIL:
+            case Difficulty.HARD:
                 return "DIFICIL"
                 
 
     
     def from_input(inp):
-        if inp == OPCION_FACIL:
-            return Dificultad.FACIL
-        elif inp == OPCION_NORMAL:
-            return Dificultad.NORMAL
-        elif inp == OPCION_DIFICIL:
-            return Dificultad.DIFICIL
+        if inp == EASY_OPTION:
+            return Difficulty.EASY
+        elif inp == MEDIUM_OPTION:
+            return Difficulty.MEDIUM
+        elif inp == HARD_OPTION:
+            return Difficulty.HARD
         else:
             return None
     

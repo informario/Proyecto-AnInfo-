@@ -1,25 +1,25 @@
-from dificultad import Dificultad
+from dificultad import Difficulty
 from enum import Enum
 
-class PartesAhorcado(Enum):
+class HangmanParts(Enum):
     """
     Enumeración que representa las diferentes partes del ahorcado del ahorcado.
 
     Attributes:
-        CABEZA: Representa la cabeza del ahorcado.
+        HEAD: Representa la cabeza del ahorcado.
         TORSO: Representa el torso del ahorcado.
-        BRAZO_IZQUIERDO: Representa el brazo izquierdo del ahorcado.
-        BRAZO_DERECHO: Representa el brazo derecho del ahorcado.
-        PIERNA_IZQUIERDA: Representa la pierna izquierda del ahorcado.
-        PIERNA_DERECHA: Representa la pierna derecha del ahorcado.
+        LEFT_ARM: Representa el brazo izquierdo del ahorcado.
+        RIGHT_ARM: Representa el brazo derecho del ahorcado.
+        LEFT_LEG: Representa la pierna izquierda del ahorcado.
+        RIGHT_LEG: Representa la pierna derecha del ahorcado.
         SOGA: Representa la soga para colgar al ahorcado.
     """
-    CABEZA = (0, "0")
+    HEAD = (0, "0")
     TORSO = (1, "|")
-    BRAZO_IZQUIERDO = (2, "/")
-    BRAZO_DERECHO = (3, "\\")
-    PIERNA_IZQUIERDA = (4, "/")
-    PIERNA_DERECHA = (5, "\\")
+    LEFT_ARM = (2, "/")
+    RIGHT_ARM = (3, "\\")
+    LEFT_LEG = (4, "/")
+    RIGHT_LEG = (5, "\\")
     SOGA = (6, "|")
 
     def value_int(self):
@@ -30,7 +30,7 @@ class PartesAhorcado(Enum):
         """Obtiene el valor en cadena asociado a la parte del ahorcado."""
         return self.value[1]
     
-class Ahorcado():
+class Hangman():
     """
     Clase que representa el ahorcado.
 
@@ -40,16 +40,16 @@ class Ahorcado():
         cuerpo_completo (list): Lista que contiene todas las partes del ahorcado.
     """
     def __init__(self):
-        self.ahorcado = [" ", " ", " ", " ", " ", " ", " "]
-        self.len_ahorcado = len(self.ahorcado)
-        self.cuerpo_completo = [PartesAhorcado.CABEZA, PartesAhorcado.TORSO, PartesAhorcado.BRAZO_IZQUIERDO, PartesAhorcado.BRAZO_DERECHO, PartesAhorcado.PIERNA_IZQUIERDA, PartesAhorcado.PIERNA_DERECHA, PartesAhorcado.SOGA]
+        self.hangman = [" ", " ", " ", " ", " ", " ", " "]
+        self.len_ahorcado = len(self.hangman)
+        self.cuerpo_completo = [HangmanParts.HEAD, HangmanParts.TORSO, HangmanParts.LEFT_ARM, HangmanParts.RIGHT_ARM, HangmanParts.LEFT_LEG, HangmanParts.RIGHT_LEG, HangmanParts.SOGA]
     
-    def agregar_parte(self, parte: PartesAhorcado):
+    def add_part(self, part: HangmanParts):
         """
         Agrega una parte específica al ahorcado.
 
         Parameters:
-            parte (PartesAhorcado): La parte del ahorcado a agregar.
+            parte (HangmanParts): La parte del ahorcado a agregar.
 
         Raises:
             Exception: Si la parte del ahorcado no existe.
@@ -57,11 +57,11 @@ class Ahorcado():
         Retorno:
             None
         """
-        if parte.value_int() > self.len_ahorcado:
+        if part.value_int() > self.len_ahorcado:
             raise Exception("Parte del ahorcado no existe")
-        self.ahorcado[parte.value_int()] = parte.value_str()
+        self.hangman[part.value_int()] = part.value_str()
 
-    def agregar_partes(self, partes: list):
+    def add_parts(self, partes: list):
         """
         Agrega varias partes al ahorcado.
 
@@ -72,36 +72,36 @@ class Ahorcado():
             None
         """
         for parte in partes:
-            self.agregar_parte(parte)
+            self.add_part(parte)
     
-    def agregar_piernas(self):
+    def add_legs(self):
         """Agrega las piernas al ahorcado."""
-        self.agregar_partes([PartesAhorcado.PIERNA_IZQUIERDA, PartesAhorcado.PIERNA_DERECHA])
+        self.add_parts([HangmanParts.LEFT_LEG, HangmanParts.RIGHT_LEG])
     
-    def agregar_brazos(self):
+    def add_arms(self):
         """Agrega los brazos al ahorcado."""
-        self.agregar_partes([PartesAhorcado.BRAZO_IZQUIERDO, PartesAhorcado.BRAZO_DERECHO])
+        self.add_parts([HangmanParts.LEFT_ARM, HangmanParts.RIGHT_ARM])
 
-    def completar_ahorcado(self):
+    def complete_hangman(self):
         """Completa todo el ahorcado."""
-        self.agregar_partes(self.cuerpo_completo)
+        self.add_parts(self.cuerpo_completo)
 
-    def agregar_cabeza(self):
+    def add_head(self):
         """Agrega la cabeza al ahorcado."""
-        self.agregar_parte(PartesAhorcado.CABEZA)
+        self.add_part(HangmanParts.HEAD)
 
-    def agregar_torso(self):
+    def add_torso(self):
         """Imprime el estado actual del ahorcado."""
-        self.agregar_parte(PartesAhorcado.TORSO)
+        self.add_part(HangmanParts.TORSO)
     
     def print(self):
-        cabeza = self.ahorcado[PartesAhorcado.CABEZA.value_int()]
-        torso = self.ahorcado[PartesAhorcado.TORSO.value_int()]
-        brazo_izquierdo = self.ahorcado[PartesAhorcado.BRAZO_IZQUIERDO.value_int()]
-        brazo_derecho = self.ahorcado[PartesAhorcado.BRAZO_DERECHO.value_int()]
-        pierna_izquierda = self.ahorcado[PartesAhorcado.PIERNA_IZQUIERDA.value_int()]
-        pierna_derecha = self.ahorcado[PartesAhorcado.PIERNA_DERECHA.value_int()]
-        soga = self.ahorcado[PartesAhorcado.SOGA.value_int()]
+        cabeza = self.hangman[HangmanParts.HEAD.value_int()]
+        torso = self.hangman[HangmanParts.TORSO.value_int()]
+        brazo_izquierdo = self.hangman[HangmanParts.LEFT_ARM.value_int()]
+        brazo_derecho = self.hangman[HangmanParts.RIGHT_ARM.value_int()]
+        pierna_izquierda = self.hangman[HangmanParts.LEFT_LEG.value_int()]
+        pierna_derecha = self.hangman[HangmanParts.RIGHT_LEG.value_int()]
+        soga = self.hangman[HangmanParts.SOGA.value_int()]
 
         print(" _______")
         print(f" |/    {soga}")
@@ -111,37 +111,37 @@ class Ahorcado():
         print(f" |")
         print("_|_")
 
-def agregar_partes_modo_facil(intentos_fallidos: int, ahorcado: Ahorcado):
+def add_parts_easy_mode(intentos_fallidos: int, hangman: Hangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo fácil.
 
     Parametros:
         intentos_fallidos (int): La cantidad de intentos fallidos del jugador.
-        ahorcado (Ahorcado): El objeto Ahorcado al que se le agregarán las partes.
+        ahorcado (Hangman): El objeto Hangman al que se le agregarán las partes.
 
     Retorno:
         None
     """
     partes_a_agregar = [
-        PartesAhorcado.CABEZA,
-        PartesAhorcado.TORSO,
-        PartesAhorcado.BRAZO_IZQUIERDO,
-        PartesAhorcado.BRAZO_DERECHO,
-        PartesAhorcado.PIERNA_IZQUIERDA,
-        PartesAhorcado.PIERNA_DERECHA,
-        PartesAhorcado.SOGA,
+        HangmanParts.HEAD,
+        HangmanParts.TORSO,
+        HangmanParts.LEFT_ARM,
+        HangmanParts.RIGHT_ARM,
+        HangmanParts.LEFT_LEG,
+        HangmanParts.RIGHT_LEG,
+        HangmanParts.SOGA,
     ]
 
     partes_agregar = partes_a_agregar[:intentos_fallidos]
-    ahorcado.agregar_partes(partes_agregar)
+    hangman.add_parts(partes_agregar)
 
-def agregar_partes_modo_normal(intentos_fallitos: int, ahorcado: Ahorcado):
+def add_parts_normal_mode(intentos_fallitos: int, hangman: Hangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo normal.
 
     Parametros:
         intentos_fallidos (int): La cantidad de intentos fallidos del jugador.
-        ahorcado (Ahorcado): El objeto Ahorcado al que se le agregarán las partes.
+        ahorcado (Hangman): El objeto Hangman al que se le agregarán las partes.
 
     Retorno:
         None
@@ -149,25 +149,25 @@ def agregar_partes_modo_normal(intentos_fallitos: int, ahorcado: Ahorcado):
     if intentos_fallitos == 0:
         return
     if intentos_fallitos == 5:
-        ahorcado.completar_ahorcado()
+        hangman.complete_hangman()
         return
     
     if intentos_fallitos >= 1:
-        ahorcado.agregar_cabeza()
+        hangman.add_head()
     if intentos_fallitos >= 2:
-        ahorcado.agregar_torso()
+        hangman.add_torso()
     if intentos_fallitos >= 3:
-        ahorcado.agregar_brazos()
+        hangman.add_arms()
     if intentos_fallitos >= 4:
-        ahorcado.agregar_piernas()
+        hangman.add_legs()
 
-def agregar_partes_modo_dificil(intentos_fallidos: int, ahorcado: Ahorcado):
+def add_parts_hard_mode(intentos_fallidos: int, hangman: Hangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo difícil.
 
     Parametros:
         intentos_fallidos (int): La cantidad de intentos fallidos del jugador.
-        ahorcado (Ahorcado): El objeto Ahorcado al que se le agregarán las partes.
+        ahorcado (Hangman): El objeto Hangman al que se le agregarán las partes.
 
     Retorno:
         None
@@ -175,17 +175,17 @@ def agregar_partes_modo_dificil(intentos_fallidos: int, ahorcado: Ahorcado):
     if intentos_fallidos == 0:
         return
     if intentos_fallidos == 3:
-        ahorcado.completar_ahorcado()
+        hangman.complete_hangman()
         return
     if intentos_fallidos >= 1:
-        ahorcado.agregar_cabeza()
-        ahorcado.agregar_torso()
+        hangman.add_head()
+        hangman.add_torso()
     if intentos_fallidos >= 2:
-        ahorcado.agregar_brazos()
-        ahorcado.agregar_piernas()
+        hangman.add_arms()
+        hangman.add_legs()
 
 
-def dibujar_ahorcado(intentos_fallidos, dificultad: Dificultad):
+def dibujar_ahorcado(intentos_fallidos, dificultad: Difficulty):
     """
     Dibuja el ahorcado del ahorcado de acuerdo a los intentos fallidos y la dificultad.
 
@@ -199,18 +199,18 @@ def dibujar_ahorcado(intentos_fallidos, dificultad: Dificultad):
     Retorno:
         None
     """
-    if dificultad.obtener_intentos_maximos() < intentos_fallidos:
+    if dificultad.get_max_attempts() < intentos_fallidos:
         raise Exception("Intentos fallidos no puede ser mayor a los intentos maximos de la dificultad")
     
-    ahorcado = Ahorcado()
-    if dificultad == Dificultad.FACIL:
-        agregar_partes_modo_facil(intentos_fallidos, ahorcado)
-    elif dificultad == Dificultad.NORMAL:
-        agregar_partes_modo_normal(intentos_fallidos, ahorcado)
+    hangman = Hangman()
+    if dificultad == Difficulty.EASY:
+        add_parts_easy_mode(intentos_fallidos, hangman)
+    elif dificultad == Difficulty.MEDIUM:
+        add_parts_normal_mode(intentos_fallidos, hangman)
     else:
-        agregar_partes_modo_dificil(intentos_fallidos, ahorcado)
+        add_parts_hard_mode(intentos_fallidos, hangman)
 
-    ahorcado.print()
+    hangman.print()
 
 # Ejemplo de uso
-dibujar_ahorcado(1, Dificultad.FACIL)
+dibujar_ahorcado(1, Difficulty.EASY)
