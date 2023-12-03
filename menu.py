@@ -1,20 +1,20 @@
+from getpass import getpass
 import os
-from juego_ahorcado import JuegoAhorcado
-from estado_juego import EstadoJuego
-from dificultad import Dificultad
+from juego_ahorcado import HangmanGame
+from estado_juego import GameState
+from dificultad import Difficulty
 from enum import Enum
 
-from options.menu_options import OpcionMenu
+from options.menu_options import MenuOption
 
-OPCION_VOLVER_MENU_PRINCIPAL = "0"
-DIFICULTAD_INICIAL = Dificultad.NORMAL
+OPTION_RETURN_TO_MAIN_MENU = "0"
+INITIAL_DIFFICULTY = Difficulty.MEDIUM
 
-
-class MenuJuego:
+class MenuGame:
     def __init__(self):
-        self.dificultad = DIFICULTAD_INICIAL
+        self.difficulty = INITIAL_DIFFICULTY
     
-    def mostrar_opciones():
+    def show_options():
         os.system('clear')
         print("Opciones:")
         print("\t1 - Empezar a jugar")
@@ -22,7 +22,7 @@ class MenuJuego:
         print("\t3 - Reglas")
         print("\t4 - Salir")
 
-    def ejecutar_opciones(self):
+    def execute_options(self):
         """
         Muestra el menu principal del juego del Ahorcado y maneja las opciones seleccionadas por el usuario.
 
@@ -35,17 +35,17 @@ class MenuJuego:
         - Mensajes de la opcion elegida.
         """    
         while True:
-            MenuJuego.mostrar_opciones()
-            opcion = input("Elige una opcion: ").strip()
-            opcion = OpcionMenu.from_input(opcion)
-            if opcion == None:
+            MenuGame.show_options()
+            options = input("Elige una opcion: ").strip()
+            options = MenuOption.from_input(options)
+            if options == None:
                 print("Opcion incorrecta")
                 continue
-            opcion.ejecutar(self)
-            if opcion == OpcionMenu.SALIR:
+            options.ejecutar(self)
+            if options == MenuOption.EXIT:
                 break
     
-    def mostrar_reglas(self):
+    def show_rules(self):
         os.system('clear')
         print("Reglas:")
         print("1. El juego consiste en adivinar una palabra o frase oculta")
@@ -58,37 +58,31 @@ class MenuJuego:
         print("8. El juego tiene tres niveles de dificultad: FACIL, NORMAL y DIFICIL, al elegir estos cambian las dificultades de las palabras, y cada uno tiene una cantidad de intentos y pistas diferente")
         print("9. El jugador puede cambiar la dificultad del juego en cualquier momento")
         print("10. El jugador puede abandonar la partida en cualquier momento")
-        print("\n")
-        print("Envie 0 para volver al menu principal")
-        opcion = input("-").strip()
-        while True:
-            if opcion == OPCION_VOLVER_MENU_PRINCIPAL:
-                return
-            print("Opcion incorrecta, vuelve a intentarlo")
-            opcion = input("-").strip()
+        print("\nPresione ENTER para volver al menu principal\n")
+        getpass(prompt="")
 
-    def seleccionar_dificultad(self):
+    def select_difficulty(self):
         os.system('clear')
         print("Selecciona una dificultad:")
         print("1. FACIL: 7 intentos, 5 pistas y palabras cortas")
         print("2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
         print("3. DIFICIL: 3 intentos, 2 pistas y palabras o frases largas")
         print("0. Volver al menu principal")
-        print("Dificultad actual: ", self.dificultad.to_string())
+        print("Dificultad actual: ", self.difficulty.to_string())
         print("\n")
-        opcion = input("-").strip()
-        dificultad = Dificultad.from_input(opcion)
-        while dificultad == None:
-            if opcion == OPCION_VOLVER_MENU_PRINCIPAL:
+        option = input("-").strip()
+        difficulty = Difficulty.from_input(option)
+        while difficulty == None:
+            if option == OPTION_RETURN_TO_MAIN_MENU:
                 return
             print("Opcion incorrecta, vuelve a intentarlo")
-            opcion = input("-").strip()
-            dificultad = Dificultad.from_input(opcion)
+            option = input("-").strip()
+            difficulty = Difficulty.from_input(option)
 
-        self.dificultad = dificultad
-        print("Dificultad seleccionada: ", self.dificultad.to_string())
+        self.difficulty = difficulty
+        print("Dificultad seleccionada: ", self.difficulty.to_string())
         
-    def empezar_a_jugar(self):
-        juego = JuegoAhorcado(self.dificultad)
-        juego.iniciar()
+    def start_to_play(self):
+        game = HangmanGame(self.difficulty)
+        game.run()
 

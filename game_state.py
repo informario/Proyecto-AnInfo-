@@ -1,15 +1,15 @@
 from enum import Enum
 
-class EstadoJuego(Enum):
-    EN_CURSO = 1
-    GANADO = 2
-    PERDIDO = 3
+class GameState(Enum):
+    RUNNING = 1
+    WON = 2
+    LOST = 3
     
     def print(self):
         match self:
-            case EstadoJuego.EN_CURSO:
+            case GameState.RUNNING:
                 print("Juego en curso")
-            case EstadoJuego.GANADO:
+            case GameState.WON:
                 print("Felicitaciones!! Ganaste la partida")
-            case EstadoJuego.PERDIDO:
+            case GameState.LOST:
                 print("Perdiste, no te quedan intentos")
