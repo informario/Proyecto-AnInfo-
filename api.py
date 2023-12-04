@@ -1,4 +1,4 @@
-from dificultad import Difficulty
+from difficulty import Difficulty
 from enum import Enum
 
 class HangmanParts(Enum):

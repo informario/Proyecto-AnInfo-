@@ -1,5 +1,5 @@
 from difficulty import Difficulty
-from game_state import GameState
+from state import GameState
 from options.game import GameOpt
 import random
 import os
@@ -18,6 +18,9 @@ class HangmanGame:
         self.letters_missed = []
         self.state = GameState.RUNNING
     
+    def update_score(self, user_statistics, difficulty):
+        self.state.update_score(user_statistics, difficulty)
+        
     def running(self):
         return self.state == GameState.RUNNING
     
@@ -57,6 +60,9 @@ class HangmanGame:
     def try_to_guess_letter(self,letter):
         if letter in self.letters_guessed:
             print("\nYa adivinaste esta letra, vuelve a intentarlo\n")
+            return
+        if letter in self.letters_missed:
+            print("\nYa intentaste con esta letra, vuelve a intentarlo\n")
             return
         
         if letter in self.letters_to_guess:
