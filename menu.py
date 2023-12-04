@@ -1,11 +1,11 @@
 from getpass import getpass
 import os
-from juego_ahorcado import HangmanGame
-from estado_juego import GameState
-from dificultad import Difficulty
+from game import HangmanGame
+from game_state import GameState
+from difficulty import Difficulty
 from enum import Enum
 
-from options.menu_options import MenuOption
+from options.menu import MenuOption
 
 OPTION_RETURN_TO_MAIN_MENU = "0"
 INITIAL_DIFFICULTY = Difficulty.MEDIUM

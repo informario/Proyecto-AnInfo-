@@ -23,7 +23,7 @@ class GameOpt(Enum):
     def execute(self, juego):
         match self:
             case GameOpt.ABANDON_GAME_OPT:
-                juego.game_abandoned()   # No se utiliza
+                juego.is_abandoned()   # No se utiliza
             case GameOpt.ASK_CLUE:
                 juego.give_clue()
             case GameOpt.ASK_HELP:
