@@ -1,4 +1,5 @@
 from difficulty import Difficulty
+from options.menu import ExitGameException
 from state import GameState
 from options.game import GameOpt
 import random
@@ -124,7 +125,7 @@ class HangmanGame:
         self.remaining_clues -= 2
 
     def is_abandoned():
-        print("¿Estas seguro de que deseas abandonar la partida?")
+        print("\n¿Estas seguro de que deseas abandonar la partida?\n")
         print("0. Si")
         print("1. No\n")
         inp = input("- ")
@@ -172,12 +173,12 @@ class HangmanGame:
                 self.try_to_guess(inp) 
                 self.print_state()
                 continue
+            
+            try:
+                opcion.execute(self)            
+            except ExitGameException:
+                return
 
-            if opcion == GameOpt.ABANDON_GAME_OPT:
-                if HangmanGame.is_abandoned():
-                    return
-                
-            opcion.execute(self)            
             self.print_state()
         
         HangmanGame.end()
@@ -188,7 +189,7 @@ class HangmanGame:
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        
         self.print_state()
         self.play()
-        
+
         
 
 
