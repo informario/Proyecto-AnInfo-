@@ -6,6 +6,9 @@ PATH = "palabras.json"
 EASY_OPTION = "1"
 MEDIUM_OPTION = "2"
 HARD_OPTION = "3"
+SCORE_EASY = 5
+SCORE_MEDIUM = 10
+SCORE_HARD = 20
 
 class Difficulty(Enum):
     EASY = 1
@@ -67,4 +70,12 @@ class Difficulty(Enum):
         else:
             return None
     
+    def get_score(self):
+        match self:
+            case Difficulty.EASY:
+                return SCORE_EASY
+            case Difficulty.MEDIUM:
+                return SCORE_MEDIUM
+            case Difficulty.HARD:
+                return SCORE_HARD
 

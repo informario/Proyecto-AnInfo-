@@ -4,7 +4,7 @@ class GameState(Enum):
     RUNNING = 1
     WON = 2
     LOST = 3
-    
+
     def print(self):
         match self:
             case GameState.RUNNING:

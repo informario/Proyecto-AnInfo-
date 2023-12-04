@@ -1,6 +1,6 @@
-from dificultad import Difficulty
-from estado_juego import GameState
-from options.game_options import GameOpt
+from difficulty import Difficulty
+from game_state import GameState
+from options.game import GameOpt
 import random
 import os
 import getpass
@@ -11,6 +11,7 @@ class HangmanGame:
         self.attempts_remaining = difficulty.get_max_attempts()
         self.remaining_clues = difficulty.get_clues()
         self.word, self.clue = difficulty.get_word()
+        self.score = difficulty.get_score()
         self.clue_used = False
         self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
         self.letters_guessed = []
@@ -48,6 +49,8 @@ class HangmanGame:
         self.print_word()
         print("\n")
         self.state.print()
+        if self.state == GameState.WON:
+            print(f"¡Obtuviste {self.score} puntos!")
         print("=========================================")
 
 
@@ -146,6 +149,8 @@ class HangmanGame:
         # Más adelante seguramente hagamos otras validaciones, por eso la funcion
         # como por ejemplo que no se pueda ingresar un numero distinto de 0, 1 o 2 
 
+    def is_won(self):
+        return self.state == GameState.WON
 
     def play(self):
         while self.running():

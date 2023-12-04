@@ -1,6 +1,6 @@
-from main_menu import *
+from menu import *
 
 def main():
-    MenuGame().execute_options()
+    GameMenu().execute_options()
 
 main()
