@@ -15,7 +15,7 @@ class Difficulty(Enum):
     MEDIUM = 2
     HARD = 3
 
-    def get_word(self):
+    def get_word(self, category):
         """Reads a .json file and returns a word according to the chosen difficulty"""
 
         with open(PATH, 'r') as j:
@@ -23,13 +23,13 @@ class Difficulty(Enum):
 
         match self:
             case Difficulty.EASY:
-                return list(random.choice(data.get('facil')).items())[0]
+                return list(random.choice(data[category.to_string()]['facil']).items())[0]
             
             case Difficulty.MEDIUM:
-                return list(random.choice(data.get('normal')).items())[0]
+                return list(random.choice(data[category.to_string()]['media']).items())[0]
             
             case Difficulty.HARD:
-                return list(random.choice(data.get('dificil')).items())[0]
+                return list(random.choice(data[category.to_string()]['dificil']).items())[0]
 
     def get_max_attempts(self):
         match self:
