@@ -1,5 +1,6 @@
 from enum import Enum
-
+import os
+import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
 RULES_OPT = "3"
@@ -11,6 +12,9 @@ class MenuOption(Enum):
     RULES = 3
     EXIT = 4
     
+    def show_incorrect_option_message():
+        print("Opcion incorrecta, vuelve a intentarlo\n")
+
     def from_input(inp):
         if inp == START_GAME_OPT:
             return MenuOption.START_GAME
@@ -23,16 +27,40 @@ class MenuOption(Enum):
         else:
             return None
 
-    def ejecutar(self, menu_juego):
+    def execute(self, game_controller):
         match self:
             case MenuOption.START_GAME:
-                menu_juego.start_to_play()
+                game_controller.play_game()
             case MenuOption.SELECT_DIFFICULTY:
-                menu_juego.select_difficulty()
+                game_controller.update_difficulty()
             case MenuOption.RULES:
-                menu_juego.show_rules()
+                game_controller.show_rules()
             case MenuOption.EXIT:
-                print("¡Gracias por jugar!")
+                if self.ask_exit_confirmation():
+                    print("\n¡Gracias por jugar!\n")
+                    raise ExitGameException 
             case _:
                 print("Opcion incorrecta")
 
+
+    def ask_exit_confirmation(self):
+        if self == MenuOption.EXIT:
+            print("\n")
+            os.system('clear')
+            while True:
+                print("¿Estas seguro de que deseas salir del juego?")
+                print("0. Si")
+                print("1. No\n")
+                inp = input("- ").strip()
+                os.system('clear')
+                if inp == "0":
+                    return True
+                if inp == "1":
+                    return False
+                MenuOption.show_incorrect_option_message()
+
+        return False
+    
+
+class ExitGameException(Exception):
+    pass

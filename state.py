@@ -4,7 +4,7 @@ class GameState(Enum):
     RUNNING = 1
     WON = 2
     LOST = 3
-    
+
     def print(self):
         match self:
             case GameState.RUNNING:
@@ -13,3 +13,12 @@ class GameState(Enum):
                 print("Felicitaciones!! Ganaste la partida")
             case GameState.LOST:
                 print("Perdiste, no te quedan intentos")
+
+    def update_score(self, user_statistics, difficulty):
+        match self:
+            case GameState.WON:
+                user_statistics.increase_score(difficulty)
+            case GameState.LOST:
+                pass
+            case _:
+                pass
