@@ -272,5 +272,169 @@
                 "energias renovables": "surgen a partir del aprovechamiento de fuentes que no contaminan ni gastan recursos naturales"
             }
         ]
+    },
+    "famosos": {
+        "facil": [
+            {
+                "Adele": "cantante británica cuyo cancion mas famosa es Hello y tiene un disco llamado 21"
+            },
+            {
+                "Eminem": "rapero estadounidense blanco muy famoso por su canción Lose Yourself"
+            },
+            {
+                "Maluma": "cantante colombiano que se hizo famoso por su canción Borro Cassette"
+            },
+            {
+                "Shakira": "cantante colombiana ex de un jugador del Barcelona que hizo una cancion para el mundial de sudafrica"
+            },
+            {
+                "Beyoncé": "cantante estadounidense que se hizo famosa por su canción Single Ladies"
+            },
+            {
+                "Bono": "cantante irlandes de la banda U2"
+            },
+            {
+                "Madonna": "cantante estadounidense conocida como la reina del pop"
+            },
+            {
+                "Lali": "cantante argentina que se hizo famosa por su papel en Casi Angeles"
+            },
+            {
+                "Tini": "cantante argentina que se hizo famosa por su papel en Violetta"
+            },
+            {
+                "Rihanna": "cantante ex de Chris Brown que se hizo famosa por su canción Umbrella"
+            },
+            {
+                "Drake": "cantante canadiense que canta God's Plan"
+            },
+            {
+                "Zendaya": "actriz estadounidense que se hizo famosa por su papel en A Todo Ritmo"
+            },
+            {
+                "Lady Gaga": "cantante estadounidense que se hizo famosa por su canción Poker Face"
+            },
+            {
+                "Dua Lipa": "cantante británica que se hizo famosa por su canción New Rules"
+            },
+            {
+                "Slash": "guitarrista británico que fue parte de la banda Guns N' Roses"
+            }
+        ],
+        "media": [
+            {
+                "Lionel Messi": "el mejor jugador de la historia del futbol"
+            },
+            {
+                "Neymar": "futbolista brasilero que juega en el PSG y fue compañero de Messi en el Barcelona"
+            },
+            {
+                "Luis Suarez": "futbolista uruguayo que juega en el Atletico de Madrid y fue compañero de Messi en el Barcelona"
+            },
+            {
+                "Sergio Aguero": "futbolista argentino ídolo del Manchester City que dice ”vamo a juga”"
+            },
+            {
+                "Paulo Dybala": "futbolista argentino que juega en la Juventus y es conocido como la joya"
+            },
+            {
+                "Brad Pitt": "actor estadounidense que se hizo famoso por su papel en Troya"
+            },
+            {
+                "Luis Miguel": "cantante mexicano que tiene una serie en Netflix y se hizo famoso por su canción La Incondicional"
+            },
+            {
+                "Tom Cruise": "actor estadounidense que se hizo famoso por su papel en Misión Imposible"
+            },
+            {
+                "Will Smith": "actor estadounidense que protagonizó ”Soy leyenda” y ”En busca de la felicidad”"
+            },
+            {
+                "Adam Sandler": "actor estadounidense comediante que actuó en ”Son como niños”"
+            },
+            {
+                "Robert De Niro": "actor estadounidense que actuó en ”El Padrino” y ”Taxi Driver”"
+            },
+            {
+                "Al Pacino": "actor estadounidense que actuó en ”El Padrino”"
+            },
+            {
+                "Elon Musk": "empresario sudafricano que fundó Tesla y SpaceX"
+            },
+            {
+                "Ariana Grande": "cantante estadounidense que se hizo famosa por su canción Thank U, Next"
+            },
+            {
+                "Katy Perry": "cantante estadounidense que se hizo famosa por su canción Firework"
+            },
+            {
+                "Jeff Bezos": "empresario estadounidense que fundó Amazon"
+            },
+            {
+                "Bill Gates": "empresario estadounidense que fundó Microsoft"
+            },
+            {
+                "Steve Jobs": "empresario estadounidense que fundó Apple"
+            },
+            {
+                "Ricardo Darín": "actor argentino que actuó en ”El secreto de sus ojos” y ”Relatos Salvajes”"
+            }
+        ],
+        "dificil": [
+            {
+                "Leonardo Di Caprio": "actor estadounidense que se hizo famoso por su papel de Jack en Titanic"
+            },
+            {
+                "Cristiano Ronaldo": "uno de los mejores jugadores de futbol, portugues, que juega en Arabia Saudita"
+            },
+            {
+                "Taylor Swift": "cantante estadounidense que se hizo famosa por su canción Shake It Off"
+            },
+            {
+                "R  icardo Fort": "personaje de la farandula argentina mejor conocido como ”El comandante”"
+            },
+            {
+                "Amy Winehouse": "cantante británica que se hizo famosa por su canción Rehab"
+            },
+            {
+                "Paul McCartney": "cantante británico que fue parte de la banda The Beatles"
+            },
+            {
+                "Freddie Mercury": "cantante británico que fue parte de la banda Queen"
+            },
+            {
+                "Michael Jackson": "cantante estadounidense que se hizo famoso por su canción Thriller"
+            },
+            {
+                "Mick Jagger": "cantante británico que fue parte de la banda The Rolling Stones"
+            },
+            {
+                "Justin Bieber": "cantante canadiense ex de Selena Gomez que se hizo famoso por su canción Baby"
+            },
+            {
+                "Miley Cyrus": "cantante estadounidense que se hizo famosa por su papel en Hannah Montana"
+            },
+            {
+                "Selena Gomez": "cantante estadounidense ex de Justin Bieber que se hizo famosa por su papel en Los Hechiceros de Waverly Place"
+            },
+            {
+                "Diego Armando Maradona": "el autor del gol con la mano mas famoso de la historia"
+            },
+            {
+                "Emanuel Ginóbili": "el mejor basquetbolista argentino de la historia"
+            },
+            {
+                "René Favaloro": "argentino creador del bypass coronario"
+            },
+            {
+                "Carlos Gardel": "cantante argentino de tango muy reconocido"
+            },
+            {
+                "Guillermo Francella": "actor argentino que actuó en la serie Casados con Hijos"
+            },
+            {
+                "Carlos Bilardo": "es gatorei señorita"
+            }
+        ]
     }
 }
