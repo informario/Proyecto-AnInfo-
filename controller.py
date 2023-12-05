@@ -32,7 +32,8 @@ class GameController:
             self.difficulty = dificulty
 
     def play_game(self):
-        game = HangmanGame(self.difficulty)
+        category = GameMenu.request_word_category()
+        game = HangmanGame(self.difficulty, category)
         game.run()
         game.update_score(self.user_statistics, self.difficulty)
     

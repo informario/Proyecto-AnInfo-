@@ -1,62 +1,741 @@
 {
-    "facil": [
-        {"auto": "ANDO EN ____MATICO SEMI FANATICO"}, 
-        {"moto": "la gente que anda en esto le gusta usar campera de cuero"}, 
-        {"fanta": "tipo una coca pero de naranja"}, 
-        {"toddy": "galletita con chips de chocolate, si comes muchas puede ser que te mueras"}, 
-        {"cascada": "una metodología tradicional"}, 
-        {"pan": "tiene harina, y es un alimento básico"}, 
-        {"birra": "bebida alcoholica"}, 
-        {"bote": "barco chico"}, 
-        {"ganar": "lo unico que sabe hacer la escaloneta"}, 
-        {"suma": "operacion matemática básica"}, 
-        {"sol": "estrella que esta muy cerca de la Tierra"}, 
-        {"luna": "los humanos llegaron acá en 1960"}, 
-        {"barra": "metal de forma cilíndrica y mucho más larga que gruesa"}, 
-        {"perro": "desciende de los lobos"}, 
-        {"gato": "desciende de los felinos grandes"}, 
-        {"banana": "fruta que aporta principalmente carbohidratos"},
-        {"issue": "una tarea concreta en un proyecto de software"},
-        {"humo": "DETRAS DEL ___ NO SE VE"}
-    ],
-    "normal": [
-        {"vereda": "no caminas en la calle, caminas por la _____"}, 
-        {"manu camejo": "un tipazo"}, 
-        {"manual": "un auto puede ser esto o automatico"}, 
-        {"codigo": "de lo que está compuesto, a mas bajo nivel, un proyecto de software"}, 
-        {"sprite": "tipo una coca pero de limon (?)"}, 
-        {"resumen": "generalmente, para estudiar para un final, uno se hace uno de estos, guardando todo lo más importante que se vio en el cuatri"}, 
-        {"github": "plataforma para el desarrollo colaborativo de software"}, 
-        {"pedido": "lo que te llega cuando compras algo online"}, 
-        {"telepatia": "superpoder mental"}, 
-        {"scrum": "una metodología agil"}, 
-        {"prototipo": "muestra inicial para un cliente"}, 
-        {"lampara": "usa electricidad para iluminar"}, 
-        {"radiografia": "te haces una de estas si te rompes una pierna, para ver como esta eso"}, 
-        {"guitarra": "instrumento musical con cuerdas, si fantasmeas tocando me caes mal"}, 
-        {"sacapuntas": "se usa para afilar un lapiz"}, 
-        {"postre": "despues de comer capaz te pinta comer algo dulce"}, 
-        {"backlog": "guarda todas las issues de un proyecto"}, 
-        {"estrella": "en el cielo hay miles"}, 
-        {"capricornio": "signo de los que nacen del 22 de diciembre al 22 de enero"}
-    ],
-    "dificil": [
-        {"daily stand up": "reunion cortita que se hace generalmente todos los dias"}, 
-        {"nico riedel": "el profesor mas fachero"}, 
-        {"manuel cangrejo": "alter ego del profesor mas fachero"}, 
-        {"gonzalo matrinez sastre": "el profesor mas fachero"}, 
-        {"calculadora casio": "si no tenes una de estas no estudias ingenieria"}, 
-        {"termodinamica": "rama de la fisica que estudia el calor"}, 
-        {"auriculares inalambricos": "para escuchar la compu sin molestar a todos los de tu casa, estos no tienen cable"}, 
-        {"campeones del mundo": "todos los argentinos somo esto desde el 18 de diciembre de 2022"}, 
-        {"electrodomestico": "lavarropas, microondas, heladera, lavaplatos, etc."}, 
-        {"extraordinario": "algo que no es normal, que no pasa todo el tiempo"}, 
-        {"desarrollo de software": "incorpora todas las etapas a lo largo del ciclo de crear un programa informatico"}, 
-        {"biocombustible": "se obtienen a partir de la biomasa o de desechos orgánicos, y capaz en el futuro sea lo que le cargues al auto"}, 
-        {"energias renovables": "surgen a partir del aprovechamiento de fuentes que no contaminan ni gastan recursos naturales"}, 
-        {"historia de usuario": "representación de un requisito del usuario"},
-        {"metodologias agiles": "estrategias de gestion de un proyecto, se basan en el equipo de trabajo y la colaboración con el cliente, buscando flexibilidad y evolución"},
-        {"scrum master": "experto en metodologías agiles (vende humo)"},
-        {"requerimientos": "características y funcionalidad deseadas del producto"}
-    ]
+    "aninfo": {
+        "facil": [
+            {
+                "cascada": "una metodología tradicional"
+            },
+            {
+                "issue": "una tarea concreta en un proyecto de software"
+            },
+            {
+                "Kanban": "metodologia muy simple y eficiente que consiste en dividir tareas en 3 apartados o mas: “To do”, “Doing”, “Done”"
+            },
+            {
+                "Lean": "metodologia agil que busca eliminar el desperdicio, es decir, todo lo que no aporta valor al producto final"
+            },
+            {
+                "TDD": "desarrollo guiado por pruebas"
+            },
+            {
+                "BDD": "desarrollo guiado por comportamiento"
+            },
+            {
+                "DevOps": "metodologia agil que busca automatizar el ciclo (validaciones, pruebas, deploy)"
+            },
+            {
+                "stagin": "etapa dentro de la etapa de despliegue donde se unifica y acopla todo para llegar a la versión final."
+            },
+            {
+                "Spiral": "metodologia tradicional que se basa en la cascada pero con iteraciones"
+            },
+            {
+                "testing": "etapa de la ingenieria de software que sirve para probar implementaciones y descubrir inconsistencias que pueden surgir entre los requerimientos del cliente y lo que se está haciendo"
+            },
+            {
+                "diseño": "etapa que sirve para definir la arquitectura del software que va a usarse"
+            },
+            {
+                "ingenieria": "es la disciplina que se encarga de la aplicación de los conocimientos científicos para el desarrollo de soluciones tecnológicas"
+            }
+        ],
+        "media": [
+            {
+                "backlog": "guarda todas las issues de un proyecto"
+            },
+            {
+                "scrum": "una metodología agil iterable e incremental en la que se trabaja en sprints. Su filosofía es la de tirar todos para el mismo lado"
+            },
+            {
+                "prototipo": "muestra inicial para un cliente"
+            },
+            {
+                "negociacion": "consiste en llegar a un acuerdo entre el cliente y el equipo de desarrollo y se da en la etapa de gestion de requerimientos"
+            },
+            {
+                "mantenimiento": "etapa de la ingenieria de software que se da luego de la implementación y sirve para corregir errores y agregar funcionalidades"
+            },
+            {
+                "prototipado": "metodologia que sirve para mostrarle al cliente una idea inicial del producto"
+            },
+            {
+                "estimar": "prever cuanto tiempo, recursos y esfuerzo se necesitaran para completar el proyecto."
+            },
+            {
+                "despliegue": "etapa de la ingenieria de software en la que se entrega al/a los cliente/s el producto, es decir, se lo lanza"
+            },
+            {
+                "validacion": "etapa dentro del desarrollo de requerimientos que sirve para asegurarse de que el producto cumple con los requerimientos del cliente"
+            },
+            {
+                "indagacion": "etapa dentro del desarrollo de requerimientos que abarca todas las actividades relacionadas con descubrir requisitos"
+            },
+            {
+                "balas de plata": "soluciones que resuelven un problema muy complejo de manera simple y eficiente, que no existen para resolver la complejidad inherente de trabajar con software"
+            }
+        ],
+        "dificil": [
+            {
+                "daily stand up": "reunion cortita que se hace generalmente todos los dias"
+            },
+            {
+                "metodologias agiles": "estrategias de gestion de un proyecto, se basan en el equipo de trabajo y la colaboración con el cliente, buscando flexibilidad y evolución"
+            },
+            {
+                "scrum master": "experto en metodologías agiles (vende humo)"
+            },
+            {
+                "historia de usuario": "representación de un requisito del usuario"
+            },
+            {
+                "requerimientos": "características y funcionalidad deseadas del producto"
+            },
+            {
+                "desarrollo de software": "incorpora todas las etapas a lo largo del ciclo de crear un programa informatico"
+            },
+            {
+                "especificacion": "etapa dentro del desarrollo de requerimientos en la que se representan y almacenan los requisitos de forma organizada"
+            },
+            {
+                "implementación": "etapa de la ingenieria de software en la que se llevan a cabo todos los pasos necesarios para pasar de los requerimientos a un producto funcional. Tiene que ser un proceso organizado"
+            },
+            {
+                "gestión de requisitos": "etapa de la ingenieria de requerimientos consiste en hacer un seguimiento de los progresos, evaluar y negociar los cambios propuestos"
+            },
+            {
+                "stakeholder": "persona que tiene interes en el proyecto"
+            },
+            {
+                "entrevista abierta": "encuentro con el cliente que consiste en ir sin agenda ni preguntas predefinidas"
+            },
+            {
+                "entrevista cerrada": "encuentro con el cliente que consiste en ir con preguntas predefinidas"
+            },
+            {
+                "Project Manager": "persona que se encarga de la gestion de un proyecto"
+            },
+            {
+                "lenguaje natural": "forma de representar los requerimientos que supone escribir oraciones en prosa"
+            },
+            {
+                "Extreme Programming": "metodologia agil que consiste en hacer iteraciones muy cortas y tiene como idea llevar todo al extremo"
+            },
+            {
+                "criterios de aceptacion": "forma de representar los requerimientos que consiste en una lista de condiciones que deben cumplirse para que el cliente acepte el producto"
+            },
+            {
+                "retrospectiva": "reunion que se hace al final de cada sprint para evaluar el trabajo realizado y mejorar el proceso"
+            },
+            {
+                "reunion de seguimiento": "reunion que se hace con el cliente para mostrarle como va el proyecto y sacarse dudas sobre los requerimientos"
+            },
+            {
+                "reunion daily": "reuniones cortas de entre 15 y 20 minutos que se hacen todos los dias en la que los miembros del equipo hablan acerca de lo que hicieron en el dia"
+            },
+            {
+                "reunion de planning": "reunion que se hace al principio de cada sprint en la que se estiman con el equipo las tareas que pueden entrar en el sprint"
+            }
+        ]
+    },
+    "otra": {
+        "facil": [
+            {
+                "auto": "ANDO EN ____MATICO SEMI FANATICO"
+            },
+            {
+                "moto": "la gente que anda en esto le gusta usar campera de cuero"
+            },
+            {
+                "fanta": "tipo una coca pero de naranja"
+            },
+            {
+                "toddy": "galletita con chips de chocolate, si comes muchas puede ser que te mueras"
+            },
+            {
+                "pan": "tiene harina, y es un alimento básico"
+            },
+            {
+                "birra": "bebida alcoholica"
+            },
+            {
+                "bote": "barco chico"
+            },
+            {
+                "ganar": "lo unico que sabe hacer la escaloneta"
+            },
+            {
+                "suma": "operacion matemática básica"
+            },
+            {
+                "sol": "estrella que esta muy cerca de la Tierra"
+            },
+            {
+                "luna": "los humanos llegaron acá en 1960"
+            },
+            {
+                "barra": "metal de forma cilíndrica y mucho más larga que gruesa"
+            },
+            {
+                "perro": "desciende de los lobos"
+            },
+            {
+                "gato": "desciende de los felinos grandes"
+            },
+            {
+                "banana": "fruta que aporta principalmente carbohidratos"
+            },
+            {
+                "humo": "DETRAS DEL ___ NO SE VE"
+            }
+        ],
+        "media": [
+            {
+                "vereda": "no caminas en la calle, caminas por la _____"
+            },
+            {
+                "manu camejo": "un tipazo"
+            },
+            {
+                "manual": "un auto puede ser esto o automatico"
+            },
+            {
+                "codigo": "de lo que está compuesto, a mas bajo nivel, un proyecto de software"
+            },
+            {
+                "sprite": "tipo una coca pero de limon (?)"
+            },
+            {
+                "resumen": "generalmente, para estudiar para un final, uno se hace uno de estos, guardando todo lo más importante que se vio en el cuatri"
+            },
+            {
+                "github": "plataforma para el desarrollo colaborativo de software"
+            },
+            {
+                "pedido": "lo que te llega cuando compras algo online"
+            },
+            {
+                "telepatia": "superpoder mental"
+            },
+            {
+                "lampara": "usa electricidad para iluminar"
+            },
+            {
+                "radiografia": "te haces una de estas si te rompes una pierna, para ver como esta eso"
+            },
+            {
+                "guitarra": "instrumento musical con cuerdas, si fantasmeas tocando me caes mal"
+            },
+            {
+                "sacapuntas": "se usa para afilar un lapiz"
+            },
+            {
+                "postre": "despues de comer capaz te pinta comer algo dulce"
+            },
+            {
+                "estrella": "en el cielo hay miles"
+            },
+            {
+                "capricornio": "signo de los que nacen del 22 de diciembre al 22 de enero"
+            }
+        ],
+        "dificil": [
+            {
+                "nico riedel": "el profesor mas fachero"
+            },
+            {
+                "manuel cangrejo": "alter ego del profesor mas fachero"
+            },
+            {
+                "gonzalo matrinez sastre": "el profesor mas fachero"
+            },
+            {
+                "calculadora casio": "si no tenes una de estas no estudias ingenieria"
+            },
+            {
+                "termodinamica": "rama de la fisica que estudia el calor"
+            },
+            {
+                "auriculares inalambricos": "para escuchar la compu sin molestar a todos los de tu casa, estos no tienen cable"
+            },
+            {
+                "campeones del mundo": "todos los argentinos somo esto desde el 18 de diciembre de 2022"
+            },
+            {
+                "electrodomestico": "lavarropas, microondas, heladera, lavaplatos, etc."
+            },
+            {
+                "extraordinario": "algo que no es normal, que no pasa todo el tiempo"
+            },
+            {
+                "biocombustible": "se obtienen a partir de la biomasa o de desechos orgánicos, y capaz en el futuro sea lo que le cargues al auto"
+            },
+            {
+                "energias renovables": "surgen a partir del aprovechamiento de fuentes que no contaminan ni gastan recursos naturales"
+            }
+        ]
+    },
+    "famosos": {
+        "facil": [
+            {
+                "Adele": "cantante británica cuyo cancion mas famosa es Hello y tiene un disco llamado 21"
+            },
+            {
+                "Eminem": "rapero estadounidense blanco muy famoso por su canción Lose Yourself"
+            },
+            {
+                "Maluma": "cantante colombiano que se hizo famoso por su canción Borro Cassette"
+            },
+            {
+                "Shakira": "cantante colombiana ex de un jugador del Barcelona que hizo una cancion para el mundial de sudafrica"
+            },
+            {
+                "Beyoncé": "cantante estadounidense que se hizo famosa por su canción Single Ladies"
+            },
+            {
+                "Bono": "cantante irlandes de la banda U2"
+            },
+            {
+                "Madonna": "cantante estadounidense conocida como la reina del pop"
+            },
+            {
+                "Lali": "cantante argentina que se hizo famosa por su papel en Casi Angeles"
+            },
+            {
+                "Tini": "cantante argentina que se hizo famosa por su papel en Violetta"
+            },
+            {
+                "Rihanna": "cantante ex de Chris Brown que se hizo famosa por su canción Umbrella"
+            },
+            {
+                "Drake": "cantante canadiense que canta God's Plan"
+            },
+            {
+                "Zendaya": "actriz estadounidense que se hizo famosa por su papel en A Todo Ritmo"
+            },
+            {
+                "Lady Gaga": "cantante estadounidense que se hizo famosa por su canción Poker Face"
+            },
+            {
+                "Dua Lipa": "cantante británica que se hizo famosa por su canción New Rules"
+            },
+            {
+                "Slash": "guitarrista británico que fue parte de la banda Guns N' Roses"
+            }
+        ],
+        "media": [
+            {
+                "Lionel Messi": "el mejor jugador de la historia del futbol"
+            },
+            {
+                "Neymar": "futbolista brasilero que juega en el PSG y fue compañero de Messi en el Barcelona"
+            },
+            {
+                "Luis Suarez": "futbolista uruguayo que juega en el Atletico de Madrid y fue compañero de Messi en el Barcelona"
+            },
+            {
+                "Sergio Aguero": "futbolista argentino ídolo del Manchester City que dice ”vamo a juga”"
+            },
+            {
+                "Paulo Dybala": "futbolista argentino que juega en la Juventus y es conocido como la joya"
+            },
+            {
+                "Brad Pitt": "actor estadounidense que se hizo famoso por su papel en Troya"
+            },
+            {
+                "Luis Miguel": "cantante mexicano que tiene una serie en Netflix y se hizo famoso por su canción La Incondicional"
+            },
+            {
+                "Tom Cruise": "actor estadounidense que se hizo famoso por su papel en Misión Imposible"
+            },
+            {
+                "Will Smith": "actor estadounidense que protagonizó ”Soy leyenda” y ”En busca de la felicidad”"
+            },
+            {
+                "Adam Sandler": "actor estadounidense comediante que actuó en ”Son como niños”"
+            },
+            {
+                "Robert De Niro": "actor estadounidense que actuó en ”El Padrino” y ”Taxi Driver”"
+            },
+            {
+                "Al Pacino": "actor estadounidense que actuó en ”El Padrino”"
+            },
+            {
+                "Elon Musk": "empresario sudafricano que fundó Tesla y SpaceX"
+            },
+            {
+                "Ariana Grande": "cantante estadounidense que se hizo famosa por su canción Thank U, Next"
+            },
+            {
+                "Katy Perry": "cantante estadounidense que se hizo famosa por su canción Firework"
+            },
+            {
+                "Jeff Bezos": "empresario estadounidense que fundó Amazon"
+            },
+            {
+                "Bill Gates": "empresario estadounidense que fundó Microsoft"
+            },
+            {
+                "Steve Jobs": "empresario estadounidense que fundó Apple"
+            },
+            {
+                "Ricardo Darín": "actor argentino que actuó en ”El secreto de sus ojos” y ”Relatos Salvajes”"
+            }
+        ],
+        "dificil": [
+            {
+                "Leonardo Di Caprio": "actor estadounidense que se hizo famoso por su papel de Jack en Titanic"
+            },
+            {
+                "Cristiano Ronaldo": "uno de los mejores jugadores de futbol, portugues, que juega en Arabia Saudita"
+            },
+            {
+                "Taylor Swift": "cantante estadounidense que se hizo famosa por su canción Shake It Off"
+            },
+            {
+                "R  icardo Fort": "personaje de la farandula argentina mejor conocido como ”El comandante”"
+            },
+            {
+                "Amy Winehouse": "cantante británica que se hizo famosa por su canción Rehab"
+            },
+            {
+                "Paul McCartney": "cantante británico que fue parte de la banda The Beatles"
+            },
+            {
+                "Freddie Mercury": "cantante británico que fue parte de la banda Queen"
+            },
+            {
+                "Michael Jackson": "cantante estadounidense que se hizo famoso por su canción Thriller"
+            },
+            {
+                "Mick Jagger": "cantante británico que fue parte de la banda The Rolling Stones"
+            },
+            {
+                "Justin Bieber": "cantante canadiense ex de Selena Gomez que se hizo famoso por su canción Baby"
+            },
+            {
+                "Miley Cyrus": "cantante estadounidense que se hizo famosa por su papel en Hannah Montana"
+            },
+            {
+                "Selena Gomez": "cantante estadounidense ex de Justin Bieber que se hizo famosa por su papel en Los Hechiceros de Waverly Place"
+            },
+            {
+                "Diego Armando Maradona": "el autor del gol con la mano mas famoso de la historia"
+            },
+            {
+                "Emanuel Ginóbili": "el mejor basquetbolista argentino de la historia"
+            },
+            {
+                "René Favaloro": "argentino creador del bypass coronario"
+            },
+            {
+                "Carlos Gardel": "cantante argentino de tango muy reconocido"
+            },
+            {
+                "Guillermo Francella": "actor argentino que actuó en la serie Casados con Hijos"
+            },
+            {
+                "Carlos Bilardo": "es gatorei señorita"
+            }
+        ]
+    },
+    "peliculas y series": {
+        "facil": [
+            {
+                "Titanic": "pelicula muy reconocida que trata sobre el hundimiento de un barco"
+            },
+            {
+                "Matrix": "pelicula que trata sobre la simulación de la realidad"
+            },
+            {
+                "Avatar": "pelicula que trata sobre un planeta habitado por seres azules"
+            },
+            {
+                "Frozen": "pelicula de Disney que trata sobre una reina que tiene poderes de hielo"
+            },
+            {
+                "Jaws": "pelicula que trata sobre un tiburon que ataca a un pueblo"
+            },
+            {
+                "Los Simpsons": "serie de Fox que trata sobre una familia amarilla"
+            },
+            {
+                "Shrek": "pelicula de Dreamworks que trata sobre un ogro verde"
+            },
+            {
+                "Toy Story": "pelicula de Pixar que trata sobre juguetes que cobran vida"
+            },
+            {
+                "Star Wars": "pelicula que trata sobre una guerra entre la luz y la oscuridad"
+            },
+            {
+                "Narcos": "serie de Netflix que trata sobre la vida de Pablo Escobar"
+            },
+            {
+                "Dexter": "serie que trata sobre un asesino en serie que mata a otros asesinos"
+            },
+            {
+                "Vikings": "serie de History Channel que trata sobre la vida de Ragnar Lothbrok"
+            },
+            {
+                "Dark": "serie de Netflix que trata sobre viajes en el tiempo"
+            },
+            {
+                "Minions": "pelicula de Universal que trata sobre unos seres amarillos que hablan raro"
+            },
+            {
+                "Iron Man": "pelicula de Marvel que trata sobre un superheroe que tiene un traje de hierro"
+            }
+        ],
+        "media": [
+            {
+                "Sherlock": "serie que trata sobre un detective que resuelve casos"
+            },
+            {
+                "The Crown": "serie de Netflix que trata sobre la reina de Inglaterra"
+            },
+            {
+                "Harry Potter": "pelicula que trata sobre un mago que va a una escuela de magia"
+            },
+            {
+                "El Rey Leon": "pelicula de Disney que trata sobre un leon que es rey"
+            },
+            {
+                "The Office": "serie de NBC que trata sobre un grupo de empleados de una empresa"
+            },
+            {
+                "El Conjuro": "pelicula que trata sobre una familia que es atacada por fantasmas"
+            },
+            {
+                "Friends": "serie de NBC que trata sobre un grupo de amigos que viven en Nueva York"
+            },
+            {
+                "La Casa de Papel": "serie de Netflix que trata sobre un grupo de ladrones que roban un banco"
+            },
+            {
+                "Transformers": "pelicula que trata sobre robots que se transforman en autos"
+            },
+            {
+                "Ratatouille": "pelicula de Pixar que trata sobre una rata que cocina"
+            },
+            {
+                "Jumanji": "pelicula que trata sobre un juego de mesa que cobra vida"
+            }
+        ],
+        "dificil": [
+            {
+                "Los Increíbles": "pelicula de Pixar que trata sobre una familia de superheroes rojos"
+            },
+            {
+                "The Avengers": "pelicula que trata sobre un grupo de superheroes"
+            },
+            {
+                "Forrest Gump": "pelicula que trata sobre un chico con discapacidad que hace cosas increibles"
+            },
+            {
+                "Jurassic Park": "pelicula que trata sobre un parque de dinosaurios"
+            },
+            {
+                "El Padrino": "pelicula que trata sobre la mafia italiana"
+            },
+            {
+                "El Señor de los Anillos": "pelicula que trata sobre un anillo que tiene que ser destruido"
+            },
+            {
+                "El Exorcista": "pelicula que trata sobre una chica que es poseida por el demonio"
+            },
+            {
+                "Stranger Things": "serie de Netflix que trata sobre un grupo de chicos que se enfrentan a un monstruo"
+            },
+            {
+                "Game of Thrones": "serie de HBO que trata sobre una guerra entre familias por el trono de hierro"
+            },
+            {
+                "Breaking Bad": "serie de Netflix que trata sobre un profesor de quimica que se vuelve narcotraficante"
+            },
+            {
+                "The Big Bang Theory": "serie de CBS que trata sobre un grupo de amigos cientificos"
+            },
+            {
+                "Peaky Blinders": "serie de Netflix que trata sobre una familia de gángsters"
+            },
+            {
+                "The Walking Dead": "serie de AMC que trata sobre un grupo de personas que sobreviven a un apocalipsis zombie"
+            },
+            {
+                "Black Mirror": "serie de Netflix que trata sobre la tecnologia y sus consecuencias"
+            }
+        ]
+    },
+    "animales": {
+        "facil": [
+            {
+                "perro": "animal que es el mejor amigo del hombre"
+            },
+            {
+                "gato": "animal al que no le gusta el agua"
+            },
+            {
+                "elefante": "animal que tiene trompa"
+            },
+            {
+                "tigre": "animal con cuello largo que tiene rayas"
+            },
+            {
+                "leon": "animal que es el rey de la selva"
+            },
+            {
+                "jirafa": "animal que tiene el cuello muy largo"
+            },
+            {
+                "mono": "animal que se parece mucho al hombre"
+            },
+            {
+                "cebra": "animal que tiene rayas"
+            },
+            {
+                "vaca": "animal que da leche"
+            },
+            {
+                "caballo": "animal que se monta"
+            },
+            {
+                "oveja": "animal que da lana"
+            },
+            {
+                "pato": "animal que hace cuac"
+            },
+            {
+                "pollo": "animal que da huevos"
+            },
+            {
+                "gallina": "animal que da huevos"
+            },
+            {
+                "pajaro": "animal que vuela"
+            },
+            {
+                "aguila": "animal que vuela"
+            },
+            {
+                "loro": "animal que habla"
+            },
+            {
+                "pez": "animal que vive en el agua"
+            },
+            {
+                "ballena": "animal que es muy grande y vive en el agua"
+            },
+            {
+                "delfin": "animal que vive en el agua y es muy inteligente"
+            },
+            {
+                "tortuga": "animal que vive en el agua y tiene caparazon"
+            },
+            {
+                "rana": "animal que vive en el agua y hace croac"
+            },
+            {
+                "pulpo": "animal que vive en el agua y tiene 8 tentaculos"
+            },
+            {
+                "sapo": "animal que vive en el agua y hace croac"
+            },
+            {
+                "araña": "animal que vive en la tierra y tiene 8 patas"
+            }
+        ],
+        "media": [
+            {
+                "cocodrilo": "reptil que vive en el agua y es muy peligroso por su enorme mordida"
+            },
+            {
+                "serpiente": "reptil largo que vive en la tierra y es muy peligroso por su veneno"
+            },
+            {
+                "hormiga": "insecto que vive en la tierra y es muy chiquito"
+            },
+            {
+                "rinoceronte": "mamifero que tiene cuernos"
+            },
+            {
+                "orangutan": "animal que se parece mucho al hombre"
+            },
+            {
+                "hipopotamo": "mamifero que vive en el agua y es muy grande"
+            },
+            {
+                "lagartija": "reptil que vive en la tierra y es muy chiquito"
+            },
+            {
+                "canguro": "mamifero nativo de Australia que salta mucho"
+            },
+            {
+                "camaleón": "reptil que cambia de color"
+            },
+            {
+                "leopardo": "mamifero la familia de los félidos que tiene manchas negras"
+            },
+            {
+                "tortuga": "reptil que tiene caparazon"
+            },
+            {
+                "tiburon": "animal que vive en el agua y es muy peligroso"
+            },
+            {
+                "mosquito": "insecto que vive en la tierra, vuela, chupa sangre y es muy chiquito"
+            },
+            {
+                "escarabajo": "insecto con caparazon que vive en la tierra y es muy chiquito"
+            },
+            {
+                "mariposa": "insecto que tiene alas muy coloridas"
+            },
+            {
+                "lombriz": "se arrastra por la tierra y se suele usar para pescar"
+            },
+            {
+                "escorpión": "Arácnido que tiene un aguijón venenoso en la cola"
+            },
+            {
+                "suricata": "pequeño mamífero carnívoro, conocido por vivir en grupos sociales y por su postura erguida de vigilancia"
+            }
+        ],
+        "dificil": [
+            {
+                "estrella de mar": "insecto que vive en el agua y tiene forma de estrella"
+            },
+            {
+                "caballito de mar": "insecto que vive en el agua y tiene forma de caballo"
+            },
+            {
+                "dragón de komodo": "Lagarto gigante, el más grande del mundo, nativo de las islas Komodo."
+            },
+            {
+                "murciélago": "Mamífero volador, el único que puede volar. Duerme de día y le gusta la oscuridad"
+            },
+            {
+                "pájaro carpintero": "Ave que se alimenta de insectos y que hace agujeros en los árboles con su pico"
+            },
+            {
+                "pez espada": "Pez que tiene un pico largo y afilado"
+            },
+            {
+                "puercoespín": "Mamífero roedor que tiene púas"
+            },
+            {
+                "merluza negra": "pez muy grande que vive en el agua procedente de la Antártida"
+            },
+            {
+                "cóndor andino": "ave rapaz que vive en los Andes"
+            },
+            {
+                "quirquincho": "mamífero que tiene caparazón"
+            },
+            {
+                "elefante marino": "mamífero que vive en el agua y es muy grande"
+            },
+            {
+                "oso hormiguero": "mamífero que se alimenta de hormigas"
+            }
+        ]
+    }
 }

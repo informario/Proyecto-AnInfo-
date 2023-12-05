@@ -8,10 +8,11 @@ import getpass
 
 class HangmanGame:
 
-    def __init__(self, difficulty):
+    def __init__(self, difficulty, word_category):
+        self.category = word_category
         self.attempts_remaining = difficulty.get_max_attempts()
         self.remaining_clues = difficulty.get_clues()
-        self.word, self.clue = difficulty.get_word()
+        self.word, self.clue = difficulty.get_word(word_category)
         self.score = difficulty.get_score()
         self.clue_used = False
         self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
@@ -43,6 +44,7 @@ class HangmanGame:
     def print_state(self):
         
         print("=========================================")
+        print("Categoria: ", self.category.to_string())
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
