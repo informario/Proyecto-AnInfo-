@@ -5,7 +5,6 @@ from options.game import GameOpt
 import random
 import os
 import getpass
-from unidecode import unidecode
 
 class HangmanGame:
 
@@ -16,8 +15,7 @@ class HangmanGame:
         self.word, self.clue = difficulty.get_word(word_category)
         self.score = difficulty.get_score()
         self.clue_used = False
-        letters_to_guess = list(set(filter(lambda x: x != " ", unidecode(self.word))))
-        self.letters_to_guess = [x.lower() for x in letters_to_guess]
+        self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
@@ -31,7 +29,7 @@ class HangmanGame:
     def print_word(self):
         if self.running():
             for letter in self.word:
-                if unidecode(letter.lower()) in self.letters_guessed:
+                if letter in self.letters_guessed:
                     print(letter, end=" ")
                 elif letter == " ":
                     print(" ", end=" ")
@@ -50,7 +48,6 @@ class HangmanGame:
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
-        print("Letras restantes: ", self.letters_to_guess)
         print("Pistas restantes: ", self.remaining_clues)
         if self.clue_used:
             print("AYUDA: ", self.clue)
@@ -88,7 +85,7 @@ class HangmanGame:
     
     def try_to_guess_word(self, word):
         
-        if word == self.word.lower():
+        if word == self.word:
             print("\nAdivinaste la palabra!\n")
             self.state = GameState.WON
             self.letters_guessed += self.letters_to_guess

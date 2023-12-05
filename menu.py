@@ -81,8 +81,9 @@ class GameMenu:
         os.system('clear')
         print("Selecciona una categoria:\n")
         print("\t1. Aninfo")
-        print("\t2. Otra")
-        print("\t3. Famosos\n")
+        print("\t2. Famosos")
+        print("\t3. Peliculas y series")
+        print("\t4. Animales\n")
     
     def request_word_category():
         GameMenu.show_category_options()

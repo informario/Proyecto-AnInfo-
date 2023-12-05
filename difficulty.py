@@ -26,8 +26,7 @@ class Difficulty(Enum):
                 return list(random.choice(data[category.to_string()]['facil']).items())[0]
             
             case Difficulty.MEDIUM:
-                #return list(random.choice(data[category.to_string()]['media']).items())[0]
-                return list({"Beyoncé": "algo"}.items())[0]
+                return list(random.choice(data[category.to_string()]['media']).items())[0]
 
             case Difficulty.HARD:
                 return list(random.choice(data[category.to_string()]['dificil']).items())[0]
