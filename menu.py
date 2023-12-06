@@ -3,6 +3,7 @@ import os
 from word_category import WordCategory
 from difficulty import Difficulty
 from options.menu import MenuOption
+from utils import clear_screen
 
 RETURN_TO_MAIN_MENU_OPT = ""
 
@@ -18,7 +19,7 @@ class GameMenu:
 
     @staticmethod
     def show_options():
-        os.system('clear')
+        clear_screen()
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
@@ -27,7 +28,7 @@ class GameMenu:
 
     @staticmethod
     def show_rules():
-        os.system('clear')
+        clear_screen()
         print("Reglas:")
         print("\t1. El juego consiste en adivinar una palabra o frase oculta")
         print("\t2. El jugador puede ingresar una letra o una palabra para intentar adivinar")
@@ -44,7 +45,7 @@ class GameMenu:
 
     @staticmethod
     def show_difficulty_options():
-        os.system('clear')
+        clear_screen()
         print("Selecciona una dificultad:")
         print("\t1. FACIL: 7 intentos, 5 pistas y palabras cortas")
         print("\t2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")

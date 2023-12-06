@@ -2,8 +2,8 @@ from difficulty import Difficulty
 from options.menu import ExitGameException
 from state import GameState
 from options.game import GameOpt
+from utils import clear_screen, remove_accent_marks
 import random
-import os
 import getpass
 
 class HangmanGame:
@@ -15,7 +15,7 @@ class HangmanGame:
         self.word, self.clue = difficulty.get_word(word_category)
         self.score = difficulty.get_score()
         self.clue_used = False
-        self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
+        self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
@@ -29,7 +29,7 @@ class HangmanGame:
     def print_word(self):
         if self.running():
             for letter in self.word:
-                if letter in self.letters_guessed:
+                if remove_accent_marks(letter.lower()) in self.letters_guessed:
                     print(letter, end=" ")
                 elif letter == " ":
                     print(" ", end=" ")
@@ -165,7 +165,7 @@ class HangmanGame:
         while self.running():
             HangmanGame.show_options()
             inp = input("Intento: ").lower().strip()
-            os.system('clear')
+            clear_screen()
             if HangmanGame.invalid_input(inp):
                 print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
                 continue
@@ -187,7 +187,7 @@ class HangmanGame:
 
     # Devuelve el estado final del juego
     def run(self):
-        os.system('clear')
+        clear_screen()
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        
         self.print_state()
         self.play()

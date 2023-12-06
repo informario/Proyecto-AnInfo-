@@ -1,5 +1,5 @@
 from enum import Enum
-import os
+from utils import clear_screen
 import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
@@ -46,13 +46,13 @@ class MenuOption(Enum):
     def ask_exit_confirmation(self):
         if self == MenuOption.EXIT:
             print("\n")
-            os.system('clear')
+            clear_screen()
             while True:
                 print("¿Estas seguro de que deseas salir del juego?")
                 print("0. Si")
                 print("1. No\n")
                 inp = input("- ").strip()
-                os.system('clear')
+                clear_screen()
                 if inp == "0":
                     return True
                 if inp == "1":
