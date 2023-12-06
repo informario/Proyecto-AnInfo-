@@ -1,5 +1,5 @@
-
 INITIAL_SCORE = 0
+CLUE_COST = 2
 
 class UserStatistics:
 
@@ -25,4 +25,18 @@ class UserStatistics:
 
     def decrease_basic_clues(self):
         self.basic_clues -= 1
+
+    def update_from_clues(self, clue_handler):
+        self.basic_clues = clue_handler.get_basic_clues()
+        self.score = clue_handler.get_score()
+
+    def buy_clue(self):
+        if self.get_score() < CLUE_COST:
+            print("\nNo tienes suficientes puntos para comprar una pista\n")
+            return
+        
+        self.increase_basic_clues()
+        self.decrease_score(CLUE_COST)
+        print("\nCompraste una pista!\n")
+
     

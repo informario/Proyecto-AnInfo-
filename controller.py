@@ -15,7 +15,6 @@ INITIAL_DIFFICULTY = Difficulty.MEDIUM
 class GameController:
     def __init__(self):
         self.user_statistics = UserStatistics()
-        self.clue_handler = ClueHandler()
         self.difficulty = INITIAL_DIFFICULTY
 
     def run(self):
@@ -33,8 +32,9 @@ class GameController:
             self.difficulty = dificulty
 
     def play_game(self):
-        game = HangmanGame(self.difficulty, self)
+        game = HangmanGame(self.difficulty, self.user_statistics)
         game.run()
+        game.update_stats(self.user_statistics)
         game.update_score(self.user_statistics, self.difficulty)
     
     def show_rules(self):
@@ -45,7 +45,5 @@ class GameController:
         print("Puntaje:             ", self.user_statistics.score)
 
     def buy_clue(self):
-        self.clue_handler.buy_clue(self.user_statistics)
+        self.user_statistics.buy_clue()
 
-    def use_clue(self, letters_to_guess, letters_guessed):
-        self.clue_handler.use_clue(self.user_statistics, letters_to_guess, letters_guessed)

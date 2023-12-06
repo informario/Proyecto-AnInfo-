@@ -2,13 +2,14 @@ from difficulty import Difficulty
 from options.menu import ExitGameException
 from state import GameState
 from options.game import GameOpt
+from clue_handler import ClueHandler
 import random
 import os
 import getpass
 
 class HangmanGame:
 
-    def __init__(self, difficulty, game_controller):
+    def __init__(self, difficulty, user_statistics):
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word()
         self.score = difficulty.get_score()
@@ -18,7 +19,10 @@ class HangmanGame:
         self.letters_missed = []
         self.state = GameState.RUNNING
         self.remaining_clues = difficulty.get_clues()
-        self.game_controller = game_controller
+        self.clue_handler = ClueHandler.from_stats(user_statistics)
+
+    def update_stats(self, user_statistics):
+        user_statistics.update_from_clues(self.clue_handler)
     
     def update_score(self, user_statistics, difficulty):
         self.state.update_score(user_statistics, difficulty)
@@ -48,8 +52,8 @@ class HangmanGame:
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
         print("Puntos de ayuda restantes: ", self.remaining_clues)
-        print("Pistas de revelacion de letra disponibles: ", self.game_controller.user_statistics.get_basic_clues())
-        print("PUNTAJE: ", self.game_controller.user_statistics.get_score())
+        print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
+        print("PUNTAJE: ", self.clue_handler.get_score())
         if self.clue_used:
             print("AYUDA: ", self.clue)
 
@@ -98,10 +102,10 @@ class HangmanGame:
             self.state = GameState.LOST
 
     def use_clue(self):
-        self.game_controller.use_clue(self.letters_to_guess, self.letters_guessed)
+        self.clue_handler.use_clue(self.letters_to_guess, self.letters_guessed)
 
     def buy_clue(self):
-        self.game_controller.buy_clue()
+        self.clue_handler.buy_clue()
 
     def give_help(self):
         if self.remaining_clues < 2:
@@ -134,6 +138,7 @@ class HangmanGame:
         print("Ingrese una letra para continuar jugando\n")
 
     def end():
+
         print("\nPresione ENTER para volver al menu principal\n")
         getpass.getpass(prompt="")
 
