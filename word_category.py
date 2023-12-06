@@ -8,6 +8,7 @@ class WordCategory (Enum):
     FAMOSOS = 2,
     PELICULAS_Y_SERIES = 3,    
     ANIMALES = 4,
+    OTROS = 5,
 
     def from_input(inp):
         if inp == "1":
@@ -18,6 +19,8 @@ class WordCategory (Enum):
             return WordCategory.PELICULAS_Y_SERIES
         elif inp == "4":
             return WordCategory.ANIMALES
+        elif inp == "5":
+            return WordCategory.OTROS
         else:
             return None
         
@@ -31,4 +34,6 @@ class WordCategory (Enum):
                 return "peliculas y series"
             case WordCategory.ANIMALES:
                 return "animales"
+            case WordCategory.OTROS:
+                return "otros"
             

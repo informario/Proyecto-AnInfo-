@@ -136,143 +136,6 @@
             }
         ]
     },
-    "otra": {
-        "facil": [
-            {
-                "auto": "ANDO EN ____MATICO SEMI FANATICO"
-            },
-            {
-                "moto": "la gente que anda en esto le gusta usar campera de cuero"
-            },
-            {
-                "fanta": "tipo una coca pero de naranja"
-            },
-            {
-                "toddy": "galletita con chips de chocolate, si comes muchas puede ser que te mueras"
-            },
-            {
-                "pan": "tiene harina, y es un alimento básico"
-            },
-            {
-                "birra": "bebida alcoholica"
-            },
-            {
-                "bote": "barco chico"
-            },
-            {
-                "ganar": "lo unico que sabe hacer la escaloneta"
-            },
-            {
-                "suma": "operacion matemática básica"
-            },
-            {
-                "sol": "estrella que esta muy cerca de la Tierra"
-            },
-            {
-                "luna": "los humanos llegaron acá en 1960"
-            },
-            {
-                "barra": "metal de forma cilíndrica y mucho más larga que gruesa"
-            },
-            {
-                "perro": "desciende de los lobos"
-            },
-            {
-                "gato": "desciende de los felinos grandes"
-            },
-            {
-                "banana": "fruta que aporta principalmente carbohidratos"
-            },
-            {
-                "humo": "DETRAS DEL ___ NO SE VE"
-            }
-        ],
-        "media": [
-            {
-                "vereda": "no caminas en la calle, caminas por la _____"
-            },
-            {
-                "manu camejo": "un tipazo"
-            },
-            {
-                "manual": "un auto puede ser esto o automatico"
-            },
-            {
-                "codigo": "de lo que está compuesto, a mas bajo nivel, un proyecto de software"
-            },
-            {
-                "sprite": "tipo una coca pero de limon (?)"
-            },
-            {
-                "resumen": "generalmente, para estudiar para un final, uno se hace uno de estos, guardando todo lo más importante que se vio en el cuatri"
-            },
-            {
-                "github": "plataforma para el desarrollo colaborativo de software"
-            },
-            {
-                "pedido": "lo que te llega cuando compras algo online"
-            },
-            {
-                "telepatia": "superpoder mental"
-            },
-            {
-                "lampara": "usa electricidad para iluminar"
-            },
-            {
-                "radiografia": "te haces una de estas si te rompes una pierna, para ver como esta eso"
-            },
-            {
-                "guitarra": "instrumento musical con cuerdas, si fantasmeas tocando me caes mal"
-            },
-            {
-                "sacapuntas": "se usa para afilar un lapiz"
-            },
-            {
-                "postre": "despues de comer capaz te pinta comer algo dulce"
-            },
-            {
-                "estrella": "en el cielo hay miles"
-            },
-            {
-                "capricornio": "signo de los que nacen del 22 de diciembre al 22 de enero"
-            }
-        ],
-        "dificil": [
-            {
-                "nico riedel": "el profesor mas fachero"
-            },
-            {
-                "manuel cangrejo": "alter ego del profesor mas fachero"
-            },
-            {
-                "gonzalo matrinez sastre": "el profesor mas fachero"
-            },
-            {
-                "calculadora casio": "si no tenes una de estas no estudias ingenieria"
-            },
-            {
-                "termodinamica": "rama de la fisica que estudia el calor"
-            },
-            {
-                "auriculares inalambricos": "para escuchar la compu sin molestar a todos los de tu casa, estos no tienen cable"
-            },
-            {
-                "campeones del mundo": "todos los argentinos somo esto desde el 18 de diciembre de 2022"
-            },
-            {
-                "electrodomestico": "lavarropas, microondas, heladera, lavaplatos, etc."
-            },
-            {
-                "extraordinario": "algo que no es normal, que no pasa todo el tiempo"
-            },
-            {
-                "biocombustible": "se obtienen a partir de la biomasa o de desechos orgánicos, y capaz en el futuro sea lo que le cargues al auto"
-            },
-            {
-                "energias renovables": "surgen a partir del aprovechamiento de fuentes que no contaminan ni gastan recursos naturales"
-            }
-        ]
-    },
     "famosos": {
         "facil": [
             {
@@ -735,6 +598,143 @@
             },
             {
                 "oso hormiguero": "mamífero que se alimenta de hormigas"
+            }
+        ]
+    },
+    "otros": {
+        "facil": [
+            {
+                "auto": "ANDO EN ____MATICO SEMI FANATICO"
+            },
+            {
+                "moto": "la gente que anda en esto le gusta usar campera de cuero"
+            },
+            {
+                "fanta": "tipo una coca pero de naranja"
+            },
+            {
+                "toddy": "galletita con chips de chocolate, si comes muchas puede ser que te mueras"
+            },
+            {
+                "pan": "tiene harina, y es un alimento básico"
+            },
+            {
+                "birra": "bebida alcoholica"
+            },
+            {
+                "bote": "barco chico"
+            },
+            {
+                "ganar": "lo unico que sabe hacer la escaloneta"
+            },
+            {
+                "suma": "operacion matemática básica"
+            },
+            {
+                "sol": "estrella que esta muy cerca de la Tierra"
+            },
+            {
+                "luna": "los humanos llegaron acá en 1960"
+            },
+            {
+                "barra": "metal de forma cilíndrica y mucho más larga que gruesa"
+            },
+            {
+                "perro": "desciende de los lobos"
+            },
+            {
+                "gato": "desciende de los felinos grandes"
+            },
+            {
+                "banana": "fruta que aporta principalmente carbohidratos"
+            },
+            {
+                "humo": "DETRAS DEL ___ NO SE VE"
+            }
+        ],
+        "media": [
+            {
+                "vereda": "no caminas en la calle, caminas por la _____"
+            },
+            {
+                "manu camejo": "un tipazo"
+            },
+            {
+                "manual": "un auto puede ser esto o automatico"
+            },
+            {
+                "codigo": "de lo que está compuesto, a mas bajo nivel, un proyecto de software"
+            },
+            {
+                "sprite": "tipo una coca pero de limon (?)"
+            },
+            {
+                "resumen": "generalmente, para estudiar para un final, uno se hace uno de estos, guardando todo lo más importante que se vio en el cuatri"
+            },
+            {
+                "github": "plataforma para el desarrollo colaborativo de software"
+            },
+            {
+                "pedido": "lo que te llega cuando compras algo online"
+            },
+            {
+                "telepatia": "superpoder mental"
+            },
+            {
+                "lampara": "usa electricidad para iluminar"
+            },
+            {
+                "radiografia": "te haces una de estas si te rompes una pierna, para ver como esta eso"
+            },
+            {
+                "guitarra": "instrumento musical con cuerdas, si fantasmeas tocando me caes mal"
+            },
+            {
+                "sacapuntas": "se usa para afilar un lapiz"
+            },
+            {
+                "postre": "despues de comer capaz te pinta comer algo dulce"
+            },
+            {
+                "estrella": "en el cielo hay miles"
+            },
+            {
+                "capricornio": "signo de los que nacen del 22 de diciembre al 22 de enero"
+            }
+        ],
+        "dificil": [
+            {
+                "nico riedel": "el profesor mas fachero"
+            },
+            {
+                "manuel cangrejo": "alter ego del profesor mas fachero"
+            },
+            {
+                "gonzalo matrinez sastre": "el profesor mas fachero"
+            },
+            {
+                "calculadora casio": "si no tenes una de estas no estudias ingenieria"
+            },
+            {
+                "termodinamica": "rama de la fisica que estudia el calor"
+            },
+            {
+                "auriculares inalambricos": "para escuchar la compu sin molestar a todos los de tu casa, estos no tienen cable"
+            },
+            {
+                "campeones del mundo": "todos los argentinos somo esto desde el 18 de diciembre de 2022"
+            },
+            {
+                "electrodomestico": "lavarropas, microondas, heladera, lavaplatos, etc."
+            },
+            {
+                "extraordinario": "algo que no es normal, que no pasa todo el tiempo"
+            },
+            {
+                "biocombustible": "se obtienen a partir de la biomasa o de desechos orgánicos, y capaz en el futuro sea lo que le cargues al auto"
+            },
+            {
+                "energias renovables": "surgen a partir del aprovechamiento de fuentes que no contaminan ni gastan recursos naturales"
             }
         ]
     }
