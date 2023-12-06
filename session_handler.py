@@ -13,16 +13,17 @@ class SessionHandler:
         self.file_name = file_name
         self.sessions = self.load_sessions()
 
-    def register_session(self, user_name):
+    def register_user(self, user_name):
         """
-        Registra la sesion de un nuevo usuario.
-        Verifica que el usuario no este registrado antes de hacerlo. 
+        Registra un nuevo usuario.
+        Verifica que el nombre de usuario no este siendo utilizado. 
         
         Parametros:
         - user_name: Nombre de usuario a crear.
 
         Retorna:
-        - Devuelve una tupla con el nombre de usuario y el puntaje si se pudo iniciar sesion correctamente. En caso contrario devuelve None.
+        - Devuelve una tupla con el nombre de usuario y el puntaje si se pudo registrar correctamente. 
+        - En caso de que el nombre de usuario este siendo utilizado devuelve None.
         """
         
         if user_name not in self.sessions:
@@ -32,15 +33,16 @@ class SessionHandler:
         
         return None, None
 
-    def login_session(self, user_name):
+    def search_user(self, user_name):
         """
-        Iniciar sesion.
+        Busca al usuario cuyo nombre se recibe como parametro.
 
         Parametros:
         - user_name: Nombre de usuario.
 
         Retorna:
-        - Devuelve una tupla con el nombre de usuario y el puntaje si se pudo iniciar sesion correctamente. En caso contrario devuelve None.
+        - Devuelve una tupla con el nombre de usuario y su puntaje si se encontro correctamente.
+        - En caso de que el nombre de usuario no se encuentre devuelve None.
         """
 
         if user_name in self.sessions:
@@ -130,10 +132,10 @@ class SessionHandler:
         print("Iniciando sesion")
 
         inp = input("\nIngrese su nombre de usuario: ").strip()
-        user_name, score = self.login_session(inp)
+        user_name, score = self.search_user(inp)
 
         if user_name is None:
-            user_name, score = self.register_session(inp)
+            user_name, score = self.register_user(inp)
     
         clear_screen()
         print(f"Bienvenido {user_name}. Tu puntaje es: {self.sessions[user_name]}.")
