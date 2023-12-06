@@ -85,7 +85,7 @@ class HangmanGame:
     
     def try_to_guess_word(self, word):
         
-        if word == self.word:
+        if word == remove_accent_marks(self.word.lower()):
             print("\nAdivinaste la palabra!\n")
             self.state = GameState.WON
             self.letters_guessed += self.letters_to_guess
