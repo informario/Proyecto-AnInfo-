@@ -2,8 +2,8 @@ from difficulty import Difficulty
 from options.menu import ExitGameException
 from state import GameState
 from options.game import GameOpt
+from utils import clear_screen
 import random
-import os
 import getpass
 
 class HangmanGame:
@@ -163,7 +163,7 @@ class HangmanGame:
         while self.running():
             HangmanGame.show_options()
             inp = input("Intento: ").lower().strip()
-            os.system('clear')
+            clear_screen()
             if HangmanGame.invalid_input(inp):
                 print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
                 continue
@@ -185,7 +185,7 @@ class HangmanGame:
 
     # Devuelve el estado final del juego
     def run(self):
-        os.system('clear')
+        clear_screen()
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        
         self.print_state()
         self.play()

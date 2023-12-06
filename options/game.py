@@ -1,5 +1,5 @@
 from enum import Enum
-import os
+from utils import clear_screen
 
 from options.menu import ExitGameException, MenuOption
 
@@ -41,7 +41,7 @@ class GameOpt(Enum):
                 print("0. Si")
                 print("1. No\n")
                 inp = input("- ").strip()
-                os.system('clear')
+                clear_screen()
                 if inp == "0":
                     return True
                 if inp == "1":
