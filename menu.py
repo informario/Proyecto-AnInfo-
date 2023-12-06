@@ -84,7 +84,8 @@ class GameMenu:
         print("\t1. Aninfo")
         print("\t2. Famosos")
         print("\t3. Peliculas y series")
-        print("\t4. Animales\n")
+        print("\t4. Animales")
+        print("\t5. Otros\n")
     
     def request_word_category():
         GameMenu.show_category_options()
