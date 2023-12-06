@@ -3,14 +3,16 @@ import os
 import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
-RULES_OPT = "3"
-EXIT_OPT = "4"
+BUY_CLUE_OPT = "3"
+RULES_OPT = "4"
+EXIT_OPT = "5"
 
 class MenuOption(Enum):
     START_GAME = 1
     SELECT_DIFFICULTY = 2
-    RULES = 3
-    EXIT = 4
+    BUY_CLUE = 3
+    RULES = 4
+    EXIT = 5
     
     def show_incorrect_option_message():
         print("Opcion incorrecta, vuelve a intentarlo\n")
@@ -20,6 +22,8 @@ class MenuOption(Enum):
             return MenuOption.START_GAME
         elif inp == SELECT_DIFFICULTY_OPT:
             return MenuOption.SELECT_DIFFICULTY
+        elif inp == BUY_CLUE_OPT:
+            return MenuOption.BUY_CLUE
         elif inp == RULES_OPT:
             return MenuOption.RULES
         elif inp == EXIT_OPT:
@@ -33,6 +37,8 @@ class MenuOption(Enum):
                 game_controller.play_game()
             case MenuOption.SELECT_DIFFICULTY:
                 game_controller.update_difficulty()
+            case MenuOption.BUY_CLUE:
+                game_controller.buy_clue()
             case MenuOption.RULES:
                 game_controller.show_rules()
             case MenuOption.EXIT:

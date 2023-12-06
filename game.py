@@ -8,9 +8,8 @@ import getpass
 
 class HangmanGame:
 
-    def __init__(self, difficulty):
+    def __init__(self, difficulty, game_controller):
         self.attempts_remaining = difficulty.get_max_attempts()
-        self.remaining_clues = difficulty.get_clues()
         self.word, self.clue = difficulty.get_word()
         self.score = difficulty.get_score()
         self.clue_used = False
@@ -18,6 +17,8 @@ class HangmanGame:
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
+        self.remaining_clues = difficulty.get_clues()
+        self.game_controller = game_controller
     
     def update_score(self, user_statistics, difficulty):
         self.state.update_score(user_statistics, difficulty)
@@ -46,7 +47,9 @@ class HangmanGame:
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
-        print("Pistas restantes: ", self.remaining_clues)
+        print("Puntos de ayuda restantes: ", self.remaining_clues)
+        print("Pistas de revelacion de letra disponibles: ", self.game_controller.user_statistics.get_basic_clues())
+        print("PUNTAJE: ", self.game_controller.user_statistics.get_score())
         if self.clue_used:
             print("AYUDA: ", self.clue)
 
@@ -94,22 +97,11 @@ class HangmanGame:
         if self.attempts_remaining == 0:
             self.state = GameState.LOST
 
+    def use_clue(self):
+        self.game_controller.use_clue(self.letters_to_guess, self.letters_guessed)
 
-    def give_clue(self):
-        if self.remaining_clues == 0:
-            print("\nNo te quedan pistas!\n")
-            return
-        
-        if len(self.letters_to_guess) <= 1:
-            print("\nTe queda solo una letra, no podes usar la pista!\n")
-            return
-    
-        print("\nPista obtenida\n") 
-        clue = random.choice(self.letters_to_guess)
-        self.letters_to_guess.remove(clue)
-        self.letters_guessed.append(clue)
-
-        self.remaining_clues -= 1
+    def buy_clue(self):
+        self.game_controller.buy_clue()
 
     def give_help(self):
         if self.remaining_clues < 2:
@@ -137,7 +129,8 @@ class HangmanGame:
     def show_options():
         print("0. Abandonar partida")
         print("1. Revelar una letra")
-        print("2. Pedir una pista")
+        print("2. Comprar una pista de revelacion de letra")
+        print("3. Pedir una pista")
         print("Ingrese una letra para continuar jugando\n")
 
     def end():
@@ -175,7 +168,7 @@ class HangmanGame:
                 continue
             
             try:
-                opcion.execute(self)            
+                opcion.execute(self)      
             except ExitGameException:
                 return
 

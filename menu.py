@@ -21,8 +21,9 @@ class GameMenu:
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
-        print("\t3 - Reglas")
-        print("\t4 - Salir")
+        print("\t3 - Comprar pista")
+        print("\t4 - Reglas")
+        print("\t5 - Salir")
 
     @staticmethod
     def show_rules():
