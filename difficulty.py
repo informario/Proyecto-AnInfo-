@@ -18,7 +18,7 @@ class Difficulty(Enum):
     def get_word(self, category):
         """Reads a .json file and returns a word according to the chosen difficulty"""
 
-        with open(PATH, 'r') as j:
+        with open(PATH, mode='r', encoding="utf8") as j:
             data = json.load(j)
 
         match self:
