@@ -2,19 +2,20 @@ from difficulty import Difficulty
 from options.menu import ExitGameException
 from state import GameState
 from options.game import GameOpt
-from utils import clear_screen
+from utils import clear_screen, remove_accent_marks
 import random
 import getpass
 
 class HangmanGame:
 
-    def __init__(self, difficulty):
+    def __init__(self, difficulty, word_category):
+        self.category = word_category
         self.attempts_remaining = difficulty.get_max_attempts()
         self.remaining_clues = difficulty.get_clues()
-        self.word, self.clue = difficulty.get_word()
+        self.word, self.clue = difficulty.get_word(word_category)
         self.score = difficulty.get_score()
         self.clue_used = False
-        self.letters_to_guess = list(set(filter(lambda x: x != " ", self.word)))
+        self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
@@ -28,7 +29,7 @@ class HangmanGame:
     def print_word(self):
         if self.running():
             for letter in self.word:
-                if letter in self.letters_guessed:
+                if remove_accent_marks(letter.lower()) in self.letters_guessed:
                     print(letter, end=" ")
                 elif letter == " ":
                     print(" ", end=" ")
@@ -43,6 +44,7 @@ class HangmanGame:
     def print_state(self):
         
         print("=========================================")
+        print("Categoria: ", self.category.to_string())
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
@@ -83,7 +85,7 @@ class HangmanGame:
     
     def try_to_guess_word(self, word):
         
-        if word == self.word:
+        if word == remove_accent_marks(self.word.lower()):
             print("\nAdivinaste la palabra!\n")
             self.state = GameState.WON
             self.letters_guessed += self.letters_to_guess

@@ -1,4 +1,6 @@
 from getpass import getpass
+import os
+from word_category import WordCategory
 from difficulty import Difficulty
 from options.menu import MenuOption
 from utils import clear_screen
@@ -76,3 +78,22 @@ class GameMenu:
 
         return option
 
+    def show_category_options():
+        os.system('clear')
+        print("Selecciona una categoria:\n")
+        print("\t1. Aninfo")
+        print("\t2. Famosos")
+        print("\t3. Peliculas y series")
+        print("\t4. Animales\n")
+    
+    def request_word_category():
+        GameMenu.show_category_options()
+        option = input("- ").strip()
+        category = WordCategory.from_input(option)
+        while category == None:
+            MenuOption.show_incorrect_option_message()
+            option = input("- ").strip()
+            category = WordCategory.from_input(option)
+
+        return category
+    
