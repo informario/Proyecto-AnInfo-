@@ -1,4 +1,6 @@
 import json
+from getpass import getpass
+from utils import clear_screen
 
 INITIAL_SCORE = 0
 
@@ -21,14 +23,15 @@ class SessionHandler:
         - user_name: Nombre de usuario a crear.
 
         Retorna:
-        - Devuelve un string indicando si el usuario fue creado con exito o no.
+        - Devuelve el nombre de usuario y el puntaje si se pudo iniciar sesion correctamente. En caso contrario devuelve None.
         """
         
         if user_name not in self.sessions:
             self.sessions[user_name] = INITIAL_SCORE
-            return f"Usuario registrado correctamente. Tu puntaje inicial es: {INITIAL_SCORE}."
-        else:
-            return f"El nombre de usuario ya existe. Por favor, use otro nombre para registrarse."
+            self.save_sessions()
+            return (user_name, self.sessions[user_name])
+        
+        return None, None
 
     def login_session(self, user_name):
         """
@@ -38,13 +41,13 @@ class SessionHandler:
         - user_name: Nombre de usuario.
 
         Retorna:
-        - Devuelve un string indicando si el usuario ingreso con exito o no.
+        - Devuelve el nombre de usuario y el puntaje si se pudo iniciar sesion correctamente. En caso contrario devuelve None.
         """
 
         if user_name in self.sessions:
-            return f"Bienvenido de nuevo {user_name}. Tu puntaje es: {self.session[user_name]}"
-        else:
-            return f"Usuario no registrado. Por favor, registrese para continuar."
+            return (user_name, self.sessions[user_name])
+        
+        return None, None
 
     def load_sessions(self):
         """
@@ -88,7 +91,83 @@ class SessionHandler:
         """
 
         if user_name in self.sessions:
-            self.sessions[user_name] += score
+            self.sessions[user_name] = score
+            self.save_sessions()
             return f"Puntos actualizados correctamente."
         else:
             return f"Usuario no resgistrado."
+
+    def run(self):
+        clear_screen()
+
+        while True:
+            print("Opciones:")
+            print("\t1 - Iniciar sesion")
+            print("\t2 - Registrarse")
+            print("\t3 - Salir")
+
+            inp = input("\nElige una opcion: ").strip()
+
+            if inp == LOGIN_SESSION_OPT:
+                user_name, score = self.log_in()
+
+                if user_name is None:
+                    clear_screen()
+                    continue
+                
+                return user_name, score
+
+            elif inp == REGISTER_SESSION_OPT:
+                self.sign_up()
+                clear_screen()
+            elif inp == EXIT_OPT:
+                return None, None
+            else:
+                clear_screen()
+                print("Opcion incorrecta\n")
+
+    def log_in(self):
+        while True:
+            clear_screen()
+            print("Iniciando sesion")
+
+            inp = input("\nIngrese su nombre de usuario: ").strip()
+            user_name, score = self.login_session(inp)
+            clear_screen()
+        
+            if user_name is None:
+                print(f"Usuario no registrado. Por favor, registrese para continuar.")
+                print("\nPresione ENTER para volver al menu de loggeo")
+                getpass(prompt="")
+                return user_name, score
+
+            print(f"Bienvenido de nuevo {user_name}. Tu puntaje es: {self.sessions[user_name]}.")
+            print("\nPresione ENTER para comenzar el juego")
+            getpass(prompt="")
+            return user_name, score
+
+    def sign_up(self):
+        while True:
+            clear_screen()
+            print("Registrandose")
+
+            inp = input("\nIngrese su nombre de usuario: ").strip()
+            user_name, score = self.register_session(inp)
+            clear_screen()
+        
+            if user_name is None:
+                print(f"El nombre de usuario ya existe. Por favor, use otro nombre para registrarse.")
+                print("\nPresione ENTER para volver a intentarlo")
+                getpass(prompt="")
+                continue
+
+            print(f"Usuario registrado correctamente. Tu puntaje inicial es: {INITIAL_SCORE}.")
+            print("\nPresione ENTER para volver al menu de loggeo")
+            getpass(prompt="")
+            return user_name, score
+
+# session_handler = SessionHandler()
+
+# user_name, puntaje = session_handler.run()
+
+# print(f"Nombre de usuario: {user_name} - Puntaje: {puntaje}")
