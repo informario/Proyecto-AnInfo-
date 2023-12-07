@@ -10,6 +10,10 @@ SCORE_EASY = 5
 SCORE_MEDIUM = 10
 SCORE_HARD = 20
 
+DEDUCTION_POINTS_EASY = 20
+DEDUCTION_POINTS_NORMAL = 10
+DEDUCTION_POINTS_HARD = 5
+
 class Difficulty(Enum):
     EASY = 1
     MEDIUM = 2
@@ -78,4 +82,6 @@ class Difficulty(Enum):
                 return SCORE_MEDIUM
             case Difficulty.HARD:
                 return SCORE_HARD
+    
+
 

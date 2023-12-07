@@ -1,6 +1,7 @@
 import json
 from getpass import getpass
 from utils import clear_screen
+from difficulty import Difficulty
 
 INITIAL_SCORE = 0
 INITIAL_CLUE = 0
@@ -153,3 +154,6 @@ class SessionHandler:
     def get_score(self, user_name):
         return self.sessions[user_name][INDEX_SCORE]
 
+    def deduct_points_on_loss(self, user_name, difficulty: Difficulty):
+        self.sessions[user_name][INDEX_SCORE] -= 1
+        self.save_sessions()
