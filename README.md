@@ -34,7 +34,7 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
 
 1. Para conseguir el codigo del juego se puede:
 
-       a. Clonar el repositorio localmente usando: git clone https://github.com/tu-nombre-de-usuario/hangman.git
+       a. Clonar el repositorio localmente usando: git clone https://github.com/Brubrux/Proyecto-AnInfo-
 
        b. Descargar el zip directamente desde el repo
 
