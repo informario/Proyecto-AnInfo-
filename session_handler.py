@@ -152,9 +152,18 @@ class SessionHandler:
         return user_name, score
     
     def get_score(self, user_name):
+        """
+        Obtiene el puntaje asociado a un usuario en la sesión actual.
+
+        Parametros:
+        - user_name (str): El nombre del usuario.
+
+        Retorna:
+        - int: El puntaje actual del usuario.
+        """
         return self.sessions[user_name][INDEX_SCORE]
 
-    def deduct_points_on_loss(self, user_name, difficulty: Difficulty):
+    def deduct_score_on_loss(self, user_name, difficulty: Difficulty):
         score = self.get_score(user_name)
         deduction_points = difficulty.get_deduction_points()
         current_score = score - deduction_points
