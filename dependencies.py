@@ -1,19 +1,19 @@
 import subprocess
 import sys
 
-def check_installation(package_name):
+MODULE = "unidecode"
+
+def check_installation():
     try:
-        # Intenta cargar el paquete
-        __import__(package_name)
-        print(f"{package_name} ya está instalado.")
+        __import__(f"{MODULE}")
+        print(f"{MODULE} ya está instalado.")
         return True
     except ImportError:
-        print(f"{package_name} no está instalado.")
+        print(f"{MODULE} no está instalado.")
         return False
 
 def install_pip():
     try:
-        # Intenta instalar pip
         subprocess.check_call([sys.executable, "-m", "ensurepip", "--default-pip"])
         print("pip ha sido instalado correctamente.")
     except subprocess.CalledProcessError as e:
@@ -21,7 +21,6 @@ def install_pip():
 
 def install_package(package_name):
     try:
-        # Intenta instalar el paquete
         subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
         print(f"{package_name} ha sido instalado correctamente.")
     except subprocess.CalledProcessError as e:
@@ -30,7 +29,6 @@ def install_package(package_name):
 if __name__ == "__main__":
     package_name = "unicode"
 
-    # Verificar si pip está instalado
     try:
         subprocess.check_call([sys.executable, "-m", "pip", "--version"])
         print("pip ya está instalado.")
@@ -38,6 +36,5 @@ if __name__ == "__main__":
         print("pip no está instalado.")
         install_pip()
 
-    # Verificar e instalar el paquete unicode
-    if not check_installation(package_name):
+    if not check_installation():
         install_package(package_name)
