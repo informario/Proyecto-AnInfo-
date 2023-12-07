@@ -3,10 +3,10 @@ from getpass import getpass
 from utils import clear_screen
 
 INITIAL_SCORE = 0
-INITIAL_CLUE = 0
+INITIAL_CLUES = 0
 
 INDEX_SCORE = 0
-INDEX_CLUE = 1
+INDEX_CLUES = 1
 
 LOGIN_SESSION_OPT = "1"
 EXIT_OPT = "2"
@@ -31,7 +31,7 @@ class SessionHandler:
         """
         
         if user_name not in self.sessions:
-            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUE]
+            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUES]
             self.save_sessions()
             return (user_name, self.sessions[user_name])
         
@@ -86,7 +86,7 @@ class SessionHandler:
         with open(self.file_name, 'w') as f:
             json.dump(self.sessions, f)
         
-    def update(self, user_name, score, clue):
+    def update(self, user_name, score, clues):
         """
         Actualiza el puntaje de un usuario.
 
@@ -100,7 +100,7 @@ class SessionHandler:
 
         if user_name in self.sessions:
             self.sessions[user_name][INDEX_SCORE] = score
-            self.sessions[user_name][INDEX_CLUE] = clue
+            self.sessions[user_name][INDEX_CLUES] = clues
             self.save_sessions()
             return True
         
@@ -117,13 +117,13 @@ class SessionHandler:
             inp = input("\nElige una opcion: ").strip()
 
             if inp == LOGIN_SESSION_OPT:
-                user_name, score = self.login_menu()
+                user_name, user_info = self.login_menu()
 
                 if user_name is None:
                     clear_screen()
                     continue
                 
-                return user_name, score
+                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES]
             
             elif inp == EXIT_OPT:
                 return None, None
@@ -137,15 +137,15 @@ class SessionHandler:
         print("Iniciando sesion")
 
         inp = input("\nIngrese su nombre de usuario: ").strip()
-        user_name, score = self.search_user(inp)
+        user_name, user_info = self.search_user(inp)
 
         if user_name is None:
-            user_name, score = self.register_user(inp)
+            user_name, user_info = self.register_user(inp)
     
         clear_screen()
         print(f"Bienvenido {user_name}.")
-        print(f"Tu puntaje es: {self.sessions[user_name][INDEX_SCORE]}.")
-        print(f"Tu cantidad de pistas es: {self.sessions[user_name][INDEX_CLUE]}. ")
+        print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
+        print(f"Tu cantidad de pistas es: {user_info[INDEX_CLUES]}. ")
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
-        return user_name, score
+        return user_name, user_info

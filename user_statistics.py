@@ -1,11 +1,12 @@
 INITIAL_SCORE = 0
+INITIAL_CLUES = 0
 CLUE_COST = 2
 
 class UserStatistics:
 
-    def __init__(self, score = INITIAL_SCORE):
+    def __init__(self, score = INITIAL_SCORE, basic_clues = INITIAL_CLUES):
         self.score = score
-        self.basic_clues = 0
+        self.basic_clues = basic_clues
         self.bonus_clues = 0
 
     def get_score(self):
