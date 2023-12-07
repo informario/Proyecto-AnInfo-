@@ -14,7 +14,7 @@ class HangmanGame:
         self.category = word_category
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
-        self.score = difficulty.get_score()
+        self.score = difficulty.get_winning_score()
         self.clue_used = False
         self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []

@@ -10,6 +10,10 @@ SCORE_EASY = 5
 SCORE_MEDIUM = 10
 SCORE_HARD = 20
 
+DEDUCTION_SCORE_EASY = 20
+DEDUCTION_SCORE_NORMAL = 10
+DEDUCTION_SCORE_HARD = 5
+
 class Difficulty(Enum):
     EASY = 1
     MEDIUM = 2
@@ -70,7 +74,7 @@ class Difficulty(Enum):
         else:
             return None
     
-    def get_score(self):
+    def get_winning_score(self):
         match self:
             case Difficulty.EASY:
                 return SCORE_EASY
@@ -78,4 +82,12 @@ class Difficulty(Enum):
                 return SCORE_MEDIUM
             case Difficulty.HARD:
                 return SCORE_HARD
-
+    
+    def get_losing_score(self):
+        match self:
+            case Difficulty.EASY:
+                return DEDUCTION_SCORE_EASY
+            case Difficulty.MEDIUM:
+                return DEDUCTION_SCORE_NORMAL
+            case Difficulty.HARD:
+                return DEDUCTION_SCORE_HARD
