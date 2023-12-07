@@ -103,13 +103,13 @@ class HangmanGame:
         if self.attempts_remaining == 0:
             self.state = GameState.LOST
 
-    def use_clue(self):
-        self.clue_handler.use_clue(self.letters_to_guess, self.letters_guessed)
+    def use_basic_clue(self):
+        self.clue_handler.use_basic_clue(self.letters_to_guess, self.letters_guessed)
 
-    def buy_clue(self):
-        self.clue_handler.buy_clue()
+    def buy_basic_clue(self):
+        self.clue_handler.buy_basic_clue()
 
-    def give_help(self):
+    def use_hint_clue(self):
         if self.remaining_clues < 2:
             print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
             return
