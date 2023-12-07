@@ -83,5 +83,11 @@ class Difficulty(Enum):
             case Difficulty.HARD:
                 return SCORE_HARD
     
-
-
+    def get_deduction_points(self):
+        match self:
+            case Difficulty.EASY:
+                return DEDUCTION_POINTS_EASY
+            case Difficulty.MEDIUM:
+                return DEDUCTION_POINTS_NORMAL
+            case Difficulty.HARD:
+                return DEDUCTION_POINTS_HARD
