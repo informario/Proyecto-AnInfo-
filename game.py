@@ -56,7 +56,7 @@ class HangmanGame:
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
         print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
-        print("Pistas de ayuda de palabra restantes: ", self.clue_handler.get_bonus_clues())
+        print("Pistas de ayuda de palabra disponibles: ", self.clue_handler.get_bonus_clues())
         print("PUNTAJE: ", self.clue_handler.get_score())
         if self.clue_handler.was_bonus_clue_used():
             print("AYUDA: ", self.clue)

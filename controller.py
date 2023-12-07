@@ -45,11 +45,12 @@ class GameController:
 
     def show_game_statistics(self):
         print("\nDificultad actual: ", self.difficulty.to_string())
-        print("Puntaje:             ", self.user_statistics.score)
+        print("Pistas de revelacion de letra disponibles: ", self.user_statistics.get_basic_clues())
+        print("Pistas de ayuda de palabra disponibles:    ", self.user_statistics.get_bonus_clues())
+        print("Puntaje:                                   ", self.user_statistics.score)
 
     def buy_basic_clue(self):
         self.user_statistics.buy_basic_clue()
 
     def buy_bonus_clue(self):
         self.user_statistics.buy_bonus_clue()
-
