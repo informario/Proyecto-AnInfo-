@@ -5,14 +5,12 @@ from options.menu import ExitGameException, MenuOption
 
 ABANDON_GAME_OPT = "0"
 ASK_CLUE_OPT = "1"
-BUY_CLUE_OPT = "2"
-ASK_HELP_OPT = "3"
+ASK_HELP_OPT = "2"
 
 class GameOpt(Enum):
     ABANDON_GAME_OPT = 1
     ASK_CLUE = 2
-    BUY_CLUE = 3
-    ASK_HELP = 4
+    ASK_HELP = 3
 
     @classmethod
     def from_input(cls, inp):
@@ -20,8 +18,6 @@ class GameOpt(Enum):
             return GameOpt.ABANDON_GAME_OPT
         elif inp == ASK_CLUE_OPT:
             return GameOpt.ASK_CLUE
-        elif inp == BUY_CLUE_OPT:
-            return GameOpt.BUY_CLUE
         elif inp == ASK_HELP_OPT:
             return GameOpt.ASK_HELP
         else:
@@ -33,9 +29,7 @@ class GameOpt(Enum):
                 if self.ask_abandon_confirmation():
                     raise ExitGameException
             case GameOpt.ASK_CLUE:
-                juego.use_clue()
-            case GameOpt.BUY_CLUE:
-                juego.buy_clue()
+                juego.give_clue()
             case GameOpt.ASK_HELP:
                 juego.give_help()
 
