@@ -1,6 +1,7 @@
 import json
 from getpass import getpass
 from utils import clear_screen
+from difficulty import Difficulty
 
 INITIAL_SCORE = 0
 INITIAL_CLUES = 0

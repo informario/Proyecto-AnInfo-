@@ -4,6 +4,7 @@ from word_category import WordCategory
 from difficulty import Difficulty
 from options.menu import MenuOption
 from utils import clear_screen
+import banners
 
 RETURN_TO_MAIN_MENU_OPT = ""
 
@@ -20,6 +21,9 @@ class GameMenu:
     @staticmethod
     def show_options():
         clear_screen()
+
+        banners.menu()
+
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")

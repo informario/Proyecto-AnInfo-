@@ -6,6 +6,7 @@ from utils import clear_screen, remove_accent_marks
 from clue_handler import ClueHandler
 import random
 import getpass
+import api
 
 class HangmanGame:
 
@@ -13,12 +14,15 @@ class HangmanGame:
         self.category = word_category
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
-        self.score = difficulty.get_score()
+        self.score = difficulty.get_winning_score()
         self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
         self.clue_handler = ClueHandler.from_stats(user_statistics)
+        self.stick_man = api.DrawnHangman(difficulty)
+
+        self.stick_man = api.DrawnHangman(difficulty)
 
     def update_stats(self, user_statistics):
         user_statistics.update_from_clues(self.clue_handler)
@@ -56,6 +60,8 @@ class HangmanGame:
         print("PUNTAJE: ", self.clue_handler.get_score())
         if self.clue_handler.was_hint_used():
             print("AYUDA: ", self.clue)
+
+        self.stick_man.draw_hangman(self.attempts_remaining)
 
         self.print_word()
         print("\n")
@@ -182,6 +188,7 @@ class HangmanGame:
         self.print_state()
         self.play()
 
-        
+def list_to_str(list):
+    return (" ").join(list)
 
 

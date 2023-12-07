@@ -21,10 +21,17 @@ class UserStatistics:
         return self.hint_clues
 
     def increase_score(self, difficulty):
-        self.score += difficulty.get_score()
+        self.score += difficulty.get_winning_score()
 
-    def decrease_score(self, amount):
+    def decrease_score(self, difficulty):
+        self.score -= difficulty.get_losing_score()
+        if self.score < 0:
+            self.score = 0
+    
+    def decrease_score_mount(self, amount):
         self.score -= amount
+        if self.score < 0:
+            self.score = 0
 
     def increase_basic_clues(self):
         self.basic_clues += 1
@@ -49,7 +56,7 @@ class UserStatistics:
             return
         
         self.increase_basic_clues()
-        self.decrease_score(CLUE_COST)
+        self.decrease_score_mount(CLUE_COST)
         print("\nCompraste una pista!\n")
 
     def buy_hint_clue(self):
