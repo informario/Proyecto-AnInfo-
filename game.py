@@ -56,9 +56,9 @@ class HangmanGame:
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
         print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
-        print("Pistas de ayuda de palabra restantes: ", self.clue_handler.get_hint_clues())
+        print("Pistas de ayuda de palabra disponibles: ", self.clue_handler.get_bonus_clues())
         print("PUNTAJE: ", self.clue_handler.get_score())
-        if self.clue_handler.was_hint_used():
+        if self.clue_handler.was_bonus_clue_used():
             print("AYUDA: ", self.clue)
 
         self.stick_man.draw_hangman(self.attempts_remaining)
@@ -113,11 +113,11 @@ class HangmanGame:
     def buy_basic_clue(self):
         self.clue_handler.buy_basic_clue()
 
-    def use_hint_clue(self):
-        self.clue_handler.use_hint_clue()
+    def use_bonus_clue(self):
+        self.clue_handler.use_bonus_clue()
 
-    def buy_hint_clue(self):
-        self.clue_handler.buy_hint_clue()
+    def buy_bonus_clue(self):
+        self.clue_handler.buy_bonus_clue()
 
     def is_abandoned():
         print("\n¿Estas seguro de que deseas abandonar la partida?\n")

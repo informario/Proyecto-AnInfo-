@@ -4,7 +4,7 @@ from utils import clear_screen
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
 BUY_BASIC_CLUE_OPT = "3"
-BUY_HINT_CLUE_OPT = "4"
+BUY_BONUS_CLUE_OPT = "4"
 RULES_OPT = "5"
 EXIT_OPT = "6"
 
@@ -12,7 +12,7 @@ class MenuOption(Enum):
     START_GAME = 1
     SELECT_DIFFICULTY = 2
     BUY_BASIC_CLUE = 3
-    BUY_HINT_CLUE = 4
+    BUY_BONUS_CLUE = 4
     RULES = 5
     EXIT = 6
     
@@ -26,8 +26,8 @@ class MenuOption(Enum):
             return MenuOption.SELECT_DIFFICULTY
         elif inp == BUY_BASIC_CLUE_OPT:
             return MenuOption.BUY_BASIC_CLUE
-        elif inp == BUY_HINT_CLUE_OPT:
-            return MenuOption.BUY_HINT_CLUE
+        elif inp == BUY_BONUS_CLUE_OPT:
+            return MenuOption.BUY_BONUS_CLUE
         elif inp == RULES_OPT:
             return MenuOption.RULES
         elif inp == EXIT_OPT:
@@ -43,8 +43,8 @@ class MenuOption(Enum):
                 game_controller.update_difficulty()
             case MenuOption.BUY_BASIC_CLUE:
                 game_controller.buy_basic_clue()
-            case MenuOption.BUY_HINT_CLUE:
-                game_controller.buy_hint_clue()
+            case MenuOption.BUY_BONUS_CLUE:
+                game_controller.buy_bonus_clue()
             case MenuOption.RULES:
                 game_controller.show_rules()
             case MenuOption.EXIT:

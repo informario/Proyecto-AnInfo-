@@ -1,15 +1,15 @@
 INITIAL_SCORE = 0
 INITIAL_CLUES = 0
-INITIAL_HINT_CLUES = 0
+INITIAL_BONUS_CLUES = 0
 CLUE_COST = 2
 HINT_COST = 10
 
 class UserStatistics:
 
-    def __init__(self, score = INITIAL_SCORE, basic_clues = INITIAL_CLUES, hint_clues =  INITIAL_HINT_CLUES):
+    def __init__(self, score = INITIAL_SCORE, basic_clues = INITIAL_CLUES, bonus_clues =  INITIAL_BONUS_CLUES):
         self.score = score
         self.basic_clues = basic_clues
-        self.hint_clues = hint_clues
+        self.bonus_clues = bonus_clues
 
     def get_score(self):
         return self.score
@@ -17,8 +17,8 @@ class UserStatistics:
     def get_basic_clues(self):
         return self.basic_clues
 
-    def get_hint_clues(self):
-        return self.hint_clues
+    def get_bonus_clues(self):
+        return self.bonus_clues
 
     def increase_score(self, difficulty):
         self.score += difficulty.get_winning_score()
@@ -28,7 +28,7 @@ class UserStatistics:
         if self.score < 0:
             self.score = 0
     
-    def decrease_score_mount(self, amount):
+    def decrease_score_amount(self, amount):
         self.score -= amount
         if self.score < 0:
             self.score = 0
@@ -39,16 +39,16 @@ class UserStatistics:
     def decrease_basic_clues(self):
         self.basic_clues -= 1
 
-    def increase_hint_clues(self):
-        self.hint_clues += 1
+    def increase_bonus_clues(self):
+        self.bonus_clues += 1
 
-    def decrease_hint_clues(self):
-        self.hint_clues -= 1
+    def decrease_bonus_clues(self):
+        self.bonus_clues -= 1
 
     def update_from_clues(self, clue_handler):
         self.basic_clues = clue_handler.get_basic_clues()
         self.score = clue_handler.get_score()
-        self.hint_clues = clue_handler.get_hint_clues()
+        self.bonus_clues = clue_handler.get_bonus_clues()
 
     def buy_basic_clue(self):
         if self.get_score() < CLUE_COST:
@@ -56,16 +56,16 @@ class UserStatistics:
             return
         
         self.increase_basic_clues()
-        self.decrease_score_mount(CLUE_COST)
+        self.decrease_score_amount(CLUE_COST)
         print("\nCompraste una pista!\n")
 
-    def buy_hint_clue(self):
+    def buy_bonus_clue(self):
         if self.get_score() < HINT_COST:
             print("\nNo tienes suficientes puntos para comprar una ayuda de palabra!\n")
             return
         
-        self.increase_hint_clues()
-        self.decrease_score(HINT_COST)
+        self.increase_bonus_clues()
+        self.decrease_score_amount(HINT_COST)
         print("\nCompraste una ayuda de palabra!\n")
 
     
