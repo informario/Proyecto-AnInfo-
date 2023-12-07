@@ -1,5 +1,6 @@
 from enum import Enum
 from difficulty import Difficulty
+import banners
 
 class GameState(Enum):
     RUNNING = 1
@@ -11,9 +12,11 @@ class GameState(Enum):
             case GameState.RUNNING:
                 print("Juego en curso")
             case GameState.WON:
+                banners.victory()
                 print("Felicitaciones!! Ganaste la partida")
             case GameState.LOST:
-                print("Perdiste, no te quedan intentos")
+                banners.defeat()
+                print("No te quedan intentos")
 
     def update_score(self, user_statistics, difficulty: Difficulty):
         match self:
