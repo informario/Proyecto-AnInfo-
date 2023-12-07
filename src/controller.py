@@ -1,13 +1,12 @@
 from getpass import getpass
-import os
-from game import HangmanGame
-from menu import GameMenu
-from state import GameState
-from difficulty import Difficulty
+from src.game import HangmanGame
+from src.menu import GameMenu
+from src.state import GameState
+from src.difficulty import Difficulty
 from enum import Enum
-from clue_handler import ClueHandler
+from src.clue_handler import ClueHandler
 from options.menu import ExitGameException, MenuOption
-from user_statistics import UserStatistics
+from src.user_statistics import UserStatistics
 
 RETURN_TO_MAIN_MENU_OPT = ""
 INITIAL_DIFFICULTY = Difficulty.MEDIUM
@@ -26,8 +25,9 @@ class GameController:
             except ExitGameException:
                 break
 
-        return self.user_statistics.get_score(), self.user_statistics.get_basic_clues(), self.user_statistics.get_bonus_clues()
-
+    def obtain_user_stats(self):
+        return self.user_statistics
+    
     def update_difficulty(self):
         dificulty = GameMenu.request_selected_difficulty()
         if dificulty != None:

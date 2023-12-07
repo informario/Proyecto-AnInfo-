@@ -1,27 +1,23 @@
-from difficulty import Difficulty
+from src.difficulty import Difficulty
 from options.menu import ExitGameException
-from state import GameState
+from src.state import GameState
 from options.game import GameOpt
-from utils import clear_screen, remove_accent_marks
-from clue_handler import ClueHandler
+from utils.utilities import clear_screen, normalize, remove_accent_marks
+from src.clue_handler import ClueHandler
 import random
 import getpass
-import api
+import utils.api as api
 
 class HangmanGame:
 
     def __init__(self, difficulty, user_statistics, word_category):
-        self.category = word_category
+        self.dificulty = difficulty
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
-        self.score = difficulty.get_winning_score()
-        self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
-        self.letters_guessed = []
-        self.letters_missed = []
+        self.letters_to_guess = normalize(self.word)
+        self.letters_guessed, self.letters_missed = []
         self.state = GameState.RUNNING
         self.clue_handler = ClueHandler.from_stats(user_statistics)
-        self.stick_man = api.DrawnHangman(difficulty)
-
         self.stick_man = api.DrawnHangman(difficulty)
 
     def update_stats(self, user_statistics):
@@ -50,7 +46,7 @@ class HangmanGame:
     
     def print_state(self):
         
-        print("=========================================")
+        print("==================================================================================")
         print("Categoria: ", self.category.to_string())
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
@@ -67,8 +63,8 @@ class HangmanGame:
         print("\n")
         self.state.print()
         if self.state == GameState.WON:
-            print(f"¡Obtuviste {self.score} puntos!")
-        print("=========================================")
+            print(f"¡Obtuviste {self.dificulty.get_winning_score()} puntos!")
+        print("================================================================================== ")
 
 
     def try_to_guess_letter(self,letter):
@@ -181,7 +177,6 @@ class HangmanGame:
         
         HangmanGame.end()
 
-    # Devuelve el estado final del juego
     def run(self):
         clear_screen()
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        

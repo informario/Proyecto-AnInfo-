@@ -16,3 +16,6 @@ def remove_accent_marks(string):
     if 'ñ' in string:
         result = result.replace('n', 'ñ', 1)
     return result
+
+def normalize(word):
+    return list(set(filter(lambda x: x != " ", remove_accent_marks(word.lower()))))

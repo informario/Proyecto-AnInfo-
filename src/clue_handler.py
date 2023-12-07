@@ -1,4 +1,4 @@
-from user_statistics import UserStatistics
+from src.user_statistics import UserStatistics
 import random
 
 CLUE_COST = 2

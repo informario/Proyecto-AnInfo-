@@ -1,7 +1,7 @@
 from enum import Enum
 import json
 import random
-PATH = "palabras.json"
+PATH = "utils/palabras.json"
 
 class WordCategory (Enum):
     ANINFO = 1,

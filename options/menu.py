@@ -1,5 +1,5 @@
 from enum import Enum
-from utils import clear_screen
+from utils.utilities import clear_screen
 # import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"

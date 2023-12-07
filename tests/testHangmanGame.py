@@ -1,5 +1,5 @@
 import unittest
-from game import HangmanGame
+from src.game import HangmanGame
 
 class TestHangmanGame(unittest.TestCase):
     def setUp(self):

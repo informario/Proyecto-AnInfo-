@@ -1,9 +1,8 @@
 from getpass import getpass
-import os
 from utils.word_category import WordCategory
-from difficulty import Difficulty
+from src.difficulty import Difficulty
 from options.menu import MenuOption
-from utils.utils import clear_screen
+from utils.utilities import clear_screen
 import utils.banners as banners
 
 RETURN_TO_MAIN_MENU_OPT = ""

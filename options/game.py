@@ -1,5 +1,5 @@
 from enum import Enum
-from utils import clear_screen
+from utils.utilities import clear_screen
 
 from options.menu import ExitGameException, MenuOption
 

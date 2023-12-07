@@ -1,7 +1,7 @@
 import json
 from getpass import getpass
-from utils import clear_screen
-from difficulty import Difficulty
+from utils.utilities import clear_screen
+from src.difficulty import Difficulty
 
 INITIAL_SCORE = 0
 INITIAL_BASIC_CLUES = 0
@@ -90,7 +90,7 @@ class SessionHandler:
         with open(self.file_name, 'w') as f:
             json.dump(self.sessions, f)
         
-    def update(self, user_name, score, basic_clues, bonus_clues):
+    def update(self, user_name, user_stats):
         """
         Actualiza el puntaje de un usuario.
 
@@ -103,9 +103,9 @@ class SessionHandler:
         """
 
         if user_name in self.sessions:
-            self.sessions[user_name][INDEX_SCORE] = score
-            self.sessions[user_name][INDEX_BASIC_CLUES] = basic_clues
-            self.sessions[user_name][INDEX_BONUS_CLUES] = bonus_clues
+            self.sessions[user_name][INDEX_SCORE] = user_stats.score
+            self.sessions[user_name][INDEX_BASIC_CLUES] = user_stats.basic_clues
+            self.sessions[user_name][INDEX_BONUS_CLUES] = user_stats.bonus_clues
             self.save_sessions()
             return True
         
