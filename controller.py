@@ -13,8 +13,8 @@ RETURN_TO_MAIN_MENU_OPT = ""
 INITIAL_DIFFICULTY = Difficulty.MEDIUM
 
 class GameController:
-    def __init__(self, score, clues):
-        self.user_statistics = UserStatistics(score, clues)
+    def __init__(self, score, basic_clues, bonus_clues):
+        self.user_statistics = UserStatistics(score, basic_clues, bonus_clues)
         self.difficulty = INITIAL_DIFFICULTY
 
     def run(self):
@@ -26,7 +26,7 @@ class GameController:
             except ExitGameException:
                 break
 
-        return self.user_statistics.get_score(), self.user_statistics.get_basic_clues()
+        return self.user_statistics.get_score(), self.user_statistics.get_basic_clues(), self.user_statistics.get_bonus_clues()
 
     def update_difficulty(self):
         dificulty = GameMenu.request_selected_difficulty()
@@ -45,8 +45,12 @@ class GameController:
 
     def show_game_statistics(self):
         print("\nDificultad actual: ", self.difficulty.to_string())
-        print("Puntaje:             ", self.user_statistics.score)
+        print("Pistas de revelacion de letra disponibles: ", self.user_statistics.get_basic_clues())
+        print("Pistas de ayuda de palabra disponibles:    ", self.user_statistics.get_bonus_clues())
+        print("Puntaje:                                   ", self.user_statistics.score)
 
-    def buy_clue(self):
-        self.user_statistics.buy_clue()
+    def buy_basic_clue(self):
+        self.user_statistics.buy_basic_clue()
 
+    def buy_bonus_clue(self):
+        self.user_statistics.buy_bonus_clue()

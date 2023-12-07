@@ -1,18 +1,20 @@
 from enum import Enum
 from utils import clear_screen
-import controller
+# import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
-BUY_CLUE_OPT = "3"
-RULES_OPT = "4"
-EXIT_OPT = "5"
+BUY_BASIC_CLUE_OPT = "3"
+BUY_BONUS_CLUE_OPT = "4"
+RULES_OPT = "5"
+EXIT_OPT = "6"
 
 class MenuOption(Enum):
     START_GAME = 1
     SELECT_DIFFICULTY = 2
-    BUY_CLUE = 3
-    RULES = 4
-    EXIT = 5
+    BUY_BASIC_CLUE = 3
+    BUY_BONUS_CLUE = 4
+    RULES = 5
+    EXIT = 6
     
     def show_incorrect_option_message():
         print("Opcion incorrecta, vuelve a intentarlo\n")
@@ -22,8 +24,10 @@ class MenuOption(Enum):
             return MenuOption.START_GAME
         elif inp == SELECT_DIFFICULTY_OPT:
             return MenuOption.SELECT_DIFFICULTY
-        elif inp == BUY_CLUE_OPT:
-            return MenuOption.BUY_CLUE
+        elif inp == BUY_BASIC_CLUE_OPT:
+            return MenuOption.BUY_BASIC_CLUE
+        elif inp == BUY_BONUS_CLUE_OPT:
+            return MenuOption.BUY_BONUS_CLUE
         elif inp == RULES_OPT:
             return MenuOption.RULES
         elif inp == EXIT_OPT:
@@ -37,8 +41,10 @@ class MenuOption(Enum):
                 game_controller.play_game()
             case MenuOption.SELECT_DIFFICULTY:
                 game_controller.update_difficulty()
-            case MenuOption.BUY_CLUE:
-                game_controller.buy_clue()
+            case MenuOption.BUY_BASIC_CLUE:
+                game_controller.buy_basic_clue()
+            case MenuOption.BUY_BONUS_CLUE:
+                game_controller.buy_bonus_clue()
             case MenuOption.RULES:
                 game_controller.show_rules()
             case MenuOption.EXIT:

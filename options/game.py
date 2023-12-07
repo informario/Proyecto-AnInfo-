@@ -4,26 +4,30 @@ from utils import clear_screen
 from options.menu import ExitGameException, MenuOption
 
 ABANDON_GAME_OPT = "0"
-ASK_CLUE_OPT = "1"
-BUY_CLUE_OPT = "2"
-ASK_HELP_OPT = "3"
+USE_BASIC_CLUE_OPT = "1"
+BUY_BASIC_CLUE_OPT = "2"
+USE_BONUS_CLUE_OPT = "3"
+BUY_BONUS_CLUE_OPT = "4"
 
 class GameOpt(Enum):
     ABANDON_GAME_OPT = 1
-    ASK_CLUE = 2
-    BUY_CLUE = 3
-    ASK_HELP = 4
+    USE_BASIC_CLUE = 2
+    BUY_BASIC_CLUE = 3
+    USE_BONUS_CLUE = 4
+    BUY_BONUS_CLUE = 5
 
     @classmethod
     def from_input(cls, inp):
         if inp == ABANDON_GAME_OPT:
             return GameOpt.ABANDON_GAME_OPT
-        elif inp == ASK_CLUE_OPT:
-            return GameOpt.ASK_CLUE
-        elif inp == BUY_CLUE_OPT:
-            return GameOpt.BUY_CLUE
-        elif inp == ASK_HELP_OPT:
-            return GameOpt.ASK_HELP
+        elif inp == USE_BASIC_CLUE_OPT:
+            return GameOpt.USE_BASIC_CLUE
+        elif inp == BUY_BASIC_CLUE_OPT:
+            return GameOpt.BUY_BASIC_CLUE
+        elif inp == USE_BONUS_CLUE_OPT:
+            return GameOpt.USE_BONUS_CLUE
+        elif inp == BUY_BONUS_CLUE_OPT:
+            return GameOpt.BUY_BONUS_CLUE
         else:
             return None
             
@@ -32,12 +36,14 @@ class GameOpt(Enum):
             case GameOpt.ABANDON_GAME_OPT:
                 if self.ask_abandon_confirmation():
                     raise ExitGameException
-            case GameOpt.ASK_CLUE:
-                juego.use_clue()
-            case GameOpt.BUY_CLUE:
-                juego.buy_clue()
-            case GameOpt.ASK_HELP:
-                juego.give_help()
+            case GameOpt.USE_BASIC_CLUE:
+                juego.use_basic_clue()
+            case GameOpt.BUY_BASIC_CLUE:
+                juego.buy_basic_clue()
+            case GameOpt.USE_BONUS_CLUE:
+                juego.use_bonus_clue()
+            case GameOpt.BUY_BONUS_CLUE:
+                juego.buy_bonus_clue()
 
     def ask_abandon_confirmation(self):
         if self == GameOpt.ABANDON_GAME_OPT:

@@ -14,14 +14,13 @@ class HangmanGame:
         self.category = word_category
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
-        self.score = difficulty.get_score()
-        self.clue_used = False
+        self.score = difficulty.get_winning_score()
         self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
-        self.remaining_clues = difficulty.get_clues()
         self.clue_handler = ClueHandler.from_stats(user_statistics)
+        self.stick_man = api.DrawnHangman(difficulty)
 
         self.stick_man = api.DrawnHangman(difficulty)
 
@@ -54,12 +53,12 @@ class HangmanGame:
         print("=========================================")
         print("Categoria: ", self.category.to_string())
         print("Intentos restantes: ", self.attempts_remaining)
-        print("Letras adivinadas: ", list_to_str (self.letters_guessed))
-        print("Letras erradas: ", list_to_str(self.letters_missed))
-        print("Puntos de ayuda restantes: ", self.remaining_clues)
+        print("Letras adivinadas: ", self.letters_guessed)
+        print("Letras erradas: ", self.letters_missed)
         print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
+        print("Pistas de ayuda de palabra disponibles: ", self.clue_handler.get_bonus_clues())
         print("PUNTAJE: ", self.clue_handler.get_score())
-        if self.clue_used:
+        if self.clue_handler.was_bonus_clue_used():
             print("AYUDA: ", self.clue)
 
         self.stick_man.draw_hangman(self.attempts_remaining)
@@ -108,24 +107,17 @@ class HangmanGame:
         if self.attempts_remaining == 0:
             self.state = GameState.LOST
 
-    def use_clue(self):
-        self.clue_handler.use_clue(self.letters_to_guess, self.letters_guessed)
+    def use_basic_clue(self):
+        self.clue_handler.use_basic_clue(self.letters_to_guess, self.letters_guessed)
 
-    def buy_clue(self):
-        self.clue_handler.buy_clue()
+    def buy_basic_clue(self):
+        self.clue_handler.buy_basic_clue()
 
-    def give_help(self):
-        if self.remaining_clues < 2:
-            print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
-            return
+    def use_bonus_clue(self):
+        self.clue_handler.use_bonus_clue()
 
-        if self.clue_used:
-            print("\nYa te dimos una pista!\n")
-            return
-
-        print("\nAyuda obtenida\n")
-        self.clue_used = True
-        self.remaining_clues -= 2
+    def buy_bonus_clue(self):
+        self.clue_handler.buy_bonus_clue()
 
     def is_abandoned():
         print("\n¿Estas seguro de que deseas abandonar la partida?\n")
@@ -141,7 +133,8 @@ class HangmanGame:
         print("0. Abandonar partida")
         print("1. Revelar una letra")
         print("2. Comprar una pista de revelacion de letra")
-        print("3. Pedir una pista")
+        print("3. Pedir una ayuda de la palabra")
+        print("4. Comprar una pista de ayuda de la palabra")
         print("Ingrese una letra para continuar jugando\n")
 
     def end():
