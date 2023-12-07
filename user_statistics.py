@@ -19,7 +19,7 @@ class UserStatistics:
         self.score += difficulty.get_score()
 
     def decrease_score(self, difficulty):
-        self.score -= difficulty.get_deduction_points()
+        self.score -= difficulty.get_losing_score()
         if self.score < 0:
             self.score = 0
     

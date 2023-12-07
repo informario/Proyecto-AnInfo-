@@ -74,7 +74,7 @@ class Difficulty(Enum):
         else:
             return None
     
-    def get_score(self):
+    def get_winning_score(self):
         match self:
             case Difficulty.EASY:
                 return SCORE_EASY
@@ -83,7 +83,7 @@ class Difficulty(Enum):
             case Difficulty.HARD:
                 return SCORE_HARD
     
-    def get_deduction_points(self):
+    def get_losing_score(self):
         match self:
             case Difficulty.EASY:
                 return DEDUCTION_SCORE_EASY
