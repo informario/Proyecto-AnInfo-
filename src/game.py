@@ -160,6 +160,7 @@ class HangmanGame:
             clear_screen()
             if HangmanGame.invalid_input(inp):
                 print("\nEl caracter ingresado no es válido, vuelve a intentarlo\n")
+                self.print_state()
                 continue
 
             opcion = GameOpt.from_input(inp)
