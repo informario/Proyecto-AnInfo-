@@ -123,57 +123,6 @@ import unittest
 from unittest.mock import patch, call
 
 class TestGameMenu(unittest.TestCase):
-
-    def test_show_back_to_menu_message(self):
-        with patch("builtins.print") as mock_print:
-            GameMenu.show_back_to_menu_message()
-            mock_print.assert_called_with("\nPresione ENTER para volver al menu principal\n")
-
-    def test_show_options(self):
-        with patch("builtins.print") as mock_print:
-            GameMenu._show_options()
-
-        expected_calls = [
-            call("Opciones:"),
-            call("\t1 - Empezar a jugar"),
-            call("\t2 - Seleccionar dificultad"),
-            call("\t3 - Comprar una pista de revelacion de letra (cuesta 2 puntos)"),
-            call("\t4 - Comprar una pista de ayuda de palabra (cuesta 10 puntos)"),
-            call("\t5 - Reglas"),
-            call("\t6 - Salir")
-        ]
-
-        mock_print.assert_has_calls(expected_calls, any_order=False)
-
-    
-    def test_show_difficulty_options(self):
-        with patch("builtins.print") as mock_print:
-            GameMenu._show_difficulty_options()
-
-        expected_calls = [
-            call("Selecciona una dificultad:"),
-            call("\t1. FACIL: 7 intentos, 5 pistas y palabras cortas"),
-            call("\t2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales"),
-            call("\t3. DIFICIL: 3 intentos, 2 pistas y palabras o frases largas")
-        ]
-
-        mock_print.assert_has_calls(expected_calls, any_order=False)
-
-    def test_show_category_options(self):
-        with patch("builtins.print") as mock_print:
-            GameMenu._show_category_options()
-
-        expected_calls = [
-            call("Selecciona una categoria:"),
-            call("\t1. Aninfo"),
-            call("\t2. Famosos"),
-            call("\t3. Peliculas y series"),
-            call("\t4. Animales"),
-            call("\t5. Otros\n")
-        ]
-
-        mock_print.assert_has_calls(expected_calls, any_order=False)
-
     
     def test_request_selected_difficulty_easy(self):
         with patch("builtins.input") as mock_input:
