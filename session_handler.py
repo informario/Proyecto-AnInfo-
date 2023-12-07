@@ -151,29 +151,29 @@ class SessionHandler:
         getpass(prompt="")
         return user_name, score
     
-    def get_score(self, user_name):
-        """
-        Obtiene el puntaje asociado a un usuario en la sesión actual.
+    # def get_score(self, user_name):
+    #     """
+    #     Obtiene el puntaje asociado a un usuario en la sesión actual.
 
-        Parametros:
-        - user_name (str): El nombre del usuario.
+    #     Parametros:
+    #     - user_name (str): El nombre del usuario.
 
-        Retorna:
-        - int: El puntaje actual del usuario.
-        """
-        return self.sessions[user_name][INDEX_SCORE]
+    #     Retorna:
+    #     - int: El puntaje actual del usuario.
+    #     """
+    #     return self.sessions[user_name][INDEX_SCORE]
 
-    def deduct_score_on_loss(self, user_name, difficulty: Difficulty):
-        """
-        Reduce el puntaje del usuario en función de la dificultad proporcionada, en caso de pérdida en la partida.
+    # def deduct_score_on_loss(self, user_name, difficulty: Difficulty):
+    #     """
+    #     Reduce el puntaje del usuario en función de la dificultad proporcionada, en caso de pérdida en la partida.
 
-        Parametros:
-        - user_name (str): El nombre del usuario al que se le va a deducir el puntaje.
-        - difficulty (Difficulty): La dificultad de la partida, que determina la cantidad de puntos a deducir.
-        """
-        score = self.get_score(user_name)
-        deduction_points = difficulty.get_deduction_points()
-        current_score = score - deduction_points
-        if current_score < 0:
-            current_score = 0
-        self.update(user_name, current_score, self.sessions[user_name][INDEX_CLUE])
+    #     Parametros:
+    #     - user_name (str): El nombre del usuario al que se le va a deducir el puntaje.
+    #     - difficulty (Difficulty): La dificultad de la partida, que determina la cantidad de puntos a deducir.
+    #     """
+    #     score = self.get_score(user_name)
+    #     deduction_points = difficulty.get_deduction_points()
+    #     current_score = score - deduction_points
+    #     if current_score < 0:
+    #         current_score = 0
+    #     self.update(user_name, current_score, self.sessions[user_name][INDEX_CLUE])

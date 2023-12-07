@@ -17,8 +17,10 @@ class UserStatistics:
     def increase_score(self, difficulty):
         self.score += difficulty.get_score()
 
-    def decrease_score(self, amount):
-        self.score -= amount
+    def decrease_score(self, difficulty):
+        self.score -= difficulty.get_deduction_points()
+        if self.score < 0:
+            self.score = 0
 
     def increase_basic_clues(self):
         self.basic_clues += 1
