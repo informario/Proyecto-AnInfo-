@@ -23,8 +23,9 @@ class GameMenu:
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
-        print("\t3 - Reglas")
-        print("\t4 - Salir")
+        print("\t3 - Comprar pista")
+        print("\t4 - Reglas")
+        print("\t5 - Salir")
 
     @staticmethod
     def show_rules():
@@ -79,7 +80,7 @@ class GameMenu:
         return option
 
     def show_category_options():
-        os.system('clear')
+        clear_screen()
         print("Selecciona una categoria:\n")
         print("\t1. Aninfo")
         print("\t2. Famosos")
