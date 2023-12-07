@@ -30,7 +30,7 @@ class HangmanParts(Enum):
         """Obtiene el valor en cadena asociado a la parte del ahorcado."""
         return self.value[1]
     
-class Hangman():
+class DrawnHangman():
     """
     Clase que representa el ahorcado.
 
@@ -39,11 +39,12 @@ class Hangman():
         len_ahorcado (int): Longitud de la lista del ahorcado.
         cuerpo_completo (list): Lista que contiene todas las partes del ahorcado.
     """
-    def __init__(self):
+    def __init__(self, difficulty):
         self.hangman = [" ", " ", " ", " ", " ", " ", " "]
         self.len_ahorcado = len(self.hangman)
         self.cuerpo_completo = [HangmanParts.HEAD, HangmanParts.TORSO, HangmanParts.LEFT_ARM, HangmanParts.RIGHT_ARM, HangmanParts.LEFT_LEG, HangmanParts.RIGHT_LEG, HangmanParts.SOGA]
-    
+        self.difficulty = difficulty
+
     def add_part(self, part: HangmanParts):
         """
         Agrega una parte específica al ahorcado.
@@ -111,7 +112,35 @@ class Hangman():
         print(f" |")
         print("_|_")
 
-def add_parts_easy_mode(intentos_fallidos: int, hangman: Hangman):
+    def draw_hangman(self,intentos_restantes):
+        """
+        Dibuja el ahorcado del ahorcado de acuerdo a los intentos fallidos y la dificultad.
+
+        Parametros:
+            intentos_fallidos (int): La cantidad de intentos fallidos del jugador.
+            dificultad (Dificultad): La dificultad del juego.
+
+        Raises:
+            Exception: Si los intentos fallidos son mayores a los intentos máximos de la dificultad.
+
+        Retorno:
+            None
+        """
+        intentos_fallidos = self.difficulty.get_max_attempts() - intentos_restantes 
+
+        if self.difficulty.get_max_attempts() < intentos_fallidos:
+            raise Exception("Intentos fallidos no puede ser mayor a los intentos maximos de la dificultad")
+        
+        if self.difficulty == Difficulty.EASY:
+            add_parts_easy_mode(intentos_fallidos, self)
+        elif self.difficulty == Difficulty.MEDIUM:
+            add_parts_normal_mode(intentos_fallidos, self)
+        else:
+            add_parts_hard_mode(intentos_fallidos, self)
+
+        self.print()
+
+def add_parts_easy_mode(intentos_fallidos: int, hangman: DrawnHangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo fácil.
 
@@ -135,7 +164,7 @@ def add_parts_easy_mode(intentos_fallidos: int, hangman: Hangman):
     partes_agregar = partes_a_agregar[:intentos_fallidos]
     hangman.add_parts(partes_agregar)
 
-def add_parts_normal_mode(intentos_fallitos: int, hangman: Hangman):
+def add_parts_normal_mode(intentos_fallidos: int, hangman: DrawnHangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo normal.
 
@@ -146,22 +175,22 @@ def add_parts_normal_mode(intentos_fallitos: int, hangman: Hangman):
     Retorno:
         None
     """    
-    if intentos_fallitos == 0:
+    if intentos_fallidos == 0:
         return
-    if intentos_fallitos == 5:
+    if intentos_fallidos == 5:
         hangman.complete_hangman()
         return
     
-    if intentos_fallitos >= 1:
+    if intentos_fallidos >= 1:
         hangman.add_head()
-    if intentos_fallitos >= 2:
+    if intentos_fallidos >= 2:
         hangman.add_torso()
-    if intentos_fallitos >= 3:
+    if intentos_fallidos >= 3:
         hangman.add_arms()
-    if intentos_fallitos >= 4:
+    if intentos_fallidos >= 4:
         hangman.add_legs()
 
-def add_parts_hard_mode(intentos_fallidos: int, hangman: Hangman):
+def add_parts_hard_mode(intentos_fallidos: int, hangman: DrawnHangman):
     """
     Agrega las partes correspondientes al ahorcado del ahorcado en modo difícil.
 
@@ -185,32 +214,7 @@ def add_parts_hard_mode(intentos_fallidos: int, hangman: Hangman):
         hangman.add_legs()
 
 
-def dibujar_ahorcado(intentos_fallidos, dificultad: Difficulty):
-    """
-    Dibuja el ahorcado del ahorcado de acuerdo a los intentos fallidos y la dificultad.
 
-    Parametros:
-        intentos_fallidos (int): La cantidad de intentos fallidos del jugador.
-        dificultad (Dificultad): La dificultad del juego.
-
-    Raises:
-        Exception: Si los intentos fallidos son mayores a los intentos máximos de la dificultad.
-
-    Retorno:
-        None
-    """
-    if dificultad.get_max_attempts() < intentos_fallidos:
-        raise Exception("Intentos fallidos no puede ser mayor a los intentos maximos de la dificultad")
-    
-    hangman = Hangman()
-    if dificultad == Difficulty.EASY:
-        add_parts_easy_mode(intentos_fallidos, hangman)
-    elif dificultad == Difficulty.MEDIUM:
-        add_parts_normal_mode(intentos_fallidos, hangman)
-    else:
-        add_parts_hard_mode(intentos_fallidos, hangman)
-
-    hangman.print()
 
 # Ejemplo de uso
-dibujar_ahorcado(1, Difficulty.EASY)
+#dibujar_ahorcado(1, Difficulty.EASY)
