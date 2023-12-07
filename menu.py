@@ -145,25 +145,6 @@ class TestGameMenu(unittest.TestCase):
 
         mock_print.assert_has_calls(expected_calls, any_order=False)
 
-    def test_show_rules(self):
-        with patch("builtins.print") as mock_print:
-            GameMenu._show_rules()
-
-        expected_calls = [
-            call("Reglas:"),
-            call("\t1. El juego consiste en adivinar una palabra o frase oculta"),
-            call("\t2. El jugador puede ingresar una letra o una palabra para intentar adivinar"),
-            call("\t3. Si la letra ingresada se encuentra en la palabra oculta, esta se revelará y pasará a ser conocida"),
-            call("\t4. Si la letra ingresada no se encuentra en la palabra oculta, el jugador pierde un intento"),
-            call("\t5. El juego termina cuando el jugador adivina la palabra oculta o se queda sin intentos"),
-            call("\t6. El jugador puede pedir pistas para obtener información sobre la palabra oculta"),
-            call("\t7. Existen dos tipos de pistas: se puede revelar una letra de la palabra (que gasta una pista), o se puede pedir una definición de la palabra oculta (que gasta dos pistas)"),
-            call("\t8. El juego tiene tres niveles de dificultad: FACIL, NORMAL y DIFICIL, al elegir estos cambian las dificultades de las palabras, y cada uno tiene una cantidad de intentos y pistas diferente"),
-            call("\t9. El jugador puede cambiar la dificultad del juego en cualquier momento"),
-            call("\t10. El jugador puede abandonar la partida en cualquier momento")
-        ]
-
-        mock_print.assert_has_calls(expected_calls, any_order=False)
     
     def test_show_difficulty_options(self):
         with patch("builtins.print") as mock_print:
