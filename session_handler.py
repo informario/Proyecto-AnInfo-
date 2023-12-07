@@ -5,9 +5,11 @@ from difficulty import Difficulty
 
 INITIAL_SCORE = 0
 INITIAL_CLUES = 0
+INITIAL_HINTS = 0
 
 INDEX_SCORE = 0
 INDEX_CLUES = 1
+INDEX_HINTS = 2
 
 LOGIN_SESSION_OPT = "1"
 EXIT_OPT = "2"
@@ -32,7 +34,7 @@ class SessionHandler:
         """
         
         if user_name not in self.sessions:
-            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUES]
+            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUES, INITIAL_HINTS]
             self.save_sessions()
             return (user_name, self.sessions[user_name])
         
@@ -87,7 +89,7 @@ class SessionHandler:
         with open(self.file_name, 'w') as f:
             json.dump(self.sessions, f)
         
-    def update(self, user_name, score, clues):
+    def update(self, user_name, score, basic_clues, hint_clues):
         """
         Actualiza el puntaje de un usuario.
 
@@ -101,7 +103,8 @@ class SessionHandler:
 
         if user_name in self.sessions:
             self.sessions[user_name][INDEX_SCORE] = score
-            self.sessions[user_name][INDEX_CLUES] = clues
+            self.sessions[user_name][INDEX_CLUES] = basic_clues
+            self.sessions[user_name][INDEX_HINTS] = hint_clues
             self.save_sessions()
             return True
         
@@ -124,7 +127,7 @@ class SessionHandler:
                     clear_screen()
                     continue
                 
-                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES]
+                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES], user_info[INDEX_HINTS]
             
             elif inp == EXIT_OPT:
                 return None, None
@@ -146,7 +149,8 @@ class SessionHandler:
         clear_screen()
         print(f"Bienvenido {user_name}.")
         print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
-        print(f"Tu cantidad de pistas es: {user_info[INDEX_CLUES]}. ")
+        print(f"Tu cantidad de pistas de revelacion de letra es: {user_info[INDEX_CLUES]}. ")
+        print(f"Tu cantidad de pistas de ayuda de palabra es: {user_info[INDEX_HINTS]}. ")
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
         return user_name, user_info
