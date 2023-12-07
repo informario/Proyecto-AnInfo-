@@ -23,7 +23,10 @@ class GameMenu:
         clear_screen()
 
         banners.menu()
+        GameMenu._show_options()
 
+    @staticmethod
+    def _show_options():
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
@@ -35,6 +38,12 @@ class GameMenu:
     @staticmethod
     def show_rules():
         clear_screen()
+        GameMenu._show_rules()
+        GameMenu.show_back_to_menu_message()
+        getpass(prompt="")
+
+    @staticmethod
+    def _show_rules():
         print("Reglas:")
         print("\t1. El juego consiste en adivinar una palabra o frase oculta")
         print("\t2. El jugador puede ingresar una letra o una palabra para intentar adivinar")
@@ -46,12 +55,14 @@ class GameMenu:
         print("\t8. El juego tiene tres niveles de dificultad: FACIL, NORMAL y DIFICIL, al elegir estos cambian las dificultades de las palabras, y cada uno tiene una cantidad de intentos y pistas diferente")
         print("\t9. El jugador puede cambiar la dificultad del juego en cualquier momento")
         print("\t10. El jugador puede abandonar la partida en cualquier momento")
-        GameMenu.show_back_to_menu_message()
-        getpass(prompt="")
 
     @staticmethod
     def show_difficulty_options():
         clear_screen()
+        GameMenu._show_difficulty_options()
+
+    @staticmethod
+    def _show_difficulty_options():
         print("Selecciona una dificultad:")
         print("\t1. FACIL: 7 intentos, 5 pistas y palabras cortas")
         print("\t2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
@@ -86,7 +97,11 @@ class GameMenu:
 
     def show_category_options():
         clear_screen()
-        print("Selecciona una categoria:\n")
+        GameMenu._show_category_options()
+
+    @staticmethod
+    def _show_category_options():
+        print("Selecciona una categoria:")
         print("\t1. Aninfo")
         print("\t2. Famosos")
         print("\t3. Peliculas y series")
@@ -103,4 +118,89 @@ class GameMenu:
             category = WordCategory.from_input(option)
 
         return category
+
+import unittest
+from unittest.mock import patch, call
+
+class TestGameMenu(unittest.TestCase):
     
+    def test_request_selected_difficulty_easy(self):
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["1"]
+            difficulty = GameMenu.request_selected_difficulty()
+            self.assertEqual(difficulty, Difficulty.EASY)
+
+    def test_request_selected_difficulty_medium(self):
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["2"]
+            difficulty = GameMenu.request_selected_difficulty()
+            self.assertEqual(difficulty, Difficulty.MEDIUM)
+
+    def test_request_selected_difficulty_hard(self):
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["3"]
+            difficulty = GameMenu.request_selected_difficulty()
+            self.assertEqual(difficulty, Difficulty.HARD)
+
+    def test_request_selected_difficulty_incorrect_option(self):
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["4", "1"]
+            difficulty = GameMenu.request_selected_difficulty()
+            self.assertEqual(difficulty, Difficulty.EASY)
+
+    def test_request_option_start_game(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["1"]
+            game_controler = GameController(0, 0, 0)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.START_GAME)
+
+    def test_request_option_select_difficulty(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["2"]
+            game_controler = GameController(0, 0, 0)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.SELECT_DIFFICULTY)
+            
+    def test_request_option_buy_basic_clue(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["3"]
+            game_controler = GameController(0, 0, 0)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.BUY_BASIC_CLUE)
+
+    def test_request_option_buy_hint_clue(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["4"]
+            game_controler = GameController(0, 0, 0)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.BUY_HINT_CLUE)
+
+    def test_request_option_rules(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["5"]
+            game_controler = GameController(0, 0, None)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.RULES)
+
+    def test_request_option_exit(self):
+        from controller import GameController
+        with patch("builtins.input") as mock_input:
+            mock_input.side_effect = ["6"]
+            game_controler = GameController(0, 0, None)
+            game_menu = GameMenu(game_controler)
+            option = game_menu.request_option()
+            self.assertEqual(option, MenuOption.EXIT)
+
+if __name__ == "__main__":
+    unittest.main()
