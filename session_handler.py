@@ -155,5 +155,9 @@ class SessionHandler:
         return self.sessions[user_name][INDEX_SCORE]
 
     def deduct_points_on_loss(self, user_name, difficulty: Difficulty):
-        self.sessions[user_name][INDEX_SCORE] -= 1
-        self.save_sessions()
+        score = self.get_score(user_name)
+        deduction_points = difficulty.get_deduction_points()
+        current_score = score - deduction_points
+        if current_score < 0:
+            current_score = 0
+        self.update(user_name, current_score, self.sessions[user_name][INDEX_CLUE])

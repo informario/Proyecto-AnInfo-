@@ -10,9 +10,9 @@ SCORE_EASY = 5
 SCORE_MEDIUM = 10
 SCORE_HARD = 20
 
-DEDUCTION_POINTS_EASY = 20
-DEDUCTION_POINTS_NORMAL = 10
-DEDUCTION_POINTS_HARD = 5
+DEDUCTION_SCORE_EASY = 20
+DEDUCTION_SCORE_NORMAL = 10
+DEDUCTION_SCORE_HARD = 5
 
 class Difficulty(Enum):
     EASY = 1
@@ -86,8 +86,8 @@ class Difficulty(Enum):
     def get_deduction_points(self):
         match self:
             case Difficulty.EASY:
-                return DEDUCTION_POINTS_EASY
+                return DEDUCTION_SCORE_EASY
             case Difficulty.MEDIUM:
-                return DEDUCTION_POINTS_NORMAL
+                return DEDUCTION_SCORE_NORMAL
             case Difficulty.HARD:
-                return DEDUCTION_POINTS_HARD
+                return DEDUCTION_SCORE_HARD
