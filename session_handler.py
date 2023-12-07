@@ -12,7 +12,8 @@ INDEX_CLUES = 1
 INDEX_HINTS = 2
 
 LOGIN_SESSION_OPT = "1"
-EXIT_OPT = "2"
+REGISTER_OPT = "2"
+EXIT_OPT = "3"
 
 class SessionHandler:
     
@@ -116,7 +117,8 @@ class SessionHandler:
         while True:
             print("Opciones:")
             print("\t1 - Iniciar sesion")
-            print("\t2 - Salir")
+            print("\t2 - Registrarse")
+            print("\t3 - Salir")
 
             inp = input("\nElige una opcion: ").strip()
 
@@ -127,6 +129,13 @@ class SessionHandler:
                     clear_screen()
                     continue
                 
+                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES]
+            elif inp == REGISTER_OPT:
+                user_name, user_info = self.reg_menu()
+
+                if user_name is None:
+                    clear_screen()
+                    continue
                 return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES], user_info[INDEX_HINTS]
             
             elif inp == EXIT_OPT:
@@ -138,15 +147,46 @@ class SessionHandler:
 
     def login_menu(self):
         clear_screen()
-        print("Iniciando sesion")
+        while True:
+            print("Iniciando sesion")
 
-        inp = input("\nIngrese su nombre de usuario: ").strip()
-        user_name, user_info = self.search_user(inp)
+            inp = input("\nIngrese su nombre de usuario (o ENTER para volver): ").strip()
+            if inp == "":
+                return None, None
+            
+            user_name, user_info = self.search_user(inp)
 
-        if user_name is None:
-            user_name, user_info = self.register_user(inp)
-    
+            if user_name is None:
+                clear_screen()
+                print("Nombre de usuario no registrado. Intente de nuevo o registrese.")
+                continue
+            else: break
+
         clear_screen()
+        print(f"Bienvenido {user_name}.")
+        print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
+        print(f"Tu cantidad de pistas es: {user_info[INDEX_CLUES]}. ")
+        print("\nPresione ENTER para comenzar el juego")
+        getpass(prompt="")
+        return user_name, user_info
+    
+    def reg_menu(self):
+        clear_screen()
+        print("Registrarse:")
+
+        while True:
+            new_user_name = input("Ingrese un nombre de usuario (o ENTER para volver): ").strip()
+            if new_user_name == "":
+                return None, None
+            
+            user_name, user_info = self.register_user(new_user_name)
+            if user_name == None:
+                clear_screen()
+                print("Nombre de usuario no disponible.")
+                continue
+            break
+        clear_screen()
+        
         print(f"Bienvenido {user_name}.")
         print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
         print(f"Tu cantidad de pistas de revelacion de letra es: {user_info[INDEX_CLUES]}. ")
@@ -154,3 +194,5 @@ class SessionHandler:
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
         return user_name, user_info
+        
+            
