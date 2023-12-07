@@ -149,3 +149,7 @@ class SessionHandler:
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
         return user_name, score
+    
+    def get_score(self, user_name):
+        return self.sessions[user_name][INDEX_SCORE]
+
