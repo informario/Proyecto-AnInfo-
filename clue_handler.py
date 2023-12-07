@@ -2,6 +2,7 @@ from user_statistics import UserStatistics
 import random
 
 CLUE_COST = 2
+HINT_COST = 10
 
 class ClueHandler:
     def __init__(self, some_score, some_basic_clues, some_hint_clues):

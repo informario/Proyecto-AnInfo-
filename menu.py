@@ -23,9 +23,10 @@ class GameMenu:
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
-        print("\t3 - Comprar pista")
-        print("\t4 - Reglas")
-        print("\t5 - Salir")
+        print("\t3 - Comprar una pista de revelacion de letra (cuesta 2 puntos)")
+        print("\t4 - Comprar una pista de ayuda de palabra (cuesta 10 puntos)")
+        print("\t5 - Reglas")
+        print("\t6 - Salir")
 
     @staticmethod
     def show_rules():
