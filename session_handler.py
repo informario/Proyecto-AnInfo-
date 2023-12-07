@@ -4,12 +4,12 @@ from utils import clear_screen
 from difficulty import Difficulty
 
 INITIAL_SCORE = 0
-INITIAL_CLUES = 0
-INITIAL_HINTS = 0
+INITIAL_BASIC_CLUES = 0
+INITIAL_BONUS_CLUES = 0
 
 INDEX_SCORE = 0
-INDEX_CLUES = 1
-INDEX_HINTS = 2
+INDEX_BASIC_CLUES = 1
+INDEX_BONUS_CLUES = 2
 
 LOGIN_SESSION_OPT = "1"
 REGISTER_OPT = "2"
@@ -35,7 +35,7 @@ class SessionHandler:
         """
         
         if user_name not in self.sessions:
-            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUES, INITIAL_HINTS]
+            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_BASIC_CLUES, INITIAL_BONUS_CLUES]
             self.save_sessions()
             return (user_name, self.sessions[user_name])
         
@@ -90,7 +90,7 @@ class SessionHandler:
         with open(self.file_name, 'w') as f:
             json.dump(self.sessions, f)
         
-    def update(self, user_name, score, basic_clues, hint_clues):
+    def update(self, user_name, score, basic_clues, bonus_clues):
         """
         Actualiza el puntaje de un usuario.
 
@@ -104,8 +104,8 @@ class SessionHandler:
 
         if user_name in self.sessions:
             self.sessions[user_name][INDEX_SCORE] = score
-            self.sessions[user_name][INDEX_CLUES] = basic_clues
-            self.sessions[user_name][INDEX_HINTS] = hint_clues
+            self.sessions[user_name][INDEX_BASIC_CLUES] = basic_clues
+            self.sessions[user_name][INDEX_BONUS_CLUES] = bonus_clues
             self.save_sessions()
             return True
         
@@ -129,14 +129,14 @@ class SessionHandler:
                     clear_screen()
                     continue
                 
-                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES]
+                return user_name, user_info[INDEX_SCORE], user_info[INDEX_BASIC_CLUES], user_info[INDEX_BONUS_CLUES]
             elif inp == REGISTER_OPT:
                 user_name, user_info = self.reg_menu()
 
                 if user_name is None:
                     clear_screen()
                     continue
-                return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES], user_info[INDEX_HINTS]
+                return user_name, user_info[INDEX_SCORE], user_info[INDEX_BASIC_CLUES], user_info[INDEX_BONUS_CLUES]
             
             elif inp == EXIT_OPT:
                 return None, None
@@ -144,6 +144,15 @@ class SessionHandler:
             else:
                 clear_screen()
                 print("Opcion incorrecta\n")
+
+    def welcome_user_print(self,user_name, user_info):
+        clear_screen()
+        print(f"Bienvenido {user_name}.")
+        print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
+        print(f"Tu cantidad de pistas de revelacion de letra es: {user_info[INDEX_BASIC_CLUES]}. ")
+        print(f"Tu cantidad de pistas de ayuda de palabra es: {user_info[INDEX_BONUS_CLUES]}. ")
+        print("\nPresione ENTER para comenzar el juego")
+        getpass(prompt="")
 
     def login_menu(self):
         clear_screen()
@@ -162,12 +171,8 @@ class SessionHandler:
                 continue
             else: break
 
-        clear_screen()
-        print(f"Bienvenido {user_name}.")
-        print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
-        print(f"Tu cantidad de pistas es: {user_info[INDEX_CLUES]}. ")
-        print("\nPresione ENTER para comenzar el juego")
-        getpass(prompt="")
+        self.welcome_user_print(user_name, user_info)
+        
         return user_name, user_info
     
     def reg_menu(self):
@@ -185,14 +190,7 @@ class SessionHandler:
                 print("Nombre de usuario no disponible.")
                 continue
             break
-        clear_screen()
-        
-        print(f"Bienvenido {user_name}.")
-        print(f"Tu puntaje es: {user_info[INDEX_SCORE]}.")
-        print(f"Tu cantidad de pistas de revelacion de letra es: {user_info[INDEX_CLUES]}. ")
-        print(f"Tu cantidad de pistas de ayuda de palabra es: {user_info[INDEX_HINTS]}. ")
-        print("\nPresione ENTER para comenzar el juego")
-        getpass(prompt="")
+        self.welcome_user_print(user_name, user_info)
         return user_name, user_info
         
             

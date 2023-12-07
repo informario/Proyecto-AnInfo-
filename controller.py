@@ -13,8 +13,8 @@ RETURN_TO_MAIN_MENU_OPT = ""
 INITIAL_DIFFICULTY = Difficulty.MEDIUM
 
 class GameController:
-    def __init__(self, score, basic_clues, hint_clues):
-        self.user_statistics = UserStatistics(score, basic_clues, hint_clues)
+    def __init__(self, score, basic_clues, bonus_clues):
+        self.user_statistics = UserStatistics(score, basic_clues, bonus_clues)
         self.difficulty = INITIAL_DIFFICULTY
 
     def run(self):
@@ -26,7 +26,7 @@ class GameController:
             except ExitGameException:
                 break
 
-        return self.user_statistics.get_score(), self.user_statistics.get_basic_clues(), self.user_statistics.get_hint_clues()
+        return self.user_statistics.get_score(), self.user_statistics.get_basic_clues(), self.user_statistics.get_bonus_clues()
 
     def update_difficulty(self):
         dificulty = GameMenu.request_selected_difficulty()
@@ -50,6 +50,6 @@ class GameController:
     def buy_basic_clue(self):
         self.user_statistics.buy_basic_clue()
 
-    def buy_hint_clue(self):
-        self.user_statistics.buy_hint_clue()
+    def buy_bonus_clue(self):
+        self.user_statistics.buy_bonus_clue()
 
