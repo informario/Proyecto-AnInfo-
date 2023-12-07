@@ -16,7 +16,7 @@ class UserStatistics:
         return self.basic_clues
 
     def increase_score(self, difficulty):
-        self.score += difficulty.get_score()
+        self.score += difficulty.get_winning_score()
 
     def decrease_score(self, difficulty):
         self.score -= difficulty.get_losing_score()
