@@ -3,6 +3,10 @@ from getpass import getpass
 from utils import clear_screen
 
 INITIAL_SCORE = 0
+INITIAL_CLUE = 0
+
+INDEX_SCORE = 0
+INDEX_CLUE = 1
 
 LOGIN_SESSION_OPT = "1"
 EXIT_OPT = "2"
@@ -27,7 +31,7 @@ class SessionHandler:
         """
         
         if user_name not in self.sessions:
-            self.sessions[user_name] = INITIAL_SCORE
+            self.sessions[user_name] = [INITIAL_SCORE, INITIAL_CLUE]
             self.save_sessions()
             return (user_name, self.sessions[user_name])
         
@@ -82,7 +86,7 @@ class SessionHandler:
         with open(self.file_name, 'w') as f:
             json.dump(self.sessions, f)
         
-    def update_points(self, user_name, score):
+    def update(self, user_name, score, clue):
         """
         Actualiza el puntaje de un usuario.
 
@@ -95,7 +99,8 @@ class SessionHandler:
         """
 
         if user_name in self.sessions:
-            self.sessions[user_name] = score
+            self.sessions[user_name][INDEX_SCORE] = score
+            self.sessions[user_name][INDEX_CLUE] = clue
             self.save_sessions()
             return True
         
@@ -138,7 +143,9 @@ class SessionHandler:
             user_name, score = self.register_user(inp)
     
         clear_screen()
-        print(f"Bienvenido {user_name}. Tu puntaje es: {self.sessions[user_name]}.")
+        print(f"Bienvenido {user_name}.")
+        print(f"Tu puntaje es: {self.sessions[user_name][INDEX_SCORE]}.")
+        print(f"Tu cantidad de pistas es: {self.sessions[user_name][INDEX_CLUE]}. ")
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
         return user_name, score
