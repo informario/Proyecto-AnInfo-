@@ -9,7 +9,8 @@ INDEX_SCORE = 0
 INDEX_CLUES = 1
 
 LOGIN_SESSION_OPT = "1"
-EXIT_OPT = "2"
+REGISTER_OPT = "2"
+EXIT_OPT = "3"
 
 class SessionHandler:
     
@@ -112,7 +113,8 @@ class SessionHandler:
         while True:
             print("Opciones:")
             print("\t1 - Iniciar sesion")
-            print("\t2 - Salir")
+            print("\t2 - Registrarse")
+            print("\t3 - Salir")
 
             inp = input("\nElige una opcion: ").strip()
 
@@ -124,7 +126,8 @@ class SessionHandler:
                     continue
                 
                 return user_name, user_info[INDEX_SCORE], user_info[INDEX_CLUES]
-            
+            elif inp == REGISTER_OPT:
+
             elif inp == EXIT_OPT:
                 return None, None
             
@@ -149,3 +152,7 @@ class SessionHandler:
         print("\nPresione ENTER para comenzar el juego")
         getpass(prompt="")
         return user_name, user_info
+    
+    def reg_menu(self):
+        clear_screen()
+        print("Registrarse: ")
