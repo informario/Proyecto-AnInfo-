@@ -8,6 +8,7 @@ class ClueHandler:
         self.score = some_score
         self.basic_clues = some_basic_clues
         self.hint_clues = some_hint_clues
+        self.hint_used = False
 
     def from_stats(user_statistics):
         return ClueHandler(user_statistics.get_score(), user_statistics.get_basic_clues(), user_statistics.get_hint_clues())
@@ -33,10 +34,10 @@ class ClueHandler:
     def decrease_basic_clues(self):
         self.basic_clues -= 1
 
-    def increase_basic_clues(self):
+    def increase_hint_clues(self):
         self.hint_clues += 1
 
-    def decrease_basic_clues(self):
+    def decrease_hint_clues(self):
         self.hint_clues -= 1
 
     def buy_basic_clue(self):
@@ -63,6 +64,9 @@ class ClueHandler:
         letters_guessed.append(clue)
         self.decrease_basic_clues()
 
+    def was_hint_used(self):
+        return self.hint_used
+
     def buy_hint_clue(self):
         if self.get_score() < HINT_COST:
             print("\nNo tienes suficientes puntos para comprar una ayuda de palabra!\n")
@@ -73,7 +77,7 @@ class ClueHandler:
         print("\nCompraste una ayuda de palabra!\n")
 
     def use_hint_clue(self):
-        if self.hint_used:
+        if self.was_hint_used():
             print("\nYa te dimos una ayuda en esta partida!\n")
             return
 

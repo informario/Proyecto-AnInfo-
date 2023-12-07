@@ -14,12 +14,10 @@ class HangmanGame:
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
         self.score = difficulty.get_score()
-        self.clue_used = False
         self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
-        self.remaining_clues = difficulty.get_clues()
         self.clue_handler = ClueHandler.from_stats(user_statistics)
 
     def update_stats(self, user_statistics):
@@ -53,10 +51,10 @@ class HangmanGame:
         print("Intentos restantes: ", self.attempts_remaining)
         print("Letras adivinadas: ", self.letters_guessed)
         print("Letras erradas: ", self.letters_missed)
-        print("Puntos de ayuda restantes: ", self.remaining_clues)
+        print("Puntos de ayuda restantes: ", self.clue_handler.get_hint_clues())
         print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
         print("PUNTAJE: ", self.clue_handler.get_score())
-        if self.clue_used:
+        if self.clue_handler.was_hint_used():
             print("AYUDA: ", self.clue)
 
         self.print_word()
@@ -110,17 +108,10 @@ class HangmanGame:
         self.clue_handler.buy_basic_clue()
 
     def use_hint_clue(self):
-        if self.remaining_clues < 2:
-            print("\nNo te quedan suficientes pistas para que te demos una ayuda!\n")
-            return
+        self.clue_handler.use_hint_clue()
 
-        if self.clue_used:
-            print("\nYa te dimos una pista!\n")
-            return
-
-        print("\nAyuda obtenida\n")
-        self.clue_used = True
-        self.remaining_clues -= 2
+    def buy_hint_clue(self):
+        self.clue_handler.buy_hint_clue()
 
     def is_abandoned():
         print("\n¿Estas seguro de que deseas abandonar la partida?\n")
@@ -136,7 +127,8 @@ class HangmanGame:
         print("0. Abandonar partida")
         print("1. Revelar una letra")
         print("2. Comprar una pista de revelacion de letra")
-        print("3. Pedir una pista")
+        print("3. Pedir una ayuda de la palabra")
+        print("4. Comprar una pista de ayuda de la palabra")
         print("Ingrese una letra para continuar jugando\n")
 
     def end():
