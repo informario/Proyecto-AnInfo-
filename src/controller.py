@@ -7,6 +7,7 @@ from enum import Enum
 from src.clue_handler import ClueHandler
 from options.menu import ExitGameException, MenuOption
 from src.user_statistics import UserStatistics
+from utils.utilities import clear_screen, difficulty_padding
 
 RETURN_TO_MAIN_MENU_OPT = ""
 INITIAL_DIFFICULTY = Difficulty.MEDIUM
@@ -44,10 +45,12 @@ class GameController:
         GameMenu.show_rules()
 
     def show_game_statistics(self):
-        print("\nDificultad actual: ", self.difficulty.to_string())
-        print("Pistas de revelacion de letra disponibles: ", self.user_statistics.get_basic_clues())
-        print("Pistas de ayuda de palabra disponibles:    ", self.user_statistics.get_bonus_clues())
-        print("Puntaje:                                   ", self.user_statistics.score)
+        print("\n------------------------------")
+        print(f"| Dificultad actual: {self.difficulty.to_string()}{difficulty_padding(self.difficulty)}|")
+        print("------------------------------")
+        print("Pistas simples: ", self.user_statistics.get_basic_clues())
+        print("Pistas bonus:   ", self.user_statistics.get_bonus_clues())
+        print("Puntaje:        ", self.user_statistics.score)
 
     def buy_basic_clue(self):
         self.user_statistics.buy_basic_clue()

@@ -43,12 +43,12 @@ class ClueHandler:
 
     def buy_basic_clue(self):
         if self.get_score() < CLUE_COST:
-            print("\nNo tienes suficientes puntos para comprar una pista\n")
+            print("\nNo tienes suficientes puntos para comprar una pista simple\n")
             return
         
         self.increase_basic_clues()
         self.decrease_score(CLUE_COST)
-        print("\nCompraste una pista!\n")
+        print("\nCompraste una pista simple!\n")
 
 
     def use_basic_clue(self, letters_to_guess, letters_guessed):
@@ -57,7 +57,7 @@ class ClueHandler:
             return
 
         if self.get_basic_clues() <= 0:
-            print("\nNo tienes pistas para usar, compra mas y volve a intentar!\n")
+            print("\nNo tienes pistas simples para usar, compra mas y volve a intentar!\n")
             return
 
         clue = random.choice(letters_to_guess)
@@ -70,23 +70,23 @@ class ClueHandler:
 
     def buy_bonus_clue(self):
         if self.get_score() < HINT_COST:
-            print("\nNo tienes suficientes puntos para comprar una ayuda de palabra!\n")
+            print("\nNo tienes suficientes puntos para comprar una pista bonus!\n")
             return
         
         self.increase_bonus_clues()
         self.decrease_score(HINT_COST)
-        print("\nCompraste una ayuda de palabra!\n")
+        print("\nCompraste una pista bonus!\n")
 
     def use_bonus_clue(self):
         if self.was_bonus_clue_used():
-            print("\nYa te dimos una ayuda en esta partida!\n")
+            print("\nYa te dimos una pista bonus en esta partida!\n")
             return
 
         if self.get_bonus_clues() <= 0:
-            print("\nNo tienes ayudas para usar, compra mas y volve a intentar!\n")
+            print("\nNo tienes pistas bonus para usar, compra mas y volve a intentar!\n")
             return
 
-        print("\nAyuda obtenida\n")
+        print("\Pista bonus obtenida\n")
         self.bonus_clue_used = True
         self.decrease_bonus_clues()
             

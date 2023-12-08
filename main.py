@@ -10,6 +10,5 @@ def main():
         game.run()
         user_stats = game.obtain_user_stats()
 
-        session_handler.update(user_name, user_stats) # Hay que implementar la logica para devolver la cantidad de pistas acumuladas
-
+        session_handler.update(user_name, user_stats) 
 main()

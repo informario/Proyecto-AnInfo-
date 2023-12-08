@@ -52,20 +52,20 @@ class UserStatistics:
 
     def buy_basic_clue(self):
         if self.get_score() < CLUE_COST:
-            print("\nNo tienes suficientes puntos para comprar una pista\n")
+            print("\nNo tienes suficientes puntos para comprar una pista simple!")
             return
         
         self.increase_basic_clues()
         self.decrease_score_amount(CLUE_COST)
-        print("\nCompraste una pista!\n")
+        print("\nCompraste una pista simple!\n")
 
     def buy_bonus_clue(self):
         if self.get_score() < HINT_COST:
-            print("\nNo tienes suficientes puntos para comprar una ayuda de palabra!\n")
+            print("\nNo tienes suficientes puntos para comprar una pista bonus!")
             return
         
         self.increase_bonus_clues()
         self.decrease_score_amount(HINT_COST)
-        print("\nCompraste una ayuda de palabra!\n")
+        print("\nCompraste una pista bonus!\n")
 
     

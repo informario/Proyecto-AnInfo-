@@ -1,4 +1,5 @@
 from getpass import getpass
+import os
 from utils.word_category import WordCategory
 from src.difficulty import Difficulty
 from options.menu import MenuOption
@@ -19,7 +20,6 @@ class GameMenu:
 
     @staticmethod
     def show_options():
-        clear_screen()
 
         banners.menu()
         GameMenu._show_options()
@@ -29,43 +29,62 @@ class GameMenu:
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
-        print("\t3 - Comprar una pista de revelacion de letra (cuesta 2 puntos)")
-        print("\t4 - Comprar una pista de ayuda de palabra (cuesta 10 puntos)")
+        print("\t3 - Comprar una pista simple (precio:  2 puntos)")
+        print("\t4 - Comprar una pista bonus  (precio: 10 puntos)")
         print("\t5 - Reglas")
         print("\t6 - Salir")
 
     @staticmethod
     def show_rules():
         clear_screen()
-        GameMenu._show_rules()
+        print("Reglas:\n")
+        print("\t1.  ¿Como jugar?")
+        print("\t    El juego consiste en adivinar una palabra o frase oculta, que es elegida de acuerdo al")
+        print("\t    nivel de dificultad seleccionado")
+        print("\t    Para ello, el jugador cuenta con una cantidad de intentos limitada, según la dificultad:")
+        print("\t\t- FACIL:     7 intentos")
+        print("\t\t- MEDIA:     5 intentos")
+        print("\t\t- DIFICIL:   3 intentos")
+        print("\t    La diferencia principal entre las dificultades se encuentra en la cantidad de intentos ")
+        print("\t    disponibles para adivinar la palabra y la dificultad de la palabra en sí. La dificultad")
+        print("\t    por default es Media")
+        print("\t    Para intentar adivinar, el jugador puede ingresar una letra o una palabra/frase entera")
+        print("\t    Si la letra ingresada se encuentra en la palabra oculta, esta se revelará en el juego")
+        print("\t    Si la letra ingresada no se encuentra en la palabra oculta, el jugador pierde un intento")
+        print("\t    El juego termina cuando el jugador adivina la palabra oculta o se queda sin intentos")
+        print("\t    El jugador puede abandonar la partida en cualquier momento\n")
+        print("\t2.  Puntaje")
+        print("\t    El jugador obtendrá una cantidad de puntos por cada partida ganada")
+        print("\t    Estos puntos sirven para comprar pistas")
+        print("\t    La cantidad de puntos obtenidos y descontados dependerá de la dificultad del juego:")
+        print("\t\t- FACIL:     . Por partida ganada: Se obtienen 5 puntos")
+        print("\t\t             . Por partida perdida: Se descuentan 20 puntos\n")
+        print("\t\t- MEDIA:     . Por partida ganada: Se obtienen 10 puntos")
+        print("\t\t             . Por partida perdida: Se descuentan 10 puntos\n")
+        print("\t\t- DIFICIL:   . Por partida ganada: Se obtienen 5 puntos")
+        print("\t\t             . Por partida perdida: Se descuentan 5 puntos\n")
+        print("\t3.  Pistas")
+        print("\t    El jugador puede pedir pistas para obtener información sobre la palabra oculta")
+        print("\t    Existen dos tipos de pistas: ")
+        print("\t\t- Pistas Simples: Revelan una letra de la palabra, y tienen un costo de 2 puntos.")
+        print("\t\t- Pistas Bonus:   Arrojan una breve descripcion de la palabra, y tienen un costo de 10 puntos.")
+        print("\n")
         GameMenu.show_back_to_menu_message()
         getpass(prompt="")
-
-    @staticmethod
-    def _show_rules():
-        print("Reglas:")
-        print("\t1. El juego consiste en adivinar una palabra o frase oculta")
-        print("\t2. El jugador puede ingresar una letra o una palabra para intentar adivinar")
-        print("\t3. Si la letra ingresada se encuentra en la palabra oculta, esta se revelará y pasará a ser conocida")
-        print("\t4. Si la letra ingresada no se encuentra en la palabra oculta, el jugador pierde un intento")
-        print("\t5. El juego termina cuando el jugador adivina la palabra oculta o se queda sin intentos")
-        print("\t6. El jugador puede pedir pistas para obtener información sobre la palabra oculta")
-        print("\t7. Existen dos tipos de pistas: se puede revelar una letra de la palabra (que gasta una pista), o se puede pedir una definición de la palabra oculta (que gasta dos pistas)")
-        print("\t8. El juego tiene tres niveles de dificultad: FACIL, NORMAL y DIFICIL, al elegir estos cambian las dificultades de las palabras, y cada uno tiene una cantidad de intentos y pistas diferente")
-        print("\t9. El jugador puede cambiar la dificultad del juego en cualquier momento")
-        print("\t10. El jugador puede abandonar la partida en cualquier momento")
+        clear_screen()
 
     @staticmethod
     def show_difficulty_options():
         clear_screen()
         GameMenu._show_difficulty_options()
 
+
     @staticmethod
     def _show_difficulty_options():
         print("Selecciona una dificultad:")
-        print("\t1. FACIL: 7 intentos, 5 pistas y palabras cortas")
-        print("\t2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
-        print("\t3. DIFICIL: 3 intentos, 2 pistas y palabras o frases largas")
+        print("\t1. FACIL: 7 intentos, 5 puntos por partida ganada, 20 por perdida y palabras cortas")
+        print("\t2. NORMAL: 5 intentos, 10 puntos por partida ganada, 10 por perdida y palabras o frases normales")
+        print("\t3. DIFICIL: 3 intentos, 20 puntos por partida ganad, 5 por perdida y palabras o frases largas")
 
     def request_selected_difficulty():
         GameMenu.show_difficulty_options()
@@ -86,6 +105,8 @@ class GameMenu:
             GameMenu.show_options()
             self.game_controller.show_game_statistics()
             inp = input("\nElige una opcion: ").strip()
+            clear_screen()
+
             option = MenuOption.from_input(inp)
             if option != None:
                 break
@@ -100,12 +121,12 @@ class GameMenu:
 
     @staticmethod
     def _show_category_options():
-        print("Selecciona una categoria:")
-        print("\t1. Aninfo")
-        print("\t2. Famosos")
-        print("\t3. Peliculas y series")
-        print("\t4. Animales")
-        print("\t5. Otros\n")
+        print("\nSelecciona una categoria:\n")
+        print("\t1. ANINFO\n")
+        print("\t2. FAMOSOS\n")
+        print("\t3. PELICULAS Y SERIES\n")
+        print("\t4. ANIMALES\n")
+        print("\t5. OTROS\n")
     
     def request_word_category():
         GameMenu.show_category_options()
