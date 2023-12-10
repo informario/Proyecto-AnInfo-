@@ -122,8 +122,8 @@ class HangmanGame:
         print("\n0. Abandonar partida")
         print("1. Usar pista simple")
         print("2. Usar pista bonus")
-        print("3. Comprar pista simple")
-        print("4. Comprar pista bonus")
+        print("3. Comprar pista simple (precio:  2 puntos)")
+        print("4. Comprar pista bonus  (precio: 10 puntos)")
         print("\nIngrese una letra para continuar jugando\n")
 
     def end():
