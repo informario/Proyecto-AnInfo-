@@ -1,10 +1,10 @@
 from getpass import getpass
 import os
-from word_category import WordCategory
-from difficulty import Difficulty
+from utils.word_category import WordCategory
+from src.difficulty import Difficulty
 from options.menu import MenuOption
-from utils import clear_screen
-import banners
+from utils.utilities import clear_screen
+import utils.banners as banners
 
 RETURN_TO_MAIN_MENU_OPT = ""
 
@@ -20,7 +20,6 @@ class GameMenu:
 
     @staticmethod
     def show_options():
-        clear_screen()
 
         banners.menu()
         GameMenu._show_options()
@@ -30,8 +29,8 @@ class GameMenu:
         print("Opciones:")
         print("\t1 - Empezar a jugar")
         print("\t2 - Seleccionar dificultad")
-        print("\t3 - Comprar una pista de revelacion de letra (cuesta 2 puntos)")
-        print("\t4 - Comprar una pista de ayuda de palabra (cuesta 10 puntos)")
+        print("\t3 - Comprar una pista simple (precio:  2 puntos)")
+        print("\t4 - Comprar una pista bonus  (precio: 10 puntos)")
         print("\t5 - Reglas")
         print("\t6 - Salir")
 
@@ -72,18 +71,20 @@ class GameMenu:
         print("\n")
         GameMenu.show_back_to_menu_message()
         getpass(prompt="")
+        clear_screen()
 
     @staticmethod
     def show_difficulty_options():
         clear_screen()
         GameMenu._show_difficulty_options()
 
+
     @staticmethod
     def _show_difficulty_options():
         print("Selecciona una dificultad:")
-        print("\t1. FACIL: 7 intentos, 5 pistas y palabras cortas")
-        print("\t2. NORMAL: 5 intentos, 3 pistas y palabras o frases normales")
-        print("\t3. DIFICIL: 3 intentos, 2 pistas y palabras o frases largas")
+        print("\t1. FACIL: 7 intentos, 5 puntos por partida ganada, 20 por perdida y palabras cortas")
+        print("\t2. NORMAL: 5 intentos, 10 puntos por partida ganada, 10 por perdida y palabras o frases normales")
+        print("\t3. DIFICIL: 3 intentos, 20 puntos por partida ganad, 5 por perdida y palabras o frases largas")
 
     def request_selected_difficulty():
         GameMenu.show_difficulty_options()
@@ -97,6 +98,7 @@ class GameMenu:
             option = input("- ").strip()
             difficulty = Difficulty.from_input(option)
 
+        clear_screen()
         return difficulty
     
     def request_option(self):
@@ -104,6 +106,8 @@ class GameMenu:
             GameMenu.show_options()
             self.game_controller.show_game_statistics()
             inp = input("\nElige una opcion: ").strip()
+            clear_screen()
+
             option = MenuOption.from_input(inp)
             if option != None:
                 break
@@ -118,12 +122,12 @@ class GameMenu:
 
     @staticmethod
     def _show_category_options():
-        print("Selecciona una categoria:")
-        print("\t1. Aninfo")
-        print("\t2. Famosos")
-        print("\t3. Peliculas y series")
-        print("\t4. Animales")
-        print("\t5. Otros\n")
+        print("\nSelecciona una categoria:\n")
+        print("\t1. ANINFO\n")
+        print("\t2. FAMOSOS\n")
+        print("\t3. PELICULAS Y SERIES\n")
+        print("\t4. ANIMALES\n")
+        print("\t5. OTROS\n")
     
     def request_word_category():
         GameMenu.show_category_options()
@@ -135,89 +139,3 @@ class GameMenu:
             category = WordCategory.from_input(option)
 
         return category
-
-import unittest
-from unittest.mock import patch, call
-
-class TestGameMenu(unittest.TestCase):
-    
-    def test_request_selected_difficulty_easy(self):
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["1"]
-            difficulty = GameMenu.request_selected_difficulty()
-            self.assertEqual(difficulty, Difficulty.EASY)
-
-    def test_request_selected_difficulty_medium(self):
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["2"]
-            difficulty = GameMenu.request_selected_difficulty()
-            self.assertEqual(difficulty, Difficulty.MEDIUM)
-
-    def test_request_selected_difficulty_hard(self):
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["3"]
-            difficulty = GameMenu.request_selected_difficulty()
-            self.assertEqual(difficulty, Difficulty.HARD)
-
-    def test_request_selected_difficulty_incorrect_option(self):
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["4", "1"]
-            difficulty = GameMenu.request_selected_difficulty()
-            self.assertEqual(difficulty, Difficulty.EASY)
-
-    def test_request_option_start_game(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["1"]
-            game_controler = GameController(0, 0, 0)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.START_GAME)
-
-    def test_request_option_select_difficulty(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["2"]
-            game_controler = GameController(0, 0, 0)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.SELECT_DIFFICULTY)
-            
-    def test_request_option_buy_basic_clue(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["3"]
-            game_controler = GameController(0, 0, 0)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.BUY_BASIC_CLUE)
-
-    def test_request_option_buy_hint_clue(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["4"]
-            game_controler = GameController(0, 0, 0)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.BUY_HINT_CLUE)
-
-    def test_request_option_rules(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["5"]
-            game_controler = GameController(0, 0, None)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.RULES)
-
-    def test_request_option_exit(self):
-        from controller import GameController
-        with patch("builtins.input") as mock_input:
-            mock_input.side_effect = ["6"]
-            game_controler = GameController(0, 0, None)
-            game_menu = GameMenu(game_controler)
-            option = game_menu.request_option()
-            self.assertEqual(option, MenuOption.EXIT)
-
-if __name__ == "__main__":
-    unittest.main()

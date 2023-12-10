@@ -1,5 +1,5 @@
 from enum import Enum
-from utils import clear_screen
+from utils.utilities import clear_screen
 # import controller
 START_GAME_OPT = "1"
 SELECT_DIFFICULTY_OPT = "2"
@@ -17,7 +17,7 @@ class MenuOption(Enum):
     EXIT = 6
     
     def show_incorrect_option_message():
-        print("Opcion incorrecta, vuelve a intentarlo\n")
+        print("\nOpcion incorrecta, vuelve a intentarlo")
 
     def from_input(inp):
         if inp == START_GAME_OPT:
@@ -61,13 +61,13 @@ class MenuOption(Enum):
             clear_screen()
             while True:
                 print("¿Estas seguro de que deseas salir del juego?")
-                print("0. Si")
-                print("1. No\n")
+                print("1. Si")
+                print("0. No\n")
                 inp = input("- ").strip()
                 clear_screen()
-                if inp == "0":
-                    return True
                 if inp == "1":
+                    return True
+                if inp == "0":
                     return False
                 MenuOption.show_incorrect_option_message()
 

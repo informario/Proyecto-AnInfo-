@@ -1,6 +1,6 @@
 from enum import Enum
-from difficulty import Difficulty
-import banners
+from src.difficulty import Difficulty
+import utils.banners as banners
 
 class GameState(Enum):
     RUNNING = 1

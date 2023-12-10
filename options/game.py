@@ -1,19 +1,19 @@
 from enum import Enum
-from utils import clear_screen
+from utils.utilities import clear_screen
 
 from options.menu import ExitGameException, MenuOption
 
 ABANDON_GAME_OPT = "0"
 USE_BASIC_CLUE_OPT = "1"
-BUY_BASIC_CLUE_OPT = "2"
-USE_BONUS_CLUE_OPT = "3"
+USE_BONUS_CLUE_OPT = "2"
+BUY_BASIC_CLUE_OPT = "3"
 BUY_BONUS_CLUE_OPT = "4"
 
 class GameOpt(Enum):
     ABANDON_GAME_OPT = 1
     USE_BASIC_CLUE = 2
-    BUY_BASIC_CLUE = 3
-    USE_BONUS_CLUE = 4
+    USE_BONUS_CLUE = 3
+    BUY_BASIC_CLUE = 4
     BUY_BONUS_CLUE = 5
 
     @classmethod
@@ -50,12 +50,12 @@ class GameOpt(Enum):
             print("\n")
             while True:
                 print("¿Estas seguro de que deseas abandonar la partida?")
-                print("0. Si")
-                print("1. No\n")
+                print("1. Si")
+                print("0. No\n")
                 inp = input("- ").strip()
                 clear_screen()
-                if inp == "0":
-                    return True
                 if inp == "1":
+                    return True
+                if inp == "0":
                     return False
                 MenuOption.show_incorrect_option_message()

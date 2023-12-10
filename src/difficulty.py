@@ -2,7 +2,7 @@ from enum import Enum
 import random
 import json
 
-PATH = "palabras.json"
+PATH = "utils/palabras.json"
 EASY_OPTION = "1"
 MEDIUM_OPTION = "2"
 HARD_OPTION = "3"
@@ -58,7 +58,7 @@ class Difficulty(Enum):
             case Difficulty.EASY:
                 return "FACIL"
             case Difficulty.MEDIUM:
-                return "NORMAL"
+                return "MEDIA"
             case Difficulty.HARD:
                 return "DIFICIL"
                 

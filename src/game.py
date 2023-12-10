@@ -1,27 +1,25 @@
-from difficulty import Difficulty
+from src.difficulty import Difficulty
 from options.menu import ExitGameException
-from state import GameState
+from src.state import GameState
 from options.game import GameOpt
-from utils import clear_screen, remove_accent_marks
-from clue_handler import ClueHandler
+from utils.utilities import clear_screen, normalize, remove_accent_marks, score_padding
+from src.clue_handler import ClueHandler
 import random
 import getpass
-import api
+import utils.api as api
 
 class HangmanGame:
 
     def __init__(self, difficulty, user_statistics, word_category):
         self.category = word_category
+        self.dificulty = difficulty
         self.attempts_remaining = difficulty.get_max_attempts()
         self.word, self.clue = difficulty.get_word(word_category)
-        self.score = difficulty.get_winning_score()
-        self.letters_to_guess = list(set(filter(lambda x: x != " ", remove_accent_marks(self.word.lower()))))
+        self.letters_to_guess = normalize(self.word)
         self.letters_guessed = []
         self.letters_missed = []
         self.state = GameState.RUNNING
         self.clue_handler = ClueHandler.from_stats(user_statistics)
-        self.stick_man = api.DrawnHangman(difficulty)
-
         self.stick_man = api.DrawnHangman(difficulty)
 
     def update_stats(self, user_statistics):
@@ -49,26 +47,27 @@ class HangmanGame:
             print(letter, end=" ")
     
     def print_state(self):
-        
-        print("=========================================")
-        print("Categoria: ", self.category.to_string())
-        print("Intentos restantes: ", self.attempts_remaining)
-        print("Letras adivinadas: ", self.letters_guessed)
-        print("Letras erradas: ", self.letters_missed)
-        print("Pistas de revelacion de letra disponibles: ", self.clue_handler.get_basic_clues())
-        print("Pistas de ayuda de palabra disponibles: ", self.clue_handler.get_bonus_clues())
-        print("PUNTAJE: ", self.clue_handler.get_score())
+        print("======================================================")
+        print(f"\n----------------| Categoria: {self.category.to_string().upper()} |----------------\n")
+        print(f"                  Dificultad: {self.dificulty.to_string()}\n")
+        print(f"Intentos restantes: {self.attempts_remaining}    |    Pistas simples: {self.clue_handler.get_basic_clues()}")
+        print(f"PUNTAJE:            {self.clue_handler.get_score()}{score_padding(self.clue_handler.get_score())}|    "\
+              f"Pistas bonus:   {self.clue_handler.get_bonus_clues()}\n")
+        print("Letras adivinadas:  ", list_to_str(self.letters_guessed))
+        print("Letras erradas:     ", list_to_str(self.letters_missed))
         if self.clue_handler.was_bonus_clue_used():
-            print("AYUDA: ", self.clue)
+            print("Pista bonus: ", self.clue)
 
         self.stick_man.draw_hangman(self.attempts_remaining)
 
         self.print_word()
-        print("\n")
+        print("\n\n")
         self.state.print()
         if self.state == GameState.WON:
-            print(f"¡Obtuviste {self.score} puntos!")
-        print("=========================================")
+            print(f"¡Obtuviste {self.dificulty.get_winning_score()} puntos!")
+        if self.state == GameState.LOST:
+            print(f"Se te descuentan {self.dificulty.get_losing_score()} puntos :(")
+        print("\n======================================================")
 
 
     def try_to_guess_letter(self,letter):
@@ -119,23 +118,13 @@ class HangmanGame:
     def buy_bonus_clue(self):
         self.clue_handler.buy_bonus_clue()
 
-    def is_abandoned():
-        print("\n¿Estas seguro de que deseas abandonar la partida?\n")
-        print("0. Si")
-        print("1. No\n")
-        inp = input("- ")
-        if inp == "1":
-            return False
-        
-        return True
-        
     def show_options():
-        print("0. Abandonar partida")
-        print("1. Revelar una letra")
-        print("2. Comprar una pista de revelacion de letra")
-        print("3. Pedir una ayuda de la palabra")
-        print("4. Comprar una pista de ayuda de la palabra")
-        print("Ingrese una letra para continuar jugando\n")
+        print("\n0. Abandonar partida")
+        print("1. Usar pista simple")
+        print("2. Usar pista bonus")
+        print("3. Comprar pista simple (precio:  2 puntos)")
+        print("4. Comprar pista bonus  (precio: 10 puntos)")
+        print("\nIngrese una letra para continuar jugando\n")
 
     def end():
 
@@ -151,8 +140,6 @@ class HangmanGame:
 
     def invalid_input(inp):
         return len(inp) == 0    
-        # Más adelante seguramente hagamos otras validaciones, por eso la funcion
-        # como por ejemplo que no se pueda ingresar un numero distinto de 0, 1 o 2 
 
     def is_won(self):
         return self.state == GameState.WON
@@ -181,8 +168,8 @@ class HangmanGame:
             self.print_state()
         
         HangmanGame.end()
+        clear_screen()
 
-    # Devuelve el estado final del juego
     def run(self):
         clear_screen()
         print("\nBienvenido al juego del Ahorcado!\n")                                                                        

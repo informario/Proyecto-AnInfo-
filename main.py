@@ -1,5 +1,5 @@
-from controller import *
-from session_handler import *
+from src.controller import *
+from src.session_handler import *
 
 def main():
     session_handler = SessionHandler()
@@ -7,8 +7,8 @@ def main():
 
     if user_name is not None:
         game = GameController(score, basic_clues, bonus_clues)
-        final_score, final_basic_clues, final_bonus_clues = game.run()
+        game.run()
+        user_stats = game.obtain_user_stats()
 
-        session_handler.update(user_name, final_score, final_basic_clues, final_bonus_clues) # Hay que implementar la logica para devolver la cantidad de pistas acumuladas
-
+        session_handler.update(user_name, user_stats) 
 main()
