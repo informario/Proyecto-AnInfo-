@@ -98,6 +98,7 @@ class GameMenu:
             option = input("- ").strip()
             difficulty = Difficulty.from_input(option)
 
+        clear_screen()
         return difficulty
     
     def request_option(self):
