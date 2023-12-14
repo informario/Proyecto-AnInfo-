@@ -93,6 +93,7 @@ class GameMenu:
         difficulty = Difficulty.from_input(option)
         while  difficulty == None:
             if option == RETURN_TO_MAIN_MENU_OPT:
+                clear_screen()
                 return None
             MenuOption.show_incorrect_option_message()
             option = input("- ").strip()
