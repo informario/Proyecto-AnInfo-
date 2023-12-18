@@ -30,7 +30,7 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
 - Si logras adivinar la palabra/frase antes de que se complete el ahorcado, ganas el juego!
 - A lo largo del juego, tus estadisticas como usuario (puntos acumulados y pistas compradas) se irán actualizando, y podrás verlas desde el menú principal. Estas estadisticas se guardan en tu sesión y se cargan cada vez que se inicia el juego.
 
-## Ejecucion del juego
+## Ejecucion del juego (Windows)
 
 1. Para conseguir el codigo del juego se puede:
 
@@ -42,6 +42,29 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
 3. Se va a tener que agregar Python a la variable de entorno PATH, en este link se explica como hacerlo: https://realpython.com/add-python-to-path/
 4. Antes de comenzar a jugar, se deben instalar las dependencias del proyecto. Para esto, abrir la terminal y ejecutar: `python <path-a-dependencies.py>/dependencies.py`
 5. Finalmente, para ejecutar el juego, abrir la terminal y ejecutar: `python <path-a-main.py>/main.py`
+
+## Ejecucion del juego (Ubuntu)
+
+1. Para conseguir el código, idem ejecución en Windows
+2. Descarga de Python:
+   `~$ sudo apt update`
+   `~$ sudo apt install python3`
+3. Agregado de Python a la variable de entorno PATH
+   `~$ cd ~`
+   `~$ ls -a`
+   Buscar un archivo con alguno de estos nombres: .profile, .bash_profile, .bash_login, .zprofile, .zlogin, en caso de ubuntu, .profile
+   `~$ cat .profile`
+   Asegurarse de que se encuentre la siguiente sección
+   `# set PATH so it includes user's private bin if it exists
+    if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+    fi
+    export PATH=<ruta al binario de python>/python`
+4. Instalar dependencias del proyecto
+   `~$ python3 <ruta a raiz del proyecto>/dependencies.py`
+5. Ejecución del juego
+   `python3 <ruta a raiz del proyecto>/main.py`
+
 
 ## Miembros del grupo
 - Alan Valdevenito
