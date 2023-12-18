@@ -55,14 +55,14 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
    Buscar un archivo con alguno de estos nombres: .profile, .bash_profile, .bash_login, .zprofile, .zlogin, en caso de ubuntu, .profile
    `~$ cat .profile`
    Asegurarse de que se encuentre la siguiente sección
-   `# set PATH so it includes user's private bin if it exists
-    if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-    fi
-    export PATH=<ruta al binario de python>/python`
-4. Instalar dependencias del proyecto
+   `# set PATH so it includes user's private bin if it exists`
+   `if [ -d "$HOME/.local/bin" ] ; then`
+   `PATH="$HOME/.local/bin:$PATH"`
+   `fi`
+   `export PATH=<ruta al binario de python>/python`
+5. Instalar dependencias del proyecto
    `~$ python3 <ruta a raiz del proyecto>/dependencies.py`
-5. Ejecución del juego
+6. Ejecución del juego
    `python3 <ruta a raiz del proyecto>/main.py`
 
 
