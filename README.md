@@ -56,9 +56,13 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
    `~$ cat .profile`
    Asegurarse de que se encuentre la siguiente sección
    `# set PATH so it includes user's private bin if it exists`
+   
    `if [ -d "$HOME/.local/bin" ] ; then`
+
    `PATH="$HOME/.local/bin:$PATH"`
+
    `fi`
+
    `export PATH=<ruta al binario de python>/python`
 5. Instalar dependencias del proyecto
    `~$ python3 <ruta a raiz del proyecto>/dependencies.py`
