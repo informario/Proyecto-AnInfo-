@@ -55,6 +55,7 @@ Las pistas se pueden comprar desde el menú principal o mientras se está jugand
    Buscar un archivo con alguno de estos nombres: .profile, .bash_profile, .bash_login, .zprofile, .zlogin, en caso de ubuntu, .profile
    `~$ cat .profile`
    Asegurarse de que se encuentre la siguiente sección
+   
    `# set PATH so it includes user's private bin if it exists`
    
    `if [ -d "$HOME/.local/bin" ] ; then`
