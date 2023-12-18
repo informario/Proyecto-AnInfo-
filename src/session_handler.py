@@ -143,7 +143,7 @@ class SessionHandler:
                 return user_name, user_info[INDEX_SCORE], user_info[INDEX_BASIC_CLUES], user_info[INDEX_BONUS_CLUES]
             
             elif inp == EXIT_OPT:
-                return None, None
+                return None, None, None, None
             
             else:
                 clear_screen()
